@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Schedule"
+        android:id="@+id/textView"
+        android:layout_gravity="center" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/ListView">
+        </ListView>
+    </RelativeLayout>
+    <LinearLayout android:layout_height="100dp"
+        android:layout_width="fill_parent"
+        android:layout_margin="5dp"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:id="@+id/addSchedule"
+            android:text="新增"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_add"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:id="@+id/setBox"
+            android:text="設定藥盒"
+            android:textSize="30dp"
+            android:contextClickable="true"
+            android:layout_gravity="center"
+            android:background="@drawable/button_add"/>
+    </LinearLayout>>
+
+</LinearLayout>
