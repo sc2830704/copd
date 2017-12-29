@@ -54,3 +54,10 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+
+# Web
+Web/PHPExcel-1.8
+Web/TCPDF-master
+Web/DataTables
+.htaccess

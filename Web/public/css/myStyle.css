@@ -1,0 +1,44 @@
+.edit_table{
+  margin:auto;
+  padding: 20px 20px 10px 20px;
+  border: 2px solid;
+  width: 95%;
+}
+
+.download_table{
+  padding: 20px 26px 10px 20px;
+  width: 100	%;
+}
+/* Create three unequal columns that floats next to each other */
+.column {
+    float: left;
+}
+
+.cleft {
+	width: 40%;
+}
+.cright {
+	width: 60%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.tr2{
+	border:1px solid;
+	text-align: center;
+}
+
+.td2{
+	border:1px solid;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.button3{
+	margin: auto;
+}
