@@ -19,18 +19,42 @@ class AdminHandler extends SimpleRest{
 		//parsing method 
 		switch($this->method){
 			case 'post':
-				$admin_login = new Admin();
-				$this ->setHttpHeaders('application/json', 200);
-				echo $this->encodeJson($admin_login->login());
-				break;
+				if($this->action == 'login'){
+					$admin_login = new Admin();
+					$this ->setHttpHeaders('application/json', 200);
+					echo $this->encodeJson($admin_login->login());
+					break;
+				}
 			default:
+				$this ->setHttpHeaders('application/json', 404);
+				echo 'METHOD Error!';
 		}
 	}
+	
 	public function encodeJson($responseData) {
 		$jsonResponse = json_encode($responseData);
 		return $jsonResponse;		
 	}
 	
+	public function set_status_code($responseData) {
+		if($responseData == '"NULL"') {
+			$this ->setHttpHeaders('application/json', 601);
+			echo 'Error: No data avaliable.';
+		}
+		else if($responseData == '"EXIST"') {
+			$this ->setHttpHeaders('application/json', 602);
+			echo 'Error: This account is already existence.';
+		}
+		else if($responseData == '"EMPTY"') {
+			$this ->setHttpHeaders('application/json', 603);
+			echo 'Error: Data is empty.';
+		}
+		else {
+			$this ->setHttpHeaders('application/json', 200);
+			echo $responseData;
+		}
+	}
+
 	public function encodeXml($responseData) {
 		// 创建 SimpleXMLElement 对象
 		$xml = new SimpleXMLElement('<?xml version="1.0"?><site></site>');

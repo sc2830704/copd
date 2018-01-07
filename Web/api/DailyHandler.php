@@ -21,38 +21,57 @@ class DailyHandler extends SimpleRest{
 			case 'get':
 				if($this->action == 'getall'){
 					$daily_all = new Daily();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($daily_all->getAll());
+					$this->set_status_code($this->encodeJson($daily_all->getAll()));
 					break;
 				}
 				else if($this->action == 'getbyuser'){
 					$daily_uid = new Daily();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($daily_uid->getByUser($this->id));
+					$this->set_status_code($this->encodeJson($daily_uid->getByUser($this->id)));
 					break;
 				}
 			case 'post':
-				$daily_add = new Daily();
-				$this ->setHttpHeaders('application/json', 200);
-				echo $this->encodeJson($daily_add->add($this->input));
-				//echo 'add success';
-				break;
+				if($this->action == 'add'){
+					$daily_add = new Daily();
+					$this->set_status_code($this->encodeJson($daily_add->add($this->input)));
+					break;
+				}
 			case 'delete':
-				$daily_delete = new Daily();
-				$this ->setHttpHeaders('application/json', 200);
-				echo $this->encodeJson($daily_delete->deletebyid($this->id));
-				//echo 'delete success';
-				break;
-			
-			
+				if($this->action == 'delete'){
+					$daily_delete = new Daily();
+					$this->set_status_code($this->encodeJson($daily_delete->deletebyid($this->id)));
+					break;
+				}
+			default:
+				$this ->setHttpHeaders('application/json', 404);
+				echo 'URL Error!';
 		}
 		
 	}
+
 	public function encodeJson($responseData) {
 		$jsonResponse = json_encode($responseData);
 		return $jsonResponse;		
 	}
 	
+	public function set_status_code($responseData) {
+		if($responseData == '"NULL"') {
+			$this ->setHttpHeaders('application/json', 601);
+			echo 'Error: No data avaliable.';
+		}
+		else if($responseData == '"EXIST"') {
+			$this ->setHttpHeaders('application/json', 602);
+			echo 'Error: This account is already existence.';
+		}
+		else if($responseData == '"EMPTY"') {
+			$this ->setHttpHeaders('application/json', 603);
+			echo 'Error: Data is empty.';
+		}
+		else {
+			$this ->setHttpHeaders('application/json', 200);
+			echo $responseData;
+		}
+	}
+
 	public function encodeXml($responseData) {
 		// 创建 SimpleXMLElement 对象
 		$xml = new SimpleXMLElement('<?xml version="1.0"?><site></site>');

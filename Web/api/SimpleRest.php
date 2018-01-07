@@ -57,7 +57,10 @@ class SimpleRest {
 			502 => 'Bad Gateway',  
 			503 => 'Service Unavailable',  
 			504 => 'Gateway Timeout',  
-			505 => 'HTTP Version Not Supported');
+			505 => 'HTTP Version Not Supported',
+			601 => 'Data Not Found',
+			602 => 'Account Is Already Existence',
+			603 => 'Empty Data');
 		return ($httpStatus[$statusCode]) ? $httpStatus[$statusCode] : $status[500];
 	}
 }

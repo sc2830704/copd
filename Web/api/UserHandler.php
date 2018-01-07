@@ -20,49 +20,61 @@ class UserHandler extends SimpleRest{
 			case 'get':
 				if($this->action == 'getall'){
 					$user_all = new User();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($user_all->getAll());
+					$this->set_status_code($this->encodeJson($user_all->getAll()));
 					break;
 				}
 				else if($this->action == 'getbyid'){
 					$user_id = new User();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($user_id->getById($this->id));
+					$this->set_status_code($this->encodeJson($user_id->getById($this->id)));
 					break;
 				}
 			case 'post':
 				if($this->action == 'add'){
 					$user_add = new User();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($user_add->add());
-					//echo 'add success';
+					$this->set_status_code($this->encodeJson($user_add->add($this->input)));
 					break;
 				}
-				//------------------------UPDATE------------------------
 				else if($this->action == 'update'){
 					$user_update = new User();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($user_update->update());
-					//echo 'add success';
+					$this->set_status_code($this->encodeJson($user_update->update($this->input)));
 					break;
 				}
 			case 'delete':
-				$user_delete = new User();
-				$this ->setHttpHeaders('application/json', 200);
-				echo $this->encodeJson($user_delete->delete($this->id));
-				//echo 'delete success';
-				break;
-			/*
-			case 'put':
-				$user_update = new User();
-				$this ->setHttpHeaders('application/json', 200);
-				echo $this->encodeJson($user_update->update($this->input));
-				//echo 'update success';
-				break;
-			*/
+				if($this->action == 'delete'){
+					$user_delete = new User();
+					$this->set_status_code($this->encodeJson($user_delete->delete($this->id)));
+					break;
+				}
+			default:
+				$this ->setHttpHeaders('application/json', 404);
+				echo 'URL Error!';
 		}
 		
 	}
+
+	public function set_status_code($responseData) {
+		if($responseData == '"NULL"') {
+			$this ->setHttpHeaders('application/json', 601);
+			//直接key URL錯誤時頁面顯示提醒
+			echo 'Error: No data avaliable.';
+		}
+		else if($responseData == '"EXIST"') {
+			$this ->setHttpHeaders('application/json', 602);
+			//直接key URL錯誤時頁面顯示提醒
+			echo 'Error: This account is already existence.';
+		}
+		else if($responseData == '"EMPTY"') {
+			$this ->setHttpHeaders('application/json', 603);
+			//直接key URL錯誤時頁面顯示提醒
+			echo 'Error: Data is empty.';
+		}
+		else {
+			$this ->setHttpHeaders('application/json', 200);
+			//Return 正確之資料
+			echo $responseData;
+		}
+	}
+
 	public function encodeJson($responseData) {
 		$jsonResponse = json_encode($responseData);
 		return $jsonResponse;		

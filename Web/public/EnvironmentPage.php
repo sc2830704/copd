@@ -37,37 +37,30 @@ else{
 	});
 	
 	function LoadEnvDataToTable(envData){
-	    var envDataTable = $('#evnTable').DataTable();
+	  var envDataTable = $('#evnTable').DataTable();
 		envDataTable.clear().draw(false);
 		for (var i in envData) {
-            envDataTable.row.add([
-                envData[i].id,
-                envData[i].deviceid,
-                envData[i].temperature,
-                envData[i].humidity,
-                envData[i].pm25,
-                envData[i].uv,
-                envData[i].datetime
-            ]).draw(false);
-        }
+      envDataTable.row.add([
+        envData[i].id,
+        envData[i].deviceid,
+        envData[i].temperature,
+        envData[i].humidity,
+        envData[i].pm25,
+        envData[i].uv,
+        envData[i].datetime
+      ]).draw(false);
+    }
 		envDataTable.columns.adjust().draw();
-		
 	}
 	function getEnvData(){
 		$.ajax({
-		type : 'GET',
-		url  : '../apiv1/env/getall',
-		dataType: 'json',
-		cache: false,
-		success :  function(result){
-		  if(result=='No data avaliable.'){
-			alert('No data avaliable.');
-			$("#evnTable").hide();
-		  }
-		  else{
-			LoadEnvDataToTable(result);
-		  }
-		}
+  		type : 'GET',
+  		url  : '../apiv1/env/getall',
+  		dataType: 'json',
+  		cache: false,
+  		success :  function(result){
+  			LoadEnvDataToTable(result);
+  		}
 	  });
 	}
 	
@@ -177,18 +170,6 @@ else{
                       <th>時間</th>
                   </tr>
               </thead>
-              <tfoot>
-                  <tr>
-                      <th>編號</th>
-                      <th>裝置編號</th>
-                      <th>溫度</th>
-                      <th>濕度</th>
-                      <th>PM2.5</th>
-                      <th>紫外線指數</th>
-                      <th>時間</th>
-                  </tr>
-              </tfoot>
-              
           </table>
         </div>
 	    <!-- PatientManage-->
@@ -237,7 +218,6 @@ else{
 	    <script src="js/sb-admin.min.js"></script>
 	    <!-- Custom scripts for this page-->
 	    <script src="js/sb-admin-datatables.min.js"></script>
-	    <script src="js/sb-admin-charts.min.js"></script>
     </div>
 </body>
 

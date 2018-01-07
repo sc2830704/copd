@@ -23,9 +23,9 @@ else{
   <!--   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">   -->
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+  <script src="js/jquery-1.11.3.min.js" type='text/javascript'></script>  
 </head>
 
-<script src="js/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" href="css\myStyle.css">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -111,76 +111,6 @@ else{
   <div class="content-wrapper" style="padding-left: 5px">
     <div class="container-fluid">
 	    <!-- /.container-fluid-->
-	    <!-- Download Page -->
-	    <div class="edit_table" id="DownloadTable" style="display:none">
-	    	<h2 align="center">Download Area</h2><br>
-	    	<table cellspacing="0" width="80%" align="center" style="border:1px solid;text-align: center;">
-	            <tr class="tr2">
-	                <th style="text-align: center;border:1px solid">ID</th>
-	                <th style="text-align: center;border:1px solid">Name</th>
-	                <th style="text-align: center;border:1px solid">Button</th>
-	            </tr>
-	            <tr class="tr2">
-	            	<td class="td2">1</td>
-	            	<td class="td2">Environment Excel</td>
-	            	<td class="td2"><a href="Download_Environment_Excel.php">Download</a></td>
-	            </tr>
-	            <tr class="tr2">
-	            	<td class="td2">2</td>
-	            	<td class="td2">Environment PDF</td>
-	            	<td class="td2"><a href="Download_Environment_PDF.php">Download</a></td>
-	            </tr>
-	            <tr class="tr2">
-	            	<td class="td2">3</td>
-	            	<td class="td2">Patient Excel</td>
-	            	<td class="td2"><a href="Download_Patient_Excel.php">Download</a></td>
-	            </tr>
-	            <tr class="tr2">
-	            	<td class="td2">4</td>
-	            	<td class="td2">Patient PDF</td>
-	            	<td class="td2"><a href="Download_Patient_PDF.php">Download</a></td>
-	            </tr>
-	    	</table>
-	    	<br>
-	    </div>
-	    <!-- PatientManage-->
-	    <div class="edit_table" id="PatientManage" style="display:none">
-	      <h2 align="center">Edit The Patient Data</h2>
-	      <p></p>
-	        <div class="row">
-	          <div class="column cleft" align="right">
-	            <label for="pid">User's ID：</label>
-	            <input type="text" id="pid"><br>
-
-	            <label for="fname">FirstName：</label>
-	            <input type="text" id="fname"><br>
-
-	            <label for="lname">LastName：</label>
-	            <input type="text" id="lname"><br>
-
-	            <label for="sex">Sex：</label>
-	            <input type="text" id="sex"><br>
-
-	            <label for="bmi">BMI：</label>
-	            <input type="text" id="bmi"><br>
-	          </div>
-
-	          <div class="column cright" align="right">
-	            <label for="history">History：</label>
-	            <textarea type="text" id="history" rows="3" cols="60"></textarea><br>
-	            <label for="drug">Drug：</label>
-	            <textarea type="text" id="drug" rows="3" cols="60"></textarea><br>
-
-	            <button  class="button2" id="patient_save">Save</button>
-	            <button  class="button2" id="patient_delete">Delete</button>
-	            <button  class="button2" id="patient_update">Update</button>
-	            <button  class="button2" id="patient_cancel">Cancel</button>
-	          </div>
-	          
-	        </div>
-	        <p>
-	        <h5 id="patient_Result" align="right" style="color:red"></h5>
-	    </div>
 	    <br>
 	    <!-- /.content-wrapper-->
 	    <footer class="sticky-footer">
@@ -219,14 +149,12 @@ else{
 	    <!-- Core plugin JavaScript-->
 	    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 	    <!-- Page level plugin JavaScript-->
-	    <script src="vendor/chart.js/Chart.min.js"></script>
 	    <script src="vendor/datatables/jquery.dataTables.js"></script>
 	    <!-- <script src="vendor/datatables/dataTables.bootstrap4.js"></script> -->
 	    <!-- Custom scripts for all pages-->
 	    <script src="js/sb-admin.min.js"></script>
 	    <!-- Custom scripts for this page-->
 	    <script src="js/sb-admin-datatables.min.js"></script>
-	    <script src="js/sb-admin-charts.min.js"></script>
     </div>
 </body>
 

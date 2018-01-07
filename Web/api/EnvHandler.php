@@ -21,36 +21,55 @@ class EnvHandler extends SimpleRest{
 			case 'get':
 				if($this->action == 'getall'){
 					$env_all = new Env();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($env_all->getAll());
+					$this->set_status_code($this->encodeJson($env_all->getAll()));
+					break;
 				}
 				else if($this->action == 'getbyid'){
 					$env_id = new Env();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($env_id->getById($this->id));
+					$this->set_status_code($this->encodeJson($env_id->getById($this->id)));
+					break;
 				}
 				else if($this->action == 'getbyuser'){
 					$env_id = new Env();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($env_id->getByUser($this->id));
+					$this->set_status_code($this->encodeJson($env_id->getByUser($this->id)));
+					break;
 				}
-				break;
 			case 'post':
 				if($this->action == 'add'){
 					$env_add = new Env();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($env_add->add($this->input));
+					$this->set_status_code($this->encodeJson($env_add->add($this->input)));
+					break;
 				}
-				break;
 			default:
-				
+				$this ->setHttpHeaders('application/json', 404);
+				echo 'URL Error!';
 		}
 	}
+
 	public function encodeJson($responseData) {
 		$jsonResponse = json_encode($responseData);
 		return $jsonResponse;		
 	}
 	
+	public function set_status_code($responseData) {
+		if($responseData == '"NULL"') {
+			$this ->setHttpHeaders('application/json', 601);
+			echo 'Error: No data avaliable.';
+		}
+		else if($responseData == '"EXIST"') {
+			$this ->setHttpHeaders('application/json', 602);
+			echo 'Error: This account is already existence.';
+		}
+		else if($responseData == '"EMPTY"') {
+			$this ->setHttpHeaders('application/json', 603);
+			echo 'Error: Data is empty.';
+		}
+		else {
+			$this ->setHttpHeaders('application/json', 200);
+			echo $responseData;
+		}
+	}
+
 	public function encodeXml($responseData) {
 		// 创建 SimpleXMLElement 对象
 		$xml = new SimpleXMLElement('<?xml version="1.0"?><site></site>');

@@ -11,7 +11,7 @@ class Daily{
 		$getAll_result = mysqli_query($con,$getAll_sql);
 		
 		if(mysqli_num_rows($getAll_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$getAll_dataArray = mysqli_fetch_all($getAll_result,MYSQLI_ASSOC);
@@ -29,7 +29,7 @@ class Daily{
 		$getById_result = mysqli_query($con,$getById_sql);
 		
 		if(mysqli_num_rows($getById_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$getById_dataArray = mysqli_fetch_all($getById_result,MYSQLI_ASSOC);
@@ -48,8 +48,8 @@ class Daily{
 		$date = $input['date'];
 		$distance = $input['distance']; 
 
-		if(!isset($uid)||empty($uid)||!isset($step)||empty($step)||!isset($date)||empty($date)||!isset($distance)||empty($distance)){
-			return 'NULL Data Exist.';
+		if(!isset($uid)||empty($uid)||!isset($step)||!isset($date)||empty($date)||!isset($distance)){
+			return 'EMPTY';
 		}
 		else {
 			$sql_insert = "INSERT INTO daily (uid, step, date, distance) VALUES ('$uid','$step','$date', '$distance')";
@@ -67,7 +67,7 @@ class Daily{
 		$sql_check = "SELECT * FROM daily WHERE id = '$id'";
 		$check_result = mysqli_query($con,$sql_check);
 		if(mysqli_num_rows($check_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$sql_delete = "DELETE FROM daily WHERE id = '$id'";
