@@ -248,7 +248,7 @@ else{
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="PatientPage.php" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text" id="test">病患資料</span>
           </a>
@@ -259,7 +259,7 @@ else{
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Environment">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="EnvironmentPage.php" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text" id="test">環境資料</span>
           </a>
@@ -270,7 +270,7 @@ else{
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Daily">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDailyPages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="DailyPage.php" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text" id="test">每日統計</span>
           </a>
@@ -281,7 +281,7 @@ else{
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activity">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseActivityPages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="ActivityPage.php" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text" id="test">活動紀錄</span>
           </a>

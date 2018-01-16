@@ -38,10 +38,6 @@ class UserHandler extends SimpleRest{
 					$user_update = new User();
 					$this->set_status_code($this->encodeJson($user_update->update($this->input)));
 					break;
-				}else if($this->action == 'login'){
-					$user_login = new User();
-					$this->set_status_code($this->encodeJson($user_login->login($this->input)));
-					break;
 				}
 			case 'delete':
 				if($this->action == 'delete'){
