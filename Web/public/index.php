@@ -71,9 +71,9 @@ $(document).ready(function(){
           </div>
           <a class="btn btn-primary btn-block" id="login" style="color:white" >Login</a>
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="register.php">Register an Account</a>
-          <a class="d-block small" href="">Forgot Password?</a>
+        <div class="text-center" style="display: none;">
+          <a class="d-block small mt-3" href="register.php" >Register an Account</a>
+          <a class="d-block small" href="" >Forgot Password?</a>
         </div>
       </div>
     </div>

@@ -31,206 +31,222 @@ else{
 <script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
 
 <script type="text/JavaScript">
-$(document).ready(function(){
 
+  $(document).ready(function(){
+    var patientDataTable = $('#patientTable').DataTable();
+    getPatientData();
+    
+    $("#NewPatient").click(function(){
+      clear_add_table();
+    })
     $("#patient_close").click(function(){
       $("#PatientManage").hide();
-    });
-
-    $("#NewPatient").click(function(){
-      document.getElementById('pid').value = '';
-      document.getElementById('pwd').value = '';
-      document.getElementById('fname').value = '';
-      document.getElementById('lname').value = '';
-      document.getElementById('sex').value = '';
-      document.getElementById('bmi').value = '';
-      document.getElementById('history').value = '';
-      document.getElementById('drug').value = '';
-      document.getElementById('env_id').value = '';
-      document.getElementById('ble_id').value = '';
-      document.getElementById('watch_id').value = '';
-      $("#patient_delete").hide();
-      $("#patient_update").hide();
-      $("#patient_save").show();
-      $("#patient_close").show();
-      $("#newid_label").show();
-      $("#pid_label").hide();
-      $("#newid").show();
-      $("#pid").hide();
-      $("#PatientManage").show();
     })
-    //---------------------------------------------------save by POST
     $("#patient_save").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "../apiv1/user/add",
-            dataType: "json",
-            data: {
-                ID: $("#newid").val(),
-                Password: $("#pwd").val(),
-                FirstName: $("#fname").val(),
-                LastName: $("#lname").val(),
-                Sex: $("#sex").val(),
-                BMI: $("#bmi").val(),
-                History: $("#history").val(),
-                Drug: $("#drug").val(),
-                ENV_ID: $("#env_id").val(),
-                BLE_ID: $("#ble_id").val(),
-                Watch_ID: $("#watch_id").val()
-            },
-            success: function(data) {
-                if (data=='ok') {
-                    alert('add successfully');
-                } 
-                else {
-                    alert(data);
-                }              
-                print_datatable(); 
-            },
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })
-        
+      post_data('add');
     })
-    //---------------------------------------------------update by POST
     $("#patient_update").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "../apiv1/user/update",
-            dataType: "json",
-            data: {
-                ID: $("#pid").val(),
-                Password: $("#pwd").val(),
-                FirstName: $("#fname").val(),
-                LastName: $("#lname").val(),
-                Sex: $("#sex").val(),
-                BMI: $("#bmi").val(),
-                History: $("#history").val(),
-                Drug: $("#drug").val(),
-                ENV_ID: $("#env_id").val(),
-                BLE_ID: $("#ble_id").val(),
-                Watch_ID: $("#watch_id").val()
-            },
-            success: function(data) {
-                if (data=='ok') {
-                    alert('update successfully');
-                } 
-                else {
-                    alert(data);
-                }                   
-                print_datatable();  
-            },
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })
-        
+      post_data('update');
     })
-    //---------------------------------------------------delete by DELETE
     $("#patient_delete").click(function() {
-        $.ajax({
-            type: "DELETE",
-            url: "../apiv1/user/delete/" + $("#pid").val(),
-            dataType: "json",
-            data: {                
-            },
-            success: function(data) {
-                if (data=='ok') {
-                    alert('delete successfully');
-                } 
-                else {
-                    alert(data);
-                }                   
-                print_datatable();         
-            },
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })
-        
+      delete_data();
     })
-    
-    //---------------------------------------------------datatable by GET
-    print_datatable();
-    function print_datatable(){
-      $('#patientTable').DataTable().destroy();
-      $.ajax({
-        type : 'GET',
-        url  : '../apiv1/user/getall',
-        dataType: 'json',
-        cache: false,
-        success :  function(result)
-        {
-          var data_array = [];
-          var sex_chinese;
-          for (i = 0; i < result.length; i++) {
-            if(result[i].sex==0){
-              sex_chinese = '女';
-            }
-            else{
-              sex_chinese = '男';
-            }
-            data = [[  result[i].id,result[i].fname,result[i].lname,result[i].sex==1?'男':'女',result[i].bmi,result[i].drug,result[i].history,result[i].env_id,result[i].ble_id,result[i].watch_id  ]];
-            var data_array = data_array.concat(data);
-          } 
-          console.log(data_array);
-          if(result=='No data avaliable.'){
-            alert('No data avaliable.');
-            $("#patientTable").hide();
-          }
-          else{
-            $("#patientTable").show();
-            //pass data to datatable
-            $('#patientTable').DataTable({
-                "aaData": data_array, //here we get the array data from the ajax call.
-            });
-            $('#patientTable').DataTable().draw();
-          }
-        },
-        error: function(jqXHR) {
-          alert("發生錯誤: " + jqXHR.status);
-        }
-      });
-    }
-
     $(document).on("click", "tr[class='odd'],tr[class='even']", function(){
-        $.ajax({
-            type: "GET",
-            url: "../apiv1/user/getbyid/" + $(this).children('td:first-child').text(),
-            dataType: "json",
-            data: {
-            },
-            success: function(data) {
-              document.getElementById('pid').value = data.id;
-              document.getElementById('pwd').value = data.pwd;
-              document.getElementById('fname').value = data.fname;
-              document.getElementById('lname').value = data.lname;
-              document.getElementById('sex').value = data.sex;
-              document.getElementById('bmi').value = data.bmi;
-              document.getElementById('history').value = data.history;
-              document.getElementById('drug').value = data.drug;
-              document.getElementById('env_id').value = data.env_id;
-              document.getElementById('ble_id').value = data.ble_id;
-              document.getElementById('watch_id').value = data.watch_id;
-            },
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })
-        $("#patient_delete").show();
-        $("#patient_update").show();
-        $("#patient_save").hide();
-        $("#patient_close").show();
-        $("#newid_label").hide();
-        $("#pid_label").show();
-        $("#newid").hide();
-        $("#pid").show();
-        $("#PatientManage").show();
-    });
-});
+      var row = $(this).children('td:first-child').text();
+      click_row(row);
+    })
+  });
 
-    
+  function getPatientData() {
+    $.ajax({
+      type : 'GET',
+      url  : '../apiv1/user/getall',
+      dataType: 'json',
+      cache: false,
+      success :  function(result) {
+        LoadPatientDataToTable(result);
+      }
+    });
+  }
+
+  function LoadPatientDataToTable(patientData) {
+    var patientDataTable = $('#patientTable').DataTable();
+    patientDataTable.clear().draw(false);
+    for (var i in patientData){
+      patientDataTable.row.add([
+        patientData[i].id,
+        patientData[i].fname,
+        patientData[i].lname,
+        patientData[i].age,
+        patientData[i].sex==1?'男':(patientData[i].sex==0?'女':null),
+        patientData[i].bmi,
+        //patientData[i].drug,
+        //patientData[i].history,
+        patientData[i].env_id,
+        patientData[i].ble_id,
+        patientData[i].watch_id
+      ]).draw(false);
+    }
+    patientDataTable.columns.adjust().draw();
+  }
+
+  function delete_data() {
+    $.ajax({
+      type: "DELETE",
+      url: "../apiv1/user/delete/" + $("#updateid").val(),
+      dataType: "json",
+      data: {                
+      },
+      success: function(data) {      
+        getPatientData();         
+        $("#PatientManage").hide(); 
+      },
+      error: function(jqXHR) {
+        alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
+      }
+    })
+  }
+
+  function post_data($action){
+    get_medicine();
+    get_case();
+    $.ajax({
+      type: "POST",
+      url: "../apiv1/user/" + $action,
+      dataType: "json",
+      data: {
+        id: $("#" + $action + "id").val(),
+        pwd: $("#pwd").val(),
+        fname: $("#fname").val(),
+        lname: $("#lname").val(),
+        age: $("#age").val(),
+        sex: $("#sex").val(),
+        bmi: $("#bmi").val(),
+        history: $("#history").val(),
+        drug: $("#drug").val(),
+        env_id: $("#env_id").val(),
+        ble_id: $("#ble_id").val(),
+        watch_id: $("#watch_id").val()
+      },
+      success: function(data) {  
+        getPatientData();
+        $("#PatientManage").hide(); 
+      },
+      error: function(jqXHR) {
+        alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
+      }
+    })
+  }
+
+  function get_medicine(){
+    var medicine_selected=[];
+    $("[name=medicine]:checkbox:checked").each(function(){
+      medicine_selected.push($(this).val());
+    });
+    medicine_selected = medicine_selected + '';
+    if(medicine_selected==''){
+    	document.getElementById('drug').value = '["None"]';
+    }
+    else{
+	    var drug_arr = medicine_selected.split(',');
+        drug_arr = JSON.stringify(drug_arr);
+	    document.getElementById('drug').value = drug_arr ;
+
+	    //document.getElementById('drug').value = medicine_selected ;
+    }
+  }
+  function get_case(){
+    var case_selected=[];
+    $("[name=case]:checkbox:checked").each(function(){
+      case_selected.push($(this).val());
+    });
+    case_selected = case_selected + '';
+    if(case_selected==''){
+     	document.getElementById('history').value = '["None"]';
+    }
+    else{
+        var history_arr = case_selected.split(',');
+        history_arr = JSON.stringify(history_arr);
+     	document.getElementById('history').value = history_arr ;
+
+     	//document.getElementById('history').value = case_selected ;
+    }
+  }
+
+  function click_row(row){
+    $.ajax({
+      type: "GET",
+      url: "../apiv1/user/getbyid/" + row,
+      dataType: "json",
+      data: {
+      },
+      success: function(data) {
+        document.getElementById('updateid').value = data.id;
+        document.getElementById('pwd').value = data.pwd;
+        document.getElementById('fname').value = data.fname;
+        document.getElementById('lname').value = data.lname;
+        document.getElementById('age').value = data.age;
+        document.getElementById('sex').value = data.sex;
+        document.getElementById('bmi').value = data.bmi;
+        document.getElementById('env_id').value = data.env_id;
+        document.getElementById('ble_id').value = data.ble_id;
+        document.getElementById('watch_id').value = data.watch_id;
+        data.history = JSON.parse(data.history);
+        data.drug = JSON.parse(data.drug);
+
+        //var history_arr = data.history.split(',');
+        //var drug_arr = data.drug.split(',');
+        
+        $("input[name='medicine']").prop("checked", false);
+        $("input[name='case']").prop("checked", false);
+        for(var i in data.history){
+          $("input[value='" + data.history[i] + "']").prop("checked", true);
+        }
+        for(var i in data.drug){
+          $("input[value='" + data.drug[i] + "']").prop("checked", true);
+        }
+        
+      },
+      error: function(jqXHR) {
+          alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
+      }
+    })
+    $("#patient_delete").show();
+    $("#patient_update").show();
+    $("#patient_save").hide();
+    $("#patient_close").show();
+    $("#newid_label").hide();
+    $("#pid_label").show();
+    $("#addid").hide();
+    $("#updateid").show();
+    $("#PatientManage").show();
+  }
+  
+
+  function clear_add_table(){
+    document.getElementById('updateid').value = '';
+    document.getElementById('addid').value = '';
+    document.getElementById('pwd').value = '';
+    document.getElementById('fname').value = '';
+    document.getElementById('lname').value = '';
+    document.getElementById('age').value = '';
+    document.getElementById('sex').value = '';
+    document.getElementById('bmi').value = '';
+    document.getElementById('env_id').value = '';
+    document.getElementById('ble_id').value = '';
+    document.getElementById('watch_id').value = '';
+    $("input[name='medicine']").prop("checked", false);
+    $("input[name='case']").prop("checked", false);
+    $("#patient_delete").hide();
+    $("#patient_update").hide();
+    $("#patient_save").show();
+    $("#patient_close").show();
+    $("#newid_label").show();
+    $("#pid_label").hide();
+    $("#addid").show();
+    $("#updateid").hide();
+    $("#PatientManage").show();
+  }
 
 </script>
 
@@ -325,37 +341,42 @@ $(document).ready(function(){
 	    <!-- Download Page -->
 	    <!-- PatientManage-->
       <div class="edit_table" id="PatientManage" style="display:none; width: 100%">
-        <h2 align="center">病患資料表</h2><br>
+        <h2 align="left" style="font-weight: bold; padding-left: 20px;">病患資料表</h2><br>
           <div class="row">
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;">
+            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 40px;">
               <label for="fname">姓氏：</label>
-              <input type="text" id="fname"> <br>
+              <input type="text" id="fname"><br>
 
-              <label for="newid" id="newid_label">帳號：</label>
-              <input type="text" id="newid">
-              
-              <label for="pid" id="pid_label">帳號：</label>
-              <input type="text" id="pid" disabled> <br>
-
-              <label for="sex">性別：</label>
-              <select id="sex" style="padding-right: 138px">
-                <option value="1">男</option>
-                <option value="0">女</option>
-              </select> <br>              
-
-              <label for="ble_id">BLE_ID：</label>
-              <input type="text" id="ble_id"> <br>
-            </div>
-
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;" >
               <label for="lname">名字：</label>
               <input type="text" id="lname"><br>
 
+              <label for="age">年齡：</label>
+              <input type="text" id="age"><br>
+
+              <label for="sex">性別：</label>
+              <select id="sex" style="width: 77%;">
+                <option value="1">男</option>
+                <option value="0">女</option>
+              </select> <br>          
+            </div>
+
+            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;" >
+              <label for="addid" id="newid_label">帳號：</label>
+              <input type="text" id="addid">
+              
+              <label for="updateid" id="pid_label">帳號：</label>
+              <input type="text" id="updateid" disabled> <br>
+
               <label for="pwd">密碼：</label>
-              <input type="password" id="pwd"><br>
+              <input type="password" id="pwd"> <br>
 
               <label for="bmi">BMI：</label>
-              <input type="text" id="bmi"><br>
+              <input type="text" id="bmi"> <br>
+            </div>
+
+            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;">
+              <label for="ble_id">BLE_ID：</label>
+              <input type="text" id="ble_id"><br>
 
               <label for="env_id">ENV_ID：</label>
               <input type="text" id="env_id"><br>
@@ -363,20 +384,100 @@ $(document).ready(function(){
               <label for="watch_id">Watch_ID：</label>
               <input type="text" id="watch_id"><br>
             </div>
-
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;">
-              <label for="history">病例：</label>
-              <textarea type="text" id="history" rows="3" cols="40"></textarea><br>
-              <label for="drug">藥物：</label>
-              <textarea type="text" id="drug" rows="3" cols="40"></textarea><br>
-
+          </div>
+          <div class="row">
+            <div class="column" align="left" style="padding: 0px 10px 0px 40px;">
+              <br><h4 style="font-weight: bold;">服用藥物</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column" align="left" style="padding: 0px 10px 0px 80px;">
+              <h5 style="font-weight: bold;">  吸入型</h5>
+            </div>
+          </div>
+          <div class="row" align="center">
+            <div class="column" align="left" style="margin: 0 auto 0 80px;" >
+              <h5>β2致效劑(β2-agonists)</h5>
+              <input name="medicine" type="checkbox" value="Fenoterol"> Fenoterol(骨骼肌輕微震顫)><br>
+              <input name="medicine" type="checkbox" value="Salbutamol"> Salbutamol<br>
+              <input name="medicine" type="checkbox" value="Formoterol"> Formoterol<br>
+              <input name="medicine" type="checkbox" value="Indacaterol"> Indacaterol(咳嗽、鼻炎)<br>
+              <input name="medicine" type="checkbox" value="Salmeterol"> Salmeterol(肌肉痙攣)<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 auto 0 auto;">
+              <h5>抗蕈毒鹼藥物(anticholinergic drugs)</h5>
+              <input name="medicine" type="checkbox" value="IpratropiumBormide"> Ipratropium Bormide(咳嗽、視力模糊)<br>
+              <input name="medicine" type="checkbox" value="Vilanterol"> Vilanterol<br>
+              <input name="medicine" type="checkbox" value="Glycopyrronium"> Glycopyrronium(咳嗽、鼻炎)<br>
+              <input name="medicine" type="checkbox" value="Tiotropium"> Tiotropium(咳嗽、視力模糊)<br>
+              <input name="medicine" type="checkbox" value="Umeclidinium"> Umeclidinium<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 auto 0 auto;">
+              <h5>吸入型類固醇(inhaled corticosteroids)</h5>
+              <input name="medicine" type="checkbox" value="Beclomethasone"> Beclomethasone<br>
+              <input name="medicine" type="checkbox" value="Budesonide"> Budesonide(咳嗽)<br>
+              <input name="medicine" type="checkbox" value="FluticasonePropionate"> Fluticasone Propionate<br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column" align="left" style="padding: 0px 10px 0px 80px;">
+              <br><h5 style="font-weight: bold;">  口服型</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column" align="left" style="margin: 0 auto 0 80px;">
+              <h5>抑制劑(Phosphodiesterase-4)</h5>
+              <input name="medicine" type="checkbox" value="Roflumilast"> Roflumilast<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 auto 0 auto;">
+              <h5>茶鹼類(methylxanthines)</h5>
+              <input name="medicine" type="checkbox" value="Aminophylline"> Aminophylline(肌肉抽筋)<br>
+              <input name="medicine" type="checkbox" value="Theophylline"> Theophylline<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 auto 0 auto;">
+              <h5>口服刑類固醇(oral steroids)</h5>
+              <input name="medicine" type="checkbox" value="OralSteroids"> Oral Steroids(口服類固醇)<br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column" align="left" style="padding: 0px 10px 0px 40px;">
+              <br><h4 style="font-weight: bold;">疾病史</h4>
+            </div>
+          </div>
+          <div class="row"> <!-- HeartDisease Hypertension Diabetes Arrhythmia HeartFailure Stroke -->
+            <div class="column" align="left" style="margin: 0 20px 0 80px;">
+              <input name="case" type="checkbox" value="HeartDisease"> 心臟病<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 20px 0 20px;">
+              <input name="case" type="checkbox" value="Hypertension"> 高血壓<br>
+              
+            </div>
+            <div class="column" align="left" style="margin: 0 20px 0 20px;">
+              <input name="case" type="checkbox" value="Diabetes"> 糖尿病<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 20px 0 20px;">
+              <input name="case" type="checkbox" value="Arrhythmia"> 心律不整<br>
+            </div>
+            <div class="column" align="left" style="margin: 0 20px 0 20px;">
+              <input name="case" type="checkbox" value="HeartFailure"> 心衰竭<br>
+              
+            </div>
+            <div class="column" align="left" style="margin: 0 20px 0 20px;">
+              <input name="case" type="checkbox" value="Stroke"> 中風<br>
+            </div>
+          </div>
+          <div class="row" align="right">
+            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 0 0 auto;" >
               <button  class="button2" id="patient_save">儲存</button>
               <button  class="button2" id="patient_delete">刪除</button>
               <button  class="button2" id="patient_update">更新</button>
               <button  class="button2" id="patient_close">取消</button>
-            </div>
-            
-          </div>
+           </div>
+         </div>
+         <div class="row" align="right">
+            <textarea type="text" id="history" rows="3" cols="40" style="display: none;"></textarea>
+            <textarea type="text" id="drug" rows="3" cols="40" style="display: none;"></textarea>
+         </div>
           <p>
           <h5 id="patient_Result" align="right" style="color:red"></h5>
       </div>
@@ -390,32 +491,15 @@ $(document).ready(function(){
 	                  <th>帳號</th>
 	                  <th>名字</th>
 	                  <th>姓氏</th>
+                    <th>年齡</th>
 	                  <th>性別</th>
 	                  <th>BMI</th>
-	                  <th>病例</th>
-	                  <th>藥物</th>
                     <th>Env_ID</th>
                     <th>BLE_ID</th>
                     <th>Watch_ID</th>
 	              </tr>
 	          </thead>
-	          <tfoot>
-	              <tr>
-	                  <th>帳號</th>
-                    <th>名字</th>
-                    <th>姓氏</th>
-                    <th>性別</th>
-                    <th>BMI</th>
-                    <th>病例</th>
-                    <th>藥物</th>
-                    <th>Env_ID</th>
-                    <th>BLE_ID</th>
-                    <th>Watch_ID</th>
-	              </tr>
-	          </tfoot>
-	          
 	      </table>
-          
 	    </div>
 	    <!-- /.content-wrapper-->
 	    <footer class="sticky-footer">
@@ -461,7 +545,6 @@ $(document).ready(function(){
 	    <script src="js/sb-admin.min.js"></script>
 	    <!-- Custom scripts for this page-->
 	    <script src="js/sb-admin-datatables.min.js"></script>
-	    <script src="js/sb-admin-charts.min.js"></script>
     </div>
 </body>
 

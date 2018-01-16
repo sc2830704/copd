@@ -42,6 +42,9 @@ $queryStr = $_SERVER['QUERY_STRING'];
 		$adminHandler = new AdminHandler($method,$params,$input);
 		echo $adminHandler->response();
 		break;
+	default:
+		header("http/ 404");
+		echo 'URL Error!';
  }
 
 ?>

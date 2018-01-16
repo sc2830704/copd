@@ -31,32 +31,38 @@ else{
 <script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
 
 <script type="text/JavaScript">
-$(document).ready(function(){
-  $.ajax({
-    type : 'GET',
-    url  : '../apiv1/daily/getall',
-    dataType: 'json',
-    cache: false,
-    success :  function(result){
-      var data_array = [];
-      for (i = 0; i < result.length; i++) {
-        data = [[  result[i].id,result[i].uid,result[i].step,result[i].date,result[i].distance  ]];
-        var data_array = data_array.concat(data);
-      } 
-      if(result=='No data avaliable.'){
-        alert('No data avaliable.');
-        $("#dailyTable").hide();
-      }
-      else{
-        console.log(data_array); // just to see I'm getting the correct data.
-        $('#dailyTable').show();
-        $('#dailyTable').DataTable({
-          "aaData": data_array, //here we get the array data from the ajax call.
-        });
-      }
-    }
+  
+  $(document).ready(function(){
+    var dailyDataTable = $('#dailyTable').DataTable();
+    getDailyData();
   });
-});
+
+  function getDailyData() {
+    $.ajax({
+      type : 'GET',
+      url  : '../apiv1/daily/getall',
+      dataType: 'json',
+      cache: false,
+      success :  function(result) {
+        LoadDailyDataToTable(result);
+      }
+    });
+  }
+
+  function LoadDailyDataToTable(dailyData) {
+    var dailyDataTable = $('#dailyTable').DataTable();
+    dailyDataTable.clear().draw(false);
+    for (var i in dailyData){
+      dailyDataTable.row.add([
+        dailyData[i].id,
+        dailyData[i].uid,
+        dailyData[i].step,
+        dailyData[i].date,
+        dailyData[i].distance
+      ]).draw(false);
+    }
+    dailyDataTable.columns.adjust().draw();
+  }
 </script>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -155,16 +161,6 @@ $(document).ready(function(){
                       <th>距離(公尺)</th>
                   </tr>
               </thead>
-              <tfoot>
-                  <tr>
-                      <th>編號</th>
-                      <th>帳號</th>
-                      <th>步數</th>
-                      <th>日期</th>
-                      <th>距離(公尺)</th>
-                  </tr>
-              </tfoot>
-              
           </table>
         </div>
 	    <!-- PatientManage-->
@@ -213,7 +209,6 @@ $(document).ready(function(){
 	    <script src="js/sb-admin.min.js"></script>
 	    <!-- Custom scripts for this page-->
 	    <script src="js/sb-admin-datatables.min.js"></script>
-	    <script src="js/sb-admin-charts.min.js"></script>
     </div>
 </body>
 

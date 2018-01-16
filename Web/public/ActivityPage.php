@@ -19,155 +19,219 @@ else{
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin CSS-->
-  <!--   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">   -->
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
-</head>
 
-<script src="js/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="css\myStyle.css">
-<link rel="stylesheet" href="..\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css">
-<script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper/popper.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.min.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="js/sb-admin-datatables.min.js"></script>
 
-<script type="text/JavaScript">
-$(document).ready(function(){
-  $("#activityTable").show();
-  $("#personal_datatable_cancel").click(function(){
-      $("#ActivityRecord").hide();
-  });
+  <!-- FLOT CHART -->
+  <script src="js/jquery-1.11.3.min.js" type='text/javascript'></script>
+  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
+  <script type="text/javascript" src="js/jquery.flot.min.js"></script>
+  <script type="text/javascript" src="js/jquery.flot.axislabels.js"></script>
+  <!--<script type="text/javascript" src="js/jquery.flot.time.js"></script>    
+  <script type="text/javascript" src="js/jquery.flot.symbol.js"></script>
+  <script type="text/javascript" src="js/hashtable.js"></script>    
+  <script type="text/javascript" src="js/jquery.numberformatter.js"></script>--> 
 
-  $.ajax({
-    type : 'GET',
-    url : '../apiv1/activity/' + $("#time_select").val(),
-    dataType: 'json',
-    result :{
-    },
-    success :  function(result){
-        var data_array = [];
-        for (i = 0; i < result.length; i++) {
-          data = [[  result[i].id,result[i].uid,result[i].step,result[i].start_time,result[i].end_time,result[i].distance,result[i].h_i_time  ]];
-          var data_array = data_array.concat(data);
-        } 
-        //pass data to datatable
-        if(result=='No data avaliable.'){
-          alert('No data avaliable.');
-          $("#activityTable").hide();
+  <link rel="stylesheet" href="css\myStyle.css">
+  <link rel="stylesheet" href="..\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css">
+  <script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
+
+  <script type="text/JavaScript">
+    $(document).ready(function(){
+      var activityDataTable = $('#activityTable').DataTable();
+      getActivityData();
+
+      $("#personal_datatable_cancel").click(function(){
+          $("#ActivityRecord").hide();
+          $("#flot-placeholder").hide();
+          $("#PersonalDataAndFlot").hide();
+      });
+      $("#time_select").change(function(){
+        getActivityData();
+      })
+      $('#activityTable').on('click', 'tr', function(){
+        var row = $(this).children('td:first-child').text();
+        row==''? '':click_row(row);
+      });
+    });
+
+    function click_row(row){
+      $.ajax({
+        type: "GET",
+        url: "../apiv1/activity/getbyid/" + row,
+        dataType: "json",
+        data: {
+        },
+        success: function(data) {
+          //顯示個人資料表
+          $("#ActivityRecord").show();
+          $("#flot-placeholder").show();
+          $("#PersonalDataAndFlot").show();
+          //繪製圖表
+          LoadActivityFlotChart(row,data);
+          //將bp的資料做分解
+          var bp_data = JSON.parse(data.bp);
+          //計算運動時間 hour:3,600,000 & minute:60,000 & second:1000
+          var time2 = new Date(data.end_time);
+          var time1 = new Date(data.start_time);
+          var hour = (time2.getTime() - time1.getTime()) / 3600000;
+          var minute = (time2.getTime() - time1.getTime()) / 60000;
+          var second = (time2.getTime() - time1.getTime()) / 1000;
+          var minute_int = Math.floor(minute);
+          var second_int = second-(minute_int*60);
+          //填入各項資訊
+          document.getElementById('personal_name').value = '姓名：' + data.fname + ' ' + data.lname;
+          document.getElementById('age').value = '年齡：' + data.age + '歲';
+          document.getElementById('before_dbp').value = '前測 舒張壓：' + bp_data.before.sbp + 'hmmg';
+          document.getElementById('before_sbp').value = ' 收縮壓：' + bp_data.before.dbp + 'hmmg';
+          document.getElementById('after_dbp').value = '後測 舒張壓：' + bp_data.after.sbp + 'hmmg';
+          document.getElementById('after_sbp').value = ' 收縮壓：' + bp_data.after.dbp + 'hmmg';
+          document.getElementById('exercise_time').value = '運動時間：' + minute_int + '分' + second_int + '秒';
+          document.getElementById('h_i_time').value = '高強度運動時間：' + data.h_i_time + '分';
         }
-        else{
-          console.log(data_array);
-          $("#activityTable").show();
-          $('#activityTable').DataTable({
-            "aaData": data_array, //here we get the array data from the ajax call.
-          });
-          $('#activityTable').DataTable().draw();
-        }
-    },
-    error: function(jqXHR) {
-      alert("發生錯誤: " + jqXHR.status);
+      })
     }
-  });
 
-  $("#time_select").change(function(){
-    $('#activityTable').DataTable().destroy();
-    $.ajax({
-      type : 'GET',
-      url : '../apiv1/activity/' + $("#time_select").val(),
-      dataType: 'json',
-      result :{
-      },
-      success :  function(result){
-        var data_array = [];
-        console.log(result.length);
-        for (i = 0; i < result.length; i++) {
-          data = [[  result[i].id,result[i].uid,result[i].step,result[i].start_time,result[i].end_time,result[i].distance,result[i].h_i_time  ]];
-          var data_array = data_array.concat(data);
-        } 
-        //pass data to datatable
-        if(result=='No data avaliable.'){
-          alert('No data avaliable.');
-          $("#activityTable").hide();
-        }
-        else{
-          console.log(data_array);
-          $("#activityTable").show();
-          $('#activityTable').DataTable({
-            "aaData": data_array, //here we get the array data from the ajax call.
-          });
-          $('#activityTable').DataTable().draw();
-        }
-      },
-      error: function(jqXHR) {
-        alert("發生錯誤: " + jqXHR.status);
-      }
-    });
-  });
-
-  $(document).on("click", "tr[class='odd'],tr[class='even']", function(){
-        $("#ActivityRecord").show();
-        $getid = $(this).children('td:first-child').text();
-        $.ajax({
-            type: "GET",
-            url: "../apiv1/activity/getbyid/" + $getid,
-            dataType: "json",
-            data: {
-            },
-            success: function(data) {
-              //印出彈出表單之DataTable
-              print_personal_table();
-              //將bp的資料做分解
-              var bp_data = JSON.parse(data.bp);
-              //計算運動時間 hour:3,600,000 & minute:60,000 & second:1000
-              var time2 = new Date(data.end_time);
-              var time1 = new Date(data.start_time);
-              var hour = (time2.getTime() - time1.getTime()) / 3600000;
-              var minute = (time2.getTime() - time1.getTime()) / 60000;
-              var second = (time2.getTime() - time1.getTime()) / 1000;
-              var minute_int = Math.floor(minute);
-              var second_int = second-(minute_int*60);
-              //填入各項資訊
-              document.getElementById('personal_name').value = '姓名：' + data.fname + ' ' + data.lname;
-              document.getElementById('age').value = '年齡：';
-              document.getElementById('before_dbp').value = '前測 舒張壓：' + bp_data.before.sbp + 'hmmg';
-              document.getElementById('before_sbp').value = ' 收縮壓：' + bp_data.before.dbp + 'hmmg';
-              document.getElementById('after_dbp').value = '後測 舒張壓：' + bp_data.after.sbp + 'hmmg';
-              document.getElementById('after_sbp').value = ' 收縮壓：' + bp_data.after.dbp + 'hmmg';
-              document.getElementById('exercise_time').value = '運動時間：' + minute_int + '分' + second_int + '秒';
-              document.getElementById('h_i_time').value = '高強度運動時間：' + data.h_i_time + '秒';
-            },
-
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })    
-    });
-
-    function print_personal_table (){
-      $('#personal_Activity').DataTable().destroy();
+    function getActivityData() {
       $.ajax({
         type : 'GET',
-        url  : '../apiv1/activity/getbyiddata/' + $getid,
+        url  : '../apiv1/activity/' + $("#time_select").val(),
         dataType: 'json',
         cache: false,
-        success :  function(result)
-        {
-          //pass data to datatable
-          $("#personal_Activity").show();
-          console.log(result); // just to see I'm getting the correct data.
-          $('#personal_Activity').DataTable({
-             "aaData": result, //here we get the array data from the ajax call.
-          });
-          $('#personal_Activity').DataTable().draw();
+        success :  function(result){
+          $("#activityTable").show();
+          LoadActivityDataToTable(result);
         },
         error: function(jqXHR) {
-          alert("發生錯誤: " + jqXHR.status);
+          $("#ActivityRecord").hide();
+          $("#flot-placeholder").hide();
+          $("#PersonalDataAndFlot").hide();
+
+          $("#activityTable").hide();
+          alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
         }
       });
     }
-});
 
-</script>
+    function LoadActivityDataToTable(activityData) {
+      var activityDataTable = $('#activityTable').DataTable();
+      activityDataTable.clear().draw(false);
+      for (var i in activityData) {
+        activityDataTable.row.add([
+          activityData[i].id,
+          activityData[i].uid,
+          activityData[i].step,
+          activityData[i].start_time,
+          activityData[i].end_time,
+          activityData[i].distance,
+          activityData[i].h_i_time
+        ]).draw(false);
+      }
+      activityDataTable.columns.adjust().draw();
+    }
 
+    function LoadActivityFlotChart(row,data) {
+      var Parse_data = JSON.parse(data.data);
+      var chart_x = [];
+      var data_hr = [];
+      var data_spo2 = [];
+      var ex_time = 0;
+      for (var i in Parse_data) {
+        //-----------------------------------------------------------製作x軸
+        //轉millisecond成分鐘和秒
+        getmin = Parse_data[i].datetime / 3600000;
+        getsec = Parse_data[i].datetime / 60000;
+        chart_min = Math.floor((getmin - getmin.toFixed())*60);
+        chart_sec = Math.floor((getsec - getsec.toFixed())*60);
+        //若小於0，+60做校正
+        chart_sec<0? chart_sec=chart_sec+60:chart_sec;
+        chart_min<0? chart_min=chart_min+60:chart_min;
+        //chart_x[i] = chart_min + chart_sec/60 ;
+        ex_time = 0.08333 + ex_time;
+
+        //若有用到，將datetime輸出成此格式->Mon Dec 25 2017 14:47:24 GMT+0800 (台北標準時間)
+        var millisecond_to_date = new Date(parseInt(Parse_data[i].datetime));
+        Parse_data[i].datetime = millisecond_to_date;
+        //console.log(Parse_data[i].datetime);
+        //console.log(chart_x[i]);
+        
+        //將所有資料串成array，準備放入圖表中
+        //data1 = [[ chart_x[i],Parse_data[i].hr ]];
+        //data2 = [[ chart_x[i],Parse_data[i].spo2 ]];
+        data1 = [[ ex_time,Parse_data[i].hr ]];
+        data2 = [[ ex_time,Parse_data[i].spo2 ]];
+        var data_hr = data_hr.concat(data1);
+        var data_spo2 = data_spo2.concat(data2);
+      }
+      
+      //圖表基本設定
+      var dataset = [
+          { label: "Heart Rate", data: data_hr}, //point的圖示為三角形
+          { label: "SPO2", data: data_spo2, yaxis: 2 } //以兩種y呈現
+      ];
+      
+      var options = {
+          series: {
+              lines: {
+                  show: true
+              }
+          },
+          xaxis: {
+              //下方x軸
+              axisLabelFontSizePixels: 12,
+              axisLabelFontFamily: 'Verdana, Arial',
+              axisLabelPadding: 10
+          },
+          yaxes: [{
+              //左邊y軸
+              axisLabel: "Heart Rate",
+              axisLabelFontSizePixels: 12,
+              axisLabelFontFamily: 'Verdana, Arial',
+              axisLabelPadding: 3
+          }, {
+              //右邊y軸
+              position: "right",
+              axisLabel: "SPO2",
+              axisLabelFontSizePixels: 12,
+              axisLabelFontFamily: 'Verdana, Arial',
+              axisLabelPadding: 3
+          }
+        ],
+          legend: {
+              //線標外框
+              noColumns: 0,
+              labelBoxBorderColor: "#000000"
+              //position: "nw"
+          },
+          grid: {
+              //圖表外框
+              hoverable: true,
+              borderWidth: 2,
+              borderColor: "#633200",
+              //圖表背景顏色 [上,下] 漸層下來
+              backgroundColor: { colors: ["#ffffff", "#EDF5FF"] }
+          },
+          //左線顏色,右線顏色
+          colors: ["#FF0000", "#0022FF"]
+      };
+      $.plot($("#flot-placeholder"), dataset, options);
+    }
+  </script>
+</head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -248,48 +312,38 @@ $(document).ready(function(){
 
   <!-- center   -->
   <div class="content-wrapper" style="padding-left: 5px">
-    <!-- click activity record -->
-    <div class="edit_table" id="ActivityRecord" style="display: none;">
-      <h2>活動紀錄</h2>
-      <br>
-      <!-- 個人姓名 -->
-      <input id="personal_name" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
-      <!-- 個人年齡 -->
-      <input id="age" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
-      <!-- 前測 DBP SBP -->
-      <input id="before_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
-      <input id="before_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
-      <!-- 後測 DBP SBP -->
-      <input id="after_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
-      <input id="after_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
-      <!-- 運動時間 -->
-      <input id="exercise_time" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
-      <!-- 高強度運動時間 -->
-      <input id="h_i_time" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br><br>
-      <!-- 個人資訊之DataTable -->
-      <div id="datatable_personal_visible">
-          <table id="personal_Activity" class="display" cellspacing="0" width="100%" style="display: none;">
-              <thead>
-                  <tr>
-                      <th>SPO2</th>
-                      <th>心跳</th>
-                      <th>時間</th>
-                  </tr>
-              </thead>
-              <tfoot>
-                  <tr>
-                      <th>SPO2</th>
-                      <th>心跳</th>
-                      <th>時間</th>
-                  </tr>
-              </tfoot>
-          </table>
+    <div class="row" id="PersonalDataAndFlot" style="display: none;">
+      <div class="column" style="width: 65%; padding-right: 5px;">
+        <div id="flot-placeholder" style="margin-left: 20px; width:90%; height:300px;" style="display: none;"></div><br>
+      </div>
+      <div class="column" style="width: 35%;">
+        <!-- click activity record -->
+        <div class="edit_table" id="ActivityRecord" style="display: none;">
+          <h2>活動紀錄</h2>
+          <br>
+          <!-- 個人姓名 -->
+          <input id="personal_name" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 個人年齡 -->
+          <input id="age" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 前測 DBP SBP -->
+          <input id="before_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
+          <input id="before_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 後測 DBP SBP -->
+          <input id="after_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
+          <input id="after_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 運動時間 -->
+          <input id="exercise_time" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 高強度運動時間 -->
+          <input id="h_i_time" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <!-- 個人資訊之DataTable -->
+
+          <div align="right">
+            <button id="personal_datatable_cancel">取消</button>
+          </div>
         </div>
-        <br>
-        <div align="right">
-          <button id="personal_datatable_cancel">取消</button>
-        </div>
+      </div>
     </div>
+    
     <!-- 全部資料之DataTable -->
     <br>
     <div class="container-fluid">
@@ -297,18 +351,13 @@ $(document).ready(function(){
         <div class="column" align="left" style="width: 30%; padding-left: 15px">
         <!-- 時間篩選 -->
         <select id="time_select">
-          <option value="getallweek">近一週</option>
-          <option value="getallmonth">本月</option>
           <option value="getall">全部</option>
-        </select>
-        <!-- 使用者篩選 -->
-        <select id="human">
-          <option value="1"></option>
-          <option value="2"></option>
+          <option value="getbytime/week">近一週</option>
+          <option value="getbytime/month">本月</option>
         </select>
         </div>
         <div class="column" align="right" style="width: 70%; ">
-          <button onclick="window.location.href='Download_Activity_PDF.php'" >PDF Download</button>
+          <button onclick="window.location.href='Download_Activity_PDF.php'" style="display: none;">PDF Download</button>
           <button onclick="window.location.href='Download_Activity_Excel.php'">EXCEL Download</button>
         </div>
       </div>
@@ -318,7 +367,7 @@ $(document).ready(function(){
     <div class="container-fluid">
 	    <!-- Activity DataTable-->
         <div id="datatable_activity_visible">
-          <table id="activityTable" class="display" cellspacing="0" width="100%" style="display: none;">
+          <table id="activityTable" class="display" cellspacing="0" width="100%">
               <thead>
                   <tr>
                       <th>編號</th>
@@ -327,21 +376,9 @@ $(document).ready(function(){
                       <th>開始時間</th>
                       <th>結束時間</th>
                       <th>距離(公尺)</th>
-                      <th>高強度運動(秒)</th>
+                      <th>高強度運動(分)</th>
                   </tr>
               </thead>
-              <tfoot>
-                  <tr>
-                      <th>編號</th>
-                      <th>帳號</th>
-                      <th>步數</th>
-                      <th>開始時間</th>
-                      <th>結束時間</th>
-                      <th>距離(公尺)</th>
-                      <th>高強度運動(秒)</th>
-                  </tr>
-              </tfoot>
-              
           </table>
         </div>
 	    <!-- /.content-wrapper-->
@@ -374,21 +411,6 @@ $(document).ready(function(){
 	        </div>
 	      </div>
 	    </div>
-	    <!-- Bootstrap core JavaScript-->
-	    <script src="vendor/jquery/jquery.min.js"></script>
-	    <script src="vendor/popper/popper.min.js"></script>
-	    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	    <!-- Core plugin JavaScript-->
-	    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	    <!-- Page level plugin JavaScript-->
-	    <script src="vendor/chart.js/Chart.min.js"></script>
-	    <script src="vendor/datatables/jquery.dataTables.js"></script>
-	    <!-- <script src="vendor/datatables/dataTables.bootstrap4.js"></script> -->
-	    <!-- Custom scripts for all pages-->
-	    <script src="js/sb-admin.min.js"></script>
-	    <!-- Custom scripts for this page-->
-	    <script src="js/sb-admin-datatables.min.js"></script>
-	    <script src="js/sb-admin-charts.min.js"></script>
     </div>
 </body>
 

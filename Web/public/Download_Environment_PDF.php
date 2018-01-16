@@ -90,7 +90,7 @@ $objPHPEXcel_PDF->SetFont('cid0jp', '', 16); //可以顯示中韓日文且不會
 $objPHPEXcel_PDF->Write(0, '環境資訊', '', 0, 'C', true, 0, false, false, 0);
 
 // 連結資料庫
-require 'connect.php';
+require '../api/connect.php';
 mysqli_select_db($con,"env");
  
 // query資料庫的資料 

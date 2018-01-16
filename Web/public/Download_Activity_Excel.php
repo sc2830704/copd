@@ -27,11 +27,11 @@
 
 // 連結資料庫
 require '../api/connect.php';
-mysqli_select_db($con,"user");
+mysqli_select_db($con,"activity");
  
 // query資料庫的資料 
-$sql_user="SELECT * FROM user";
-$result = mysqli_query($con,$sql_user);
+$sql_activity="SELECT * FROM activity";
+$result = mysqli_query($con,$sql_activity);
 
 $_cnt = 1;
 
@@ -53,30 +53,19 @@ $objPHPExcel = new PHPExcel();
 // 將資料庫的資料全部存在student這個陣列
 while($row = mysqli_fetch_array($result)) {
 	$_cnt++;
-	$row['drug'] = str_replace("[", "", $row['drug']);
-	$row['drug'] = str_replace("]", "", $row['drug']);
-	$row['drug'] = str_replace("\"", "", $row['drug']);
-	$row['history'] = str_replace("[", "", $row['history']);
-	$row['history'] = str_replace("]", "", $row['history']);
-	$row['history'] = str_replace("\"", "", $row['history']);
-	if($row['sex']==0){
-		$sex_chinese = '女';
-	}
-	else {
-		$sex_chinese = '男';
-	}
+	$row['start_time'] = str_replace("-", "/", $row['start_time']);
+	$row['end_time'] = str_replace("-", "/", $row['end_time']);
+	//$objPHPExcel->getActiveSheet()->getStyle('E'.$_cnt)->getAlignment()->setWrapText(true); 
 	$objPHPExcel->setActiveSheetIndex()
 		->setCellValue('A'.$_cnt , $row['id'])
-		->setCellValue('B'.$_cnt , $row['fname'])
-		->setCellValue('C'.$_cnt , $row['lname'])
-		->setCellValue('D'.$_cnt , $row['age'])
-		->setCellValue('E'.$_cnt , $sex_chinese)
-		->setCellValue('F'.$_cnt , $row['bmi'])
-		->setCellValue('G'.$_cnt , $row['history'])
-		->setCellValue('H'.$_cnt , $row['drug'])
-		->setCellValue('I'.$_cnt , $row['env_id'])
-		->setCellValue('J'.$_cnt , $row['ble_id'])
-		->setCellValue('K'.$_cnt , $row['watch_id']);
+		->setCellValue('B'.$_cnt , $row['uid'])
+		->setCellValue('C'.$_cnt , $row['step'])
+		->setCellValue('D'.$_cnt , $row['bp'])
+		->setCellValue('E'.$_cnt , $row['data'])
+		->setCellValue('F'.$_cnt , $row['distance'])
+		->setCellValue('G'.$_cnt , $row['h_i_time'])
+		->setCellValue('H'.$_cnt , $row['start_time'])
+		->setCellValue('I'.$_cnt , $row['end_time']);
 }
 
 // Set document properties
@@ -90,22 +79,20 @@ $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
 
 // Add some data
 $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', '帳號')
-            ->setCellValue('B1', '名字')
-            ->setCellValue('C1', '姓氏')
-            ->setCellValue('D1', '年齡')
-            ->setCellValue('E1', '性別')
-            ->setCellValue('F1', 'BMI')
-            ->setCellValue('G1', '病例')
-            ->setCellValue('H1', '藥物')
-            ->setCellValue('I1', 'Env_ID')
-            ->setCellValue('J1', 'BLE_ID')
-            ->setCellValue('K1', 'Watch_ID');
+            ->setCellValue('A1', '編號')
+            ->setCellValue('B1', '使用者編號')
+            ->setCellValue('C1', '步數')
+            ->setCellValue('D1', '血壓')
+            ->setCellValue('E1', '血氧及心率')
+            ->setCellValue('F1', '運動距離')
+            ->setCellValue('G1', '高強度運動時間')
+            ->setCellValue('H1', '開始時間')
+            ->setCellValue('I1', '結束時間');
 			
 $data_number = 0 ;
 
 // Rename worksheet
-$objPHPExcel->getActiveSheet()->setTitle('Patient');
+$objPHPExcel->getActiveSheet()->setTitle('Activity');
 
 // Set active sheet index to the first sheet, so Excel opens this as the first sheet
 $objPHPExcel->setActiveSheetIndex(0);
@@ -114,7 +101,7 @@ $objPHPExcel->setActiveSheetIndex(0);
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 
 //***************************file name***************************************
-header('Content-Disposition: attachment;filename="Patient.xlsx"');
+header('Content-Disposition: attachment;filename="Activity.xlsx"');
 header('Cache-Control: max-age=0');
 // If you're serving to IE 9, then the following may be needed
 header('Cache-Control: max-age=1');

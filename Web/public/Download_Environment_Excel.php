@@ -26,7 +26,7 @@
  */
 
 // 連結資料庫
-require 'connect.php';
+require '../api/connect.php';
 mysqli_select_db($con,"env");
  
 // query資料庫的資料 

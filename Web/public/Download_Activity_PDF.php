@@ -38,65 +38,52 @@ $objPHPEXcel_PDF->AddPage();
 // add some datas here 
 
 // set title
-$objPHPEXcel_PDF->SetTitle('使用者資訊');
+$objPHPEXcel_PDF->SetTitle('運動資訊');
 //$objPHPEXcel_PDF->SetFont('msungstdlight', '', 15); 可以顯示中文但會偏移
 $objPHPEXcel_PDF->SetFont('cid0jp', '', 14); //可以顯示中韓日文且不會偏移
-$objPHPEXcel_PDF->Write(0, '使用者資訊', '', 0, 'C', true, 0, false, false, 0);
+$objPHPEXcel_PDF->Write(0, '運動資訊', '', 0, 'C', true, 0, false, false, 0);
 
 // 連結資料庫
 require '../api/connect.php';
-mysqli_select_db($con,"user");
+mysqli_select_db($con,"activity");
  
 // query資料庫的資料 
-$sql_user="SELECT * FROM user";
+$sql_user="SELECT * FROM activity";
 $result = mysqli_query($con,$sql_user);
 
 $_cnt = 0;
 $table_data = "";
-// 將資料庫的資料全部存在student這個陣列
+// 將資料庫的資料全部存在陣列
 while($row = mysqli_fetch_array($result)) {
 	$_cnt++;
-	$row['drug'] = str_replace("[", "", $row['drug']);
-	$row['drug'] = str_replace("]", "", $row['drug']);
-	$row['drug'] = str_replace("\"", "", $row['drug']);
-	$row['history'] = str_replace("[", "", $row['history']);
-	$row['history'] = str_replace("]", "", $row['history']);
-	$row['history'] = str_replace("\"", "", $row['history']);
-	if($row['sex']==0){
-		$sex_chinese = '女';
-	}
-	else {
-		$sex_chinese = '男';
-	}
+	$row['start_time'] = str_replace("-", "/", $row['start_time']);
+	$row['end_time'] = str_replace("-", "/", $row['end_time']);
+
 	$table_data = $table_data . "<tr>
      		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['id']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['fname']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['lname']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['age']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$sex_chinese}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['bmi']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['history']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['drug']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['env_id']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['ble_id']}</td>
-     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['watch_id']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['uid']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['step']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['bp']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['data']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['distance']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['h_i_time']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['start_time']}</td>
+     		<td border=\"1\" align=\"center\" cellpadding=\"3\">{$row['end_time']}</td>
      	</tr>";
 }
 
 $table = "
 <table  border=\"1\" align=\"center\" cellpadding=\"3\">
 	<tr>
-		<td>帳號</td>
-		<td>名字</td>
-		<td>姓氏</td>
-		<td>年齡</td>
-		<td>性別</td>
-		<td>BMI</td>
-		<td>病例</td>
-		<td>藥物</td>
-		<td>Env-ID</td>
-		<td>BLE-ID</td>
-		<td>Watch-ID</td>
+		<td>編號</td>
+		<td>使用者編號</td>
+		<td>步數</td>
+		<td>血壓</td>
+		<td>血氧及心率</td>
+		<td>運動距離</td>
+		<td>高強度運動時間</td>
+		<td>開始時間</td>
+		<td>結束時間</td>
 	</tr>
 	". $table_data .
 	"
@@ -106,7 +93,7 @@ $table = "
 $objPHPEXcel_PDF->writeHTML('<br>', true, false, false, false, '');
 $objPHPEXcel_PDF->writeHTML($table, true, false, false, false, '');
 
-$file_name = 'Patient.pdf';
+$file_name = 'Activity.pdf';
 $objPHPEXcel_PDF->Output($file_name,'I');
 
 ?>

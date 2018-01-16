@@ -12,7 +12,7 @@ class Env{
 		$getAll_result = mysqli_query($con,$getAll_sql);
 		
 		if(mysqli_num_rows($getAll_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$getAll_dataArray = mysqli_fetch_all($getAll_result,MYSQLI_ASSOC);
@@ -29,7 +29,7 @@ class Env{
 		$getByUser_result = mysqli_query($con,$getByUser_sql);
 		
 		if(mysqli_num_rows($getByUser_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$getByUser_dataArray = mysqli_fetch_all($getByUser_result,MYSQLI_ASSOC);
@@ -46,7 +46,7 @@ class Env{
 		$getById_result = mysqli_query($con,$getById_sql);
 
 		if(mysqli_num_rows($getById_result) == 0) {
-			return 'No data avaliable.';
+			return 'NULL';
 		}
 		else {
 			$getById_dataArray = mysqli_fetch_all($getById_result,MYSQLI_ASSOC);
@@ -66,7 +66,7 @@ class Env{
 		$datetime = $input['datetime'];
 
 		if(!isset($deviceid)||empty($deviceid)||!isset($temperature)||empty($temperature)||!isset($humidity)||empty($humidity)||!isset($pm25)||empty($pm25)||!isset($uv)||empty($uv)||!isset($datetime)||empty($datetime)){
-			return 'NULL Data Exist.';
+			return 'EMPTY';
 		}
 		else {
 			$sql_insert = "INSERT INTO env (deviceid, temperature, humidity, pm25, uv, datetime) VALUES ('$deviceid','$temperature','$humidity','$pm25','$uv','$datetime')";
