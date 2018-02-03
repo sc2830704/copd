@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listBLEDevice"
+        android:layout_gravity="center_horizontal"
+        android:focusable="false"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:visibility="visible"
+        android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="中止掃描"
+        android:id="@+id/tv_scan"
+        android:textSize="25dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:visibility="visible"
+        android:background="@color/material_grey_300"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

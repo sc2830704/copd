@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@mipmap/ic_home"
+            android:title="@string/mainpage" />
+        <item
+            android:id="@+id/nav_event"
+            android:icon="@mipmap/ic_calendar"
+            android:title="@string/activity" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_user"
+            android:title="@string/personalInfo" />
+
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@mipmap/ic_calendar"
+            android:title="@string/history" />
+        <item
+            android:id="@+id/nav_device"
+            android:icon="@drawable/ic_bluetooth_general"
+            android:title="@string/myDevice" />
+    </group>
+
+
+
+</menu>
