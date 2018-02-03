@@ -58,7 +58,8 @@ else{
         dailyData[i].uid,
         dailyData[i].step,
         dailyData[i].date,
-        dailyData[i].distance
+        dailyData[i].distance,
+        dailyData[i].h_i_time
       ]).draw(false);
     }
     dailyDataTable.columns.adjust().draw();
@@ -159,6 +160,7 @@ else{
                       <th>步數</th>
                       <th>日期</th>
                       <th>距離(公尺)</th>
+                      <th>高強度運動時間(分)</th>
                   </tr>
               </thead>
           </table>

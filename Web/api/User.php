@@ -1,6 +1,7 @@
 <?php
 //-----------------------------------------------------------------------------User
 //response by method
+
 class User{
 	
 	function getAll(){
@@ -55,7 +56,8 @@ class User{
 		$ble_id = $input['ble_id'];
 		$watch_id = $input['watch_id'];
 
-		if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)||!isset($env_id)||empty($env_id)||!isset($ble_id)||empty($ble_id)||!isset($watch_id)||empty($watch_id)){
+		//if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)||!isset($env_id)||empty($env_id)||!isset($ble_id)||empty($ble_id)||!isset($watch_id)||empty($watch_id)){
+		if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)){
 			return 'EMPTY';
 		}
 		else {
@@ -107,8 +109,8 @@ class User{
 		$ble_id = $input['ble_id'];
 		$watch_id = $input['watch_id'];
 
-
-		if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)||!isset($env_id)||empty($env_id)||!isset($ble_id)||empty($ble_id)||!isset($watch_id)||empty($watch_id)){
+		// if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)||!isset($env_id)||empty($env_id)||!isset($ble_id)||empty($ble_id)||!isset($watch_id)||empty($watch_id)){
+		if(!isset($id)||empty($id)||!isset($pwd)||empty($pwd)||!isset($fname)||empty($fname)||!isset($lname)||empty($lname)||!isset($age)||empty($age)||!isset($sex)||!isset($bmi)||empty($bmi)||!isset($history)||empty($history)||!isset($drug)||empty($drug)){
 			return 'EMPTY';
 		}
 		else{
@@ -140,6 +142,20 @@ class User{
 			return $row;
 		}
 		return 'LoginFailed';
+	}
+	function checkId($id){
+		//connet db
+		require 'connect.php';
+		mysqli_select_db($con,"user");
+		
+		//query data by method
+		$getById_sql = "SELECT * FROM user WHERE id = '$id'";
+		$getById_result = mysqli_query($con,$getById_sql);
+		$row = mysqli_fetch_array($getById_result,MYSQLI_ASSOC);
+		if(empty($row)){
+			return 'Ok';
+		}
+		return 'EXIST';
 	}
 
 }

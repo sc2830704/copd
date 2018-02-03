@@ -3,6 +3,7 @@
 require_once('connect.php');
 require_once('SimpleRest.php');
 require_once('User.php');
+header('Content-Type: application/json; charset=UTF-8');
 class UserHandler extends SimpleRest{
 	public $method, $action, $id, $input;
 	//constructor
@@ -27,6 +28,10 @@ class UserHandler extends SimpleRest{
 					$user_id = new User();
 					$this->set_status_code($this->encodeJson($user_id->getById($this->id)));
 					break;
+				}else if($this->action == 'checkid'){
+					$user = new User();
+					$this->set_status_code($this->encodeJson($user->checkId($this->id)));
+					break;
 				}
 			case 'post':
 				if($this->action == 'add'){
@@ -37,6 +42,10 @@ class UserHandler extends SimpleRest{
 				else if($this->action == 'update'){
 					$user_update = new User();
 					$this->set_status_code($this->encodeJson($user_update->update($this->input)));
+					break;
+				}else if($this->action == 'login'){
+					$user_login = new User();
+					$this->set_status_code($this->encodeJson($user_login->login($this->input)));
 					break;
 				}
 			case 'delete':

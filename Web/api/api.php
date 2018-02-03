@@ -5,7 +5,6 @@ require_once('EnvHandler.php');
 require_once('ActivityHandler.php');
 require_once('DailyHandler.php');
 require_once('AdminHandler.php');
-
 $method = $_SERVER['REQUEST_METHOD'];
 $params = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $controller = $params[0];

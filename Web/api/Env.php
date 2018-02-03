@@ -65,7 +65,7 @@ class Env{
 		$uv = $input['uv'];
 		$datetime = $input['datetime'];
 
-		if(!isset($deviceid)||empty($deviceid)||!isset($temperature)||empty($temperature)||!isset($humidity)||empty($humidity)||!isset($pm25)||empty($pm25)||!isset($uv)||empty($uv)||!isset($datetime)||empty($datetime)){
+		if(!isset($deviceid)||!isset($temperature)||!isset($humidity)||!isset($pm25)||!isset($uv)||!isset($datetime)){
 			return 'EMPTY';
 		}
 		else {

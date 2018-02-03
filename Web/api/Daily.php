@@ -47,12 +47,13 @@ class Daily{
 		$step = $input['step'];
 		$date = $input['date'];
 		$distance = $input['distance']; 
+		$h_i_time = $input['h_i_time'];
 
-		if(!isset($uid)||empty($uid)||!isset($step)||!isset($date)||empty($date)||!isset($distance)){
+		if(!isset($uid)||empty($uid)||!isset($step)||!isset($date)||empty($date)||!isset($distance)||!isset($h_i_time)){
 			return 'EMPTY';
 		}
 		else {
-			$sql_insert = "INSERT INTO daily (uid, step, date, distance) VALUES ('$uid','$step','$date', '$distance')";
+			$sql_insert = "INSERT INTO daily (uid, step, date, distance, h_i_time) VALUES ('$uid','$step','$date', '$distance', '$h_i_time')";
 			$add_result = mysqli_query($con,$sql_insert);
 			return 'ok';
 		}
