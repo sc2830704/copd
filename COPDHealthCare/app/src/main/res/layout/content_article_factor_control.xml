@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="7dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="戒菸"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="        戒菸對於肺阻塞病人的好處除了可以減緩肺功能的下降速率，也可改善臨床症狀(咳嗽、痰液分泌)，降低致病率與死亡率。戒菸可使用尼古丁輔助，或參加戒菸門診。"/>
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="30sp"
+    android:layout_marginTop="5dp"
+    android:text="流感疫苗 "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="        建議每年應接種流感疫苗以預防肺阻塞的急性發作，流感疫苗接種能降低肺阻塞病人併發重症（如:下呼吸道感染而就醫）。"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="營養 "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="        由於疲勞、呼吸困難、慢性咳痰和藥物副作用(腸胃不適)，使肺阻塞病人攝取營養受影響，而營養不良會引起肺阻塞病人發生惡病質、肌肉減少症和體重減輕，並進一步導致的肺功能及運動能力下降，增加急性惡化的危險，飲食可以依照下列建議做調整:"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:text="        1.建議少量多餐，以避免餐後呼吸困難和飽足感，且飯前先休息"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:text="        2.應適度補充水分以避免排痰困難。"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:text="        3.維持均衡飲食，鈣質和維生素 A、C、E 的補充可能有助於改善肺阻塞的關症狀"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:text="        4.蛋白質攝取對於肺阻塞病人維持肌肉質量甚為重要，每日蛋白質總攝取量應為1.2-1.5 g/kg ( 如: 1.2 g/kg *體重50公斤 = 60公克 )。"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

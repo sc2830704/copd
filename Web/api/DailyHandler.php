@@ -21,28 +21,36 @@ class DailyHandler extends SimpleRest{
 			case 'get':
 				if($this->action == 'getall'){
 					$daily_all = new Daily();
-					$this->set_status_code($this->encodeJson($daily_all->getAll()));
+					//$this->set_status_code($this->encodeJson($daily_all->getAll()));
+					echo $this->set_status_code($daily_all->getAll());
 					break;
 				}
 				else if($this->action == 'getbyuser'){
 					$daily_uid = new Daily();
-					$this->set_status_code($this->encodeJson($daily_uid->getByUser($this->id)));
+					//$this->set_status_code($this->encodeJson($daily_uid->getByUser($this->id)));
+					echo $this->set_status_code($daily_uid->getByUser($this->id));
+					break;
+				}
+				else if($this->action == 'getbytime'){
+					$daily_time = new Daily();
+					//$this->set_status_code($this->encodeJson($daily_time->getByTime($this->id)));
+					echo $this->set_status_code($daily_time->getByTime($this->id));
 					break;
 				}
 			case 'post':
 				if($this->action == 'add'){
 					$daily_add = new Daily();
-					$this->set_status_code($this->encodeJson($daily_add->add($this->input)));
+					echo $this->set_status_code($daily_add->add($this->input));
 					break;
 				}
 			case 'delete':
 				if($this->action == 'delete'){
 					$daily_delete = new Daily();
-					$this->set_status_code($this->encodeJson($daily_delete->deletebyid($this->id)));
+					echo $this->set_status_code($daily_delete->deletebyid($this->id));
 					break;
 				}
 			default:
-				$this ->setHttpHeaders('application/json', 404);
+				$this ->setHttpHeaders('text/html', 404);
 				echo 'URL Error!';
 		}
 		
@@ -54,21 +62,21 @@ class DailyHandler extends SimpleRest{
 	}
 	
 	public function set_status_code($responseData) {
-		if($responseData == '"NULL"') {
-			$this ->setHttpHeaders('application/json', 601);
-			echo 'Error: No data avaliable.';
+		if($responseData == 'NULL') {
+			$this ->setHttpHeaders('text/html', 601);
+			return 'Error: No data avaliable.';
 		}
-		else if($responseData == '"EXIST"') {
-			$this ->setHttpHeaders('application/json', 602);
-			echo 'Error: This account is already existence.';
+		else if($responseData == 'EXIST') {
+			$this ->setHttpHeaders('text/html', 602);
+			return 'Error: This account is already existence.';
 		}
-		else if($responseData == '"EMPTY"') {
-			$this ->setHttpHeaders('application/json', 603);
-			echo 'Error: Data is empty.';
+		else if($responseData == 'EMPTY') {
+			$this ->setHttpHeaders('text/html', 603);
+			return 'Error: Data is empty.';
 		}
 		else {
 			$this ->setHttpHeaders('application/json', 200);
-			echo $responseData;
+			return $this ->encodeJson($responseData);
 		}
 	}
 

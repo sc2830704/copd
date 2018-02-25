@@ -5,8 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="device_watch">ZoeTech 手環</string>
-    <string name="device_spo2">SPO2</string>
+    <string name="device_watch">ZoeTech手錶</string>
+    <string name="device_spo2">SPO2 手環</string>
     <string name="device_env">環境感測裝置</string>
     <string name="remove">移除</string>
     <string name="pair">配對</string>
@@ -121,4 +121,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="male">男</string>
     <string name="female">女</string>
+    <string name="version">版本 V1.0</string>
+    <string name="title_activity_health_education">HealthEducationActivity</string>
+    <string name="large_text">
+        ( Chronic Obstructive Pulmonary Disease, COPD) 是一種呼吸道長期發炎導致無法恢復之呼吸道阻塞，使得氣體無法通暢地進出呼吸道的疾病...
+    </string>
+    <string name="education">衛教</string>
+    <string name="title_activity_health_article">HealthArticleActivity</string>
+
+    <string name="title_activity_history_detail">HistoryDetailActivity</string>
 </resources>

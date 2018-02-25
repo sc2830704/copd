@@ -1,4 +1,9 @@
 <?php
+if($_SERVER["HTTPS"] != "on")
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 session_start();
 if(empty($_SESSION['account'])){
   header("Location: index.php"); 
@@ -32,8 +37,14 @@ else{
 
 <script type="text/JavaScript">
 	$(document).ready(function(){
-	  var envDataTable = $('#evnTable').DataTable();
+	  var envDataTable = $('#evnTable').DataTable({
+      "order": [[ 6, "desc" ]]
+    });
 	  getEnvData();
+
+    $("#time_select").change(function(){
+      getEnvData();
+    })
 	});
 	
 	function LoadEnvDataToTable(envData){
@@ -52,17 +63,22 @@ else{
     }
 		envDataTable.columns.adjust().draw();
 	}
-	function getEnvData(){
-		$.ajax({
-  		type : 'GET',
-  		url  : '../apiv1/env/getall',
-  		dataType: 'json',
-  		cache: false,
-  		success :  function(result){
-  			LoadEnvDataToTable(result);
-  		}
-	  });
-	}
+  function getEnvData() {
+    $.ajax({
+      type : 'GET',
+      url  : '../apiv1/env/' + $("#time_select").val(),
+      dataType: 'json',
+      cache: false,
+      success :  function(result){
+        $("#envTable").show();
+        LoadEnvDataToTable(result);
+      },
+      error: function(jqXHR) {
+        $("#envTable").hide();
+        alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
+      }
+    });
+  }
 	
 
 </script>
@@ -78,29 +94,29 @@ else{
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="HomePage">
           <a class="nav-link" href="homepage.php">
-            <i class="fa fa-fw fa-dashboard"></i>
+            <i class="fa fa-fw fa-windows"></i>
             <span class="nav-link-text">COPD首頁</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-child"></i>
             <span class="nav-link-text" id="test">病患資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="PatientPage.php">Table</a>
+              <a href="PatientPage.php">Patient</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Environment">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bank"></i>
             <span class="nav-link-text" id="test">環境資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="EnvironmentPage.php">Table</a>
+              <a href="EnvironmentPage.php">Environment</a>
             </li>
           </ul>
         </li>
@@ -111,18 +127,18 @@ else{
           </a>
           <ul class="sidenav-second-level collapse" id="collapseDailyPages">
             <li>
-              <a href="DailyPage.php">Table</a>
+              <a href="DailyPage.php">Daily</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activity">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseActivityPages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bar-chart-o"></i>
             <span class="nav-link-text" id="test">活動紀錄</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseActivityPages">
             <li>
-              <a href="ActivityPage.php">Table</a>
+              <a href="ActivityPage.php">Activity</a>
             </li>
           </ul>
         </li>
@@ -150,9 +166,14 @@ else{
   <div class="content-wrapper" style="padding-left: 5px">
     <div class="container-fluid">
         <div class="download_table" align="right">
-              <button onclick="window.location.href='Download_Environment_PDF.php'">PDF Download</button>
-              <button onclick="window.location.href='Download_Environment_Excel.php'">EXCEL Download</button>
-            <br></br>
+          <select id="time_select">
+            <option value="getbytime/week">近一週</option>
+            <option value="getall">全部</option>
+            <option value="getbytime/month">本月</option>
+          </select>&nbsp;&nbsp;
+          <button onclick="window.location.href='Download_Environment_PDF.php'">PDF 下載</button>
+          <button onclick="window.location.href='Download_Environment_Excel.php'">EXCEL 下載</button>
+          <br></br>
         </div>
 	    <!-- /.container-fluid-->
 	    <!-- Download Page -->
@@ -178,7 +199,7 @@ else{
 	    <footer class="sticky-footer">
 	      <div class="container">
 	        <div class="text-center">
-	          <small>Copyright © Your Website 2017</small>
+	          <small>COPD Walk © 2018</small>
 	        </div>
 	      </div>
 	    </footer>

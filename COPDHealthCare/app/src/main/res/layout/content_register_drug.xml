@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:animateLayoutChanges="true"
+                android:visibility="visible">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:textColor="@color/md_Black"
+                    android:textStyle="bold"
+                    android:text="吸入型藥物"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbBerotec"
+                    android:textSize="18sp"
+                    android:text="備勞喘噴霧劑: (Berotec, Fenoterol) "/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbBerodualN"
+                    android:textSize="18sp"
+                    android:text="備喘全噴霧劑: (Berodual N, Fenoterol+ Ipratropium)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbCombivent"
+                    android:textSize="18sp"
+                    android:text="冠喘衛噴霧劑: (Combivent, Salbutamol + Ipratropium) "/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbSeretide"
+                    android:textSize="18sp"
+                    android:text="使肺泰乾粉吸入劑: (Seretide, Fluticasone propionate + Salmeterol)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbSpiriva"
+                    android:textSize="18sp"
+                    android:text="適喘樂吸入劑: (Spiriva, Tiotropium) "/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbAtrovent"
+                    android:textSize="18sp"
+                    android:text="定喘樂吸入液: (Atrovent Nebuliser Soln, Ipratropium)"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="26sp"
+                    android:textColor="@color/md_Black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"
+                    android:text="口服型藥物"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbPrednisone"
+                    android:textSize="18sp"
+                    android:text="強的松/去氫可的松 (Prednisone)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbDonison"
+                    android:textSize="18sp"
+                    android:text="康速龍 (Donison, Prednisolone)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbMethylprednisolone"
+                    android:textSize="18sp"
+                    android:text="甲基培尼皮質醇 (Methylprednisolone)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbHydrocortisone"
+                    android:textSize="18sp"
+                    android:text="氫化可體松 (Hydrocortisone)"/>
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/cbDexamethasone"
+                    android:textSize="18sp"
+                    android:text="地塞米松 (Dexamethasone)"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/md_Black"
+                        android:text="其他:"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etDrugOther"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnBack"
+                    android:text="上一頁"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnGo2History"
+                    android:text="下一頁"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom">
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:visibility="invisible"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_marginBottom="0dp"
+                    android:max="100"
+                    android:backgroundTint="@color/md_blue_50"
+                    android:indeterminateTint="#1a09d6"
+                    android:layout_marginTop="-7dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

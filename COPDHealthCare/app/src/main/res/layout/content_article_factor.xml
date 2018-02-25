@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="7dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="年齡 "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvAge"
+        android:text="        人體所有的器官均會隨著年齡而失去功能，肺臟也一樣，當年齡大於二十五歲後，肺功能會隨著時間逐漸變差。"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="吸菸 "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvSmoke"
+        android:text="         抽菸是造成肺阻塞最常見的危險因子，肺部吸入性菸霧微粒與氣體的總負擔量增加，而導致呼吸道疾病與肺阻塞的發生。"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="職業"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvCarer"
+        android:text="         使用不當器具燃燒木材、動物糞便、穀類殘渣和煤炭均可能造成高度室內空氣污染，在礦場以及在金屬和化工廠工作者，吸入棉、五穀類、木材等灰塵以及在屠宰場、 養雞場等不潔的蒸氣，顯示會造成慢性氣道阻塞。
+"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="空氣汙染"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvAirPullet"
+        android:text="        室內或室外空氣汙染(如:汽車燃燒石油燃料所造成的空氣污染)已被證實與肺功能的下降相關。空氣汙染及空氣中懸浮微粒(如:PM2.5、PM10、CO、SO2等) 濃度的上升也被發現會增加肺阻塞住院率。
+"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="二手煙 "/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvSecondSmoke"
+        android:text="        嬰兒和孩童吸到二手菸容易發生呼吸道疾病、損害肺功能，同時幼兒生長過程，肺功能會發育不全。"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginTop="5dp"
+        android:text="濕度與氣溫"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/tvHumdity"
+        android:text="        氣候變化對慢性阻塞性肺疾病病患影響很大，當吸入乾冷的空氣時，容易使氣管收縮，尤其濕度和氣溫變化大時，會使病情加重。"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+</LinearLayout>

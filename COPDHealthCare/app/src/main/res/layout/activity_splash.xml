@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mitlab_raymond.copdhealthcare.SplashActivity">
+    tools:context="com.ntust.mitlab.copdwalk.SplashActivity">
 
     <TextView
         android:id="@+id/fullscreen_content"
@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="版本 V1.0"/>
+                android:id="@+id/tvVersion"
+                android:text="@string/version"/>
         </LinearLayout>
     </FrameLayout>
 

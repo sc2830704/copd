@@ -18,7 +18,7 @@
         android:layout_width="66dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.37"
-        app:srcCompat="@mipmap/ic_lung_white" />
+        app:srcCompat="@drawable/ic_lungs" />
 
     <TextView
         android:id="@+id/textView"

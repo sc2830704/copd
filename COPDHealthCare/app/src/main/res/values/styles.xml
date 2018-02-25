@@ -46,10 +46,18 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
     <style name="my_pb_style" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:maxHeight">5dip</item>
         <item name="android:minHeight">3dip</item>
         <item name="android:indeterminateOnly">false</item>
-        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/md_red_500</item>
+        <item name="android:textColor">@color/md_White</item>
     </style>
 </resources>

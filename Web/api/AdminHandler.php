@@ -21,12 +21,11 @@ class AdminHandler extends SimpleRest{
 			case 'post':
 				if($this->action == 'login'){
 					$admin_login = new Admin();
-					$this ->setHttpHeaders('application/json', 200);
-					echo $this->encodeJson($admin_login->login());
+					echo $this->set_status_code($admin_login->login());
 					break;
 				}
 			default:
-				$this ->setHttpHeaders('application/json', 404);
+				$this ->setHttpHeaders('text/html', 404);
 				echo 'METHOD Error!';
 		}
 	}
@@ -37,21 +36,21 @@ class AdminHandler extends SimpleRest{
 	}
 	
 	public function set_status_code($responseData) {
-		if($responseData == '"NULL"') {
-			$this ->setHttpHeaders('application/json', 601);
-			echo 'Error: No data avaliable.';
+		if($responseData == 'NULL') {
+			$this ->setHttpHeaders('text/html', 601);
+			return 'Error: No data avaliable.';
 		}
-		else if($responseData == '"EXIST"') {
-			$this ->setHttpHeaders('application/json', 602);
-			echo 'Error: This account is already existence.';
+		else if($responseData == 'EXIST') {
+			$this ->setHttpHeaders('text/html', 602);
+			return 'Error: This account is already existence.';
 		}
-		else if($responseData == '"EMPTY"') {
-			$this ->setHttpHeaders('application/json', 603);
-			echo 'Error: Data is empty.';
+		else if($responseData == 'EMPTY') {
+			$this ->setHttpHeaders('text/html', 603);
+			return 'Error: Data is empty.';
 		}
 		else {
 			$this ->setHttpHeaders('application/json', 200);
-			echo $responseData;
+			return $this ->encodeJson($responseData);
 		}
 	}
 

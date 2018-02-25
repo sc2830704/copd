@@ -24,7 +24,8 @@
         android:layout_below="@+id/appBarLayout"
         android:layout_alignParentStart="true">
         <include layout="@layout/content_register" />
-        <include layout="@layout/content_register_detail" />
+        <include layout="@layout/content_register_drug" />
+        <include layout="@layout/content_register_history" />
     </ViewFlipper>
 
 

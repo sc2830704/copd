@@ -1,4 +1,9 @@
 <?php
+if($_SERVER["HTTPS"] != "on")
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 session_start();
 if(empty($_SESSION['account'])){
   header("Location: index.php"); 
@@ -35,10 +40,7 @@ else{
   <script src="js/sb-admin.min.js"></script>
   <!-- Custom scripts for this page-->
   <script src="js/sb-admin-datatables.min.js"></script>
-
-  <!-- FLOT CHART -->
   <script src="js/jquery-1.11.3.min.js" type='text/javascript'></script>
-  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/excanvas.min.js"></script><![endif]-->
 
   <script src="js/highcharts.js"></script>
   <script src="js/boost.js"></script>
@@ -60,29 +62,29 @@ else{
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="HomePage">
           <a class="nav-link" href="homepage.php">
-            <i class="fa fa-fw fa-dashboard"></i>
+            <i class="fa fa-fw fa-windows"></i>
             <span class="nav-link-text">COPD首頁</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-child"></i>
             <span class="nav-link-text" id="test">病患資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="PatientPage.php">Table</a>
+              <a href="PatientPage.php">Patient</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Environment">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bank"></i>
             <span class="nav-link-text" id="test">環境資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="EnvironmentPage.php">Table</a>
+              <a href="EnvironmentPage.php">Environment</a>
             </li>
           </ul>
         </li>
@@ -93,18 +95,18 @@ else{
           </a>
           <ul class="sidenav-second-level collapse" id="collapseDailyPages">
             <li>
-              <a href="DailyPage.php">Table</a>
+              <a href="DailyPage.php">Daily</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activity">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseActivityPages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bar-chart-o"></i>
             <span class="nav-link-text" id="test">活動紀錄</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseActivityPages">
             <li>
-              <a href="ActivityPage.php">Table</a>
+              <a href="ActivityPage.php">Activity</a>
             </li>
           </ul>
         </li>
@@ -135,7 +137,7 @@ else{
       </div>
       <div class="column" style="width: 35%;">
         <!-- click activity record -->
-        <div class="edit_table" id="ActivityRecord" style="display: none;">
+        <div class="edit_table" id="ActivityRecord" style="display: none; border: 1px solid;">
           <h2>活動紀錄</h2>
           <br>
           <!-- 個人姓名 -->
@@ -143,11 +145,11 @@ else{
           <!-- 個人年齡 -->
           <input id="age" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
           <!-- 前測 DBP SBP -->
-          <input id="before_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
-          <input id="before_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <input id="before_dbp" style="width:200px; text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
+          <input id="before_sbp" style="width:200px; text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
           <!-- 後測 DBP SBP -->
-          <input id="after_dbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
-          <input id="after_sbp" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
+          <input id="after_dbp" style="width:200px; text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input>
+          <input id="after_sbp" style="width:200px; text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
           <!-- 運動時間 -->
           <input id="exercise_time" style="text-align: left; padding-right: 5px; border: 0px; background: #ffffff;" size="number" disabled></input><br>
           <!-- 高強度運動時間 -->
@@ -155,7 +157,7 @@ else{
           <!-- 個人資訊之DataTable -->
 
           <div align="right">
-            <button id="personal_datatable_cancel">取消</button>
+            <button id="personal_datatable_cancel">關閉</button>
           </div>
         </div>
       </div>
@@ -165,17 +167,15 @@ else{
     <br>
     <div class="container-fluid">
       <div class="row">
-        <div class="column" align="left" style="width: 30%; padding-left: 15px">
+        <div class="column" align="right" style="width: 100%; padding-left: 15px">
         <!-- 時間篩選 -->
-        <select id="time_select">
-          <option value="getall">全部</option>
-          <option value="getbytime/week">近一週</option>
-          <option value="getbytime/month">本月</option>
-        </select>
-        </div>
-        <div class="column" align="right" style="width: 70%; ">
-          <button onclick="window.location.href='Download_Activity_PDF.php'" style="display: none;">PDF Download</button>
-          <button onclick="window.location.href='Download_Activity_Excel.php'">EXCEL Download</button>
+          <select id="time_select">
+            <option value="getall">全部</option>
+            <option value="getbytime/week">近一週</option>
+            <option value="getbytime/month">本月</option>
+          </select>&nbsp;&nbsp;
+          <button onclick="window.location.href='Download_Activity_PDF.php'" style="display: none;">PDF 下載</button>
+          <button onclick="window.location.href='Download_Activity_Excel.php'">EXCEL 下載</button>
         </div>
       </div>
     </div>
@@ -202,7 +202,7 @@ else{
 	    <footer class="sticky-footer">
 	      <div class="container">
 	        <div class="text-center">
-	          <small>Copyright © Your Website 2017</small>
+	          <small>COPD Walk © 2018</small>
 	        </div>
 	      </div>
 	    </footer>
@@ -233,7 +233,9 @@ else{
 
 <script type="text/JavaScript">
 $(document).ready(function(){
-  var activityDataTable = $('#activityTable').DataTable();
+  var activityDataTable = $('#activityTable').DataTable({
+    "order": [[ 3, "desc" ]]
+  });
   getActivityData();
 
   $("#personal_datatable_cancel").click(function(){
@@ -277,10 +279,10 @@ function click_row(row){
       //填入各項資訊
       document.getElementById('personal_name').value = '姓名：' + data.fname + ' ' + data.lname;
       document.getElementById('age').value = '年齡：' + data.age + '歲';
-      document.getElementById('before_dbp').value = '前測 舒張壓：' + bp_data.before.sbp + 'hmmg';
-      document.getElementById('before_sbp').value = ' 收縮壓：' + bp_data.before.dbp + 'hmmg';
-      document.getElementById('after_dbp').value = '後測 舒張壓：' + bp_data.after.sbp + 'hmmg';
-      document.getElementById('after_sbp').value = ' 收縮壓：' + bp_data.after.dbp + 'hmmg';
+      document.getElementById('before_dbp').value = '前測 舒張壓：' + bp_data.before.dbp.toFixed(2) + 'mmhg';
+      document.getElementById('before_sbp').value = '收縮壓：' + bp_data.before.sbp.toFixed(2) + 'mmhg';
+      document.getElementById('after_dbp').value = '後測 舒張壓：' + bp_data.after.dbp.toFixed(2) + 'mmhg';
+      document.getElementById('after_sbp').value = '收縮壓：' + bp_data.after.sbp.toFixed(2) + 'mmhg';
       document.getElementById('exercise_time').value = '運動時間：' + minute_int + '分' + second_int + '秒';
       document.getElementById('h_i_time').value = '高強度運動時間：' + data.h_i_time + '分';
     }
@@ -329,43 +331,26 @@ function LoadActivityFlotChart(row,data) {
   var Parse_data = JSON.parse(data.data);
   var arr_hr = [];
   var arr_spo2 = [];
-  var data_hr = [];
-  var data_spo2 = [];
-  var ex_time = 0;
   for (var i in Parse_data) {
-    //-----------------------------------------------------------製作x軸
-    //轉millisecond成分鐘和秒
-    getmin = Parse_data[i].datetime / 3600000;
-    getsec = Parse_data[i].datetime / 60000;
-    chart_min = Math.floor((getmin - getmin.toFixed())*60);
-    chart_sec = Math.floor((getsec - getsec.toFixed())*60);
-    //若小於0，+60做校正
-    chart_sec<0? chart_sec=chart_sec+60:chart_sec;
-    chart_min<0? chart_min=chart_min+60:chart_min;
-    ex_time = 0.08333 + ex_time;
 
-    //若有用到，將datetime輸出成此格式->Mon Dec 25 2017 14:47:24 GMT+0800 (台北標準時間)
+    //若有用到，將millisecond_to_date輸出成此格式->Mon Dec 25 2017 14:47:24 GMT+0800 (台北標準時間)
     var millisecond_to_date = new Date(parseInt(Parse_data[i].datetime));
-    Parse_data[i].datetime = millisecond_to_date;
-    //console.log(Parse_data[i].datetime);
-    //console.log(chart_x[i]);
-    
-    //將所有資料串成array，準備放入圖表中
-    //data1 = [[ chart_x[i],Parse_data[i].hr ]];
-    //data2 = [[ chart_x[i],Parse_data[i].spo2 ]];
+    var year = millisecond_to_date.getFullYear();
+    var mon = millisecond_to_date.getMonth();
+    var day = millisecond_to_date.getDate();
+    var h = millisecond_to_date.getHours();
+    var m = millisecond_to_date.getMinutes();
+    var s = millisecond_to_date.getSeconds();
+    console.log(year,mon,day,h,m,s);
+
     arr_hr.push([
-    	ex_time,
+    	Date.UTC(year, mon, day, h, m, s),
     	Parse_data[i].hr
     ]);
     arr_spo2.push([
-    	ex_time,
+    	Date.UTC(year, mon, day, h, m, s),
     	Parse_data[i].spo2
     ]);
-
-    data1 = [[ ex_time,Parse_data[i].hr ]];
-    data2 = [[ ex_time,Parse_data[i].spo2 ]];
-    var data_hr = data_hr.concat(data1);
-    var data_spo2 = data_spo2.concat(data2);
   }
   getData(arr_hr,arr_spo2);
 }
@@ -383,19 +368,23 @@ function getData(hr_data,spo2_data) {
 	    },
 
 	    title: {
-	        text: 'COPD Manage System Activity Record'
+	        text: 'COPD 管理系統活動紀錄'
 	    },
 
 	    subtitle: {
-	        text: 'User\'s Heart Rate and SPO2'
+	        text: '心率和SPO2'
 	    },
+
+	    xAxis: {
+		    type: 'datetime'
+		},
 
 	    tooltip: {
 	        valueDecimals: 2
 	    },
 
 	    series: [{
-	    	name: 'Heart Rate',
+	    	name: '心率',
 	        data: hr_data,
 	        lineWidth: 0.5
 	    },

@@ -99,5 +99,11 @@
     <color name="md_Grey_700">#616161</color>
     <color name="md_Grey_800">#424242</color>
 
+    <color name="md_BlueGrey_400">#78909C</color>
+    <color name="md_BlueGrey_600">#546E7A</color>
+    <color name="md_BlueGrey_700">#455A64</color>
+    <color name="md_BlueGrey_800">#37474F</color>
+
+
     <color name="black_overlay">#66000000</color>
 </resources>

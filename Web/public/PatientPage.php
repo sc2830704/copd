@@ -1,4 +1,9 @@
 <?php
+if($_SERVER["HTTPS"] != "on")
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 session_start();
 if(empty($_SESSION['account'])){
   header("Location: index.php"); 
@@ -64,6 +69,7 @@ else{
       dataType: 'json',
       cache: false,
       success :  function(result) {
+        console.log(result); 
         LoadPatientDataToTable(result);
       }
     });
@@ -126,20 +132,35 @@ else{
         drug: $("#drug").val(),
         env_id: $("#env_id").val(),
         ble_id: $("#ble_id").val(),
-        watch_id: $("#watch_id").val()
+        watch_id: $("#watch_id").val(),
+        drug_other: $("#drug_other_post").val(),
+        history_other: $("#history_other_post").val()
       },
-      success: function(data) {  
+      success: function(data) { 
         getPatientData();
         $("#PatientManage").hide(); 
       },
       error: function(jqXHR) {
+        console.log(jqXHR);
         alert("發生錯誤: " + jqXHR.status + ' ' + jqXHR.statusText);
       }
     })
   }
 
   function get_medicine(){
+    var medicine_other = [];
     var medicine_selected=[];
+
+    var medicine_reg= $("#drug_other").val().replace(/,/g,"\",\"") + '';
+    if(medicine_reg==''){
+      document.getElementById('drug_other_post').value = '["None"]';
+    }
+    else{
+      medicine_other = ['["' + medicine_reg + '"]'];
+      console.log(medicine_other);
+      document.getElementById('drug_other_post').value = medicine_other;
+    }
+
     $("[name=medicine]:checkbox:checked").each(function(){
       medicine_selected.push($(this).val());
     });
@@ -148,15 +169,28 @@ else{
     	document.getElementById('drug').value = '["None"]';
     }
     else{
+      //console.log(medicine_selected);
 	    var drug_arr = medicine_selected.split(',');
-        drug_arr = JSON.stringify(drug_arr);
+      //console.log(drug_arr);
+      drug_arr = JSON.stringify(drug_arr);
+      //console.log(drug_arr);
 	    document.getElementById('drug').value = drug_arr ;
-
-	    //document.getElementById('drug').value = medicine_selected ;
     }
   }
   function get_case(){
+    var case_other = [];
     var case_selected=[];
+
+    var case_reg= $("#history_other").val().replace(/,/g,"\",\"") + '';
+    if(case_reg==''){
+      document.getElementById('history_other_post').value = '["None"]';
+    }
+    else{
+      case_other = ['["' + case_reg + '"]'];
+      console.log(case_other);
+      document.getElementById('history_other_post').value = case_other;
+    }
+
     $("[name=case]:checkbox:checked").each(function(){
       case_selected.push($(this).val());
     });
@@ -168,8 +202,6 @@ else{
         var history_arr = case_selected.split(',');
         history_arr = JSON.stringify(history_arr);
      	document.getElementById('history').value = history_arr ;
-
-     	//document.getElementById('history').value = case_selected ;
     }
   }
 
@@ -193,7 +225,10 @@ else{
         document.getElementById('watch_id').value = data.watch_id;
         data.history = JSON.parse(data.history);
         data.drug = JSON.parse(data.drug);
-
+        data.drug_other = JSON.parse(data.drug_other);
+        data.history_other = JSON.parse(data.history_other);
+        document.getElementById('drug_other').value = data.drug_other;
+        document.getElementById('history_other').value = data.history_other;
         //var history_arr = data.history.split(',');
         //var drug_arr = data.drug.split(',');
         
@@ -235,6 +270,8 @@ else{
     document.getElementById('env_id').value = '';
     document.getElementById('ble_id').value = '';
     document.getElementById('watch_id').value = '';
+    document.getElementById('drug_other').value = '';
+    document.getElementById('history_other').value = '';
     $("input[name='medicine']").prop("checked", false);
     $("input[name='case']").prop("checked", false);
     $("#patient_delete").hide();
@@ -261,29 +298,29 @@ else{
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="HomePage">
           <a class="nav-link" href="homepage.php">
-            <i class="fa fa-fw fa-dashboard"></i>
+            <i class="fa fa-fw fa-windows"></i>
             <span class="nav-link-text">COPD首頁</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-child"></i>
             <span class="nav-link-text" id="test">病患資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="PatientPage.php">Table</a>
+              <a href="PatientPage.php">Patient</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Environment">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bank"></i>
             <span class="nav-link-text" id="test">環境資料</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="EnvironmentPage.php">Table</a>
+              <a href="EnvironmentPage.php">Environment</a>
             </li>
           </ul>
         </li>
@@ -294,18 +331,18 @@ else{
           </a>
           <ul class="sidenav-second-level collapse" id="collapseDailyPages">
             <li>
-              <a href="DailyPage.php">Table</a>
+              <a href="DailyPage.php">Daily</a>
             </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activity">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseActivityPages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
+            <i class="fa fa-fw fa-bar-chart-o"></i>
             <span class="nav-link-text" id="test">活動紀錄</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseActivityPages">
             <li>
-              <a href="ActivityPage.php">Table</a>
+              <a href="ActivityPage.php">Activity</a>
             </li>
           </ul>
         </li>
@@ -333,153 +370,113 @@ else{
   <div class="content-wrapper" style="padding-left: 5px">
     <div class="container-fluid">
         <div class="download_table" align="right">
-              <button onclick="window.location.href='Download_Patient_PDF.php'">PDF Download</button>
-              <button onclick="window.location.href='Download_Patient_Excel.php'">EXCEL Download</button>&nbsp;
-              &nbsp;<button id="NewPatient">New Data</button>
+              <button onclick="window.location.href='Download_Patient_PDF.php'">PDF 下載</button>
+              <button onclick="window.location.href='Download_Patient_Excel.php'">EXCEL 下載</button>&nbsp;
+              &nbsp;<button id="NewPatient">新增資料</button>
         </div>
 	    <!-- /.container-fluid-->
 	    <!-- Download Page -->
 	    <!-- PatientManage-->
       <div class="edit_table" id="PatientManage" style="display:none; width: 100%">
-        <h2 align="left" style="font-weight: bold; padding-left: 20px;">病患資料表</h2><br>
-          <div class="row">
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 40px;">
+        <div class="row">
+          <div class="column" align="right" style="padding: 0px 10px 0px 5px; width: 25%;"><br>
+              <h5 align="left" style="font-weight: bold; padding-left: 20px;">病患資料表</h5>
               <label for="fname">姓氏：</label>
-              <input type="text" id="fname"><br>
+              <input type="text" id="fname"> <br>
 
               <label for="lname">名字：</label>
-              <input type="text" id="lname"><br>
+              <input type="text" id="lname"> <br>
 
               <label for="age">年齡：</label>
-              <input type="text" id="age"><br>
+              <input type="text" id="age"> <br>
 
               <label for="sex">性別：</label>
-              <select id="sex" style="width: 77%;">
+              <select id="sex" style="width: 173px;">
                 <option value="1">男</option>
                 <option value="0">女</option>
-              </select> <br>          
-            </div>
+              </select> <br>
 
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;" >
-              <label for="addid" id="newid_label">帳號：</label>
-              <input type="text" id="addid">
-              
               <label for="updateid" id="pid_label">帳號：</label>
-              <input type="text" id="updateid" disabled> <br>
+              <input type="text" id="updateid" disabled>
+
+              <label for="addid" id="newid_label">帳號：</label>
+              <input type="text" id="addid"> <br>
 
               <label for="pwd">密碼：</label>
               <input type="password" id="pwd"> <br>
 
               <label for="bmi">BMI：</label>
               <input type="text" id="bmi"> <br>
-            </div>
 
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 auto 0 auto;">
-              <label for="ble_id">BLE_ID：</label>
-              <input type="text" id="ble_id"><br>
+              <label for="env_id">環境ID：</label>
+              <input type="text" id="env_id"> <br>
+              
+              <label for="ble_id">藍芽ID：</label>
+              <input type="text" id="ble_id"> <br>
 
-              <label for="env_id">ENV_ID：</label>
-              <input type="text" id="env_id"><br>
+              <label for="watch_id">手錶ID：</label>
+              <input type="text" id="watch_id"> <br><br>
+	      
+	      <h6 style="color: red;">[備註] 帳號若包含英文字母需小寫</h6>
+	      <h6 style="color: red;">     (輸入大寫會自動轉為小寫)</h6>
+	      
+          </div>
+          <div class="column" align="left" style="padding: 0px 10px 0px 5px; width: 50%">
+          <br>
+            <div style="padding: 0px 10px 0px 40px;">
+              <h5 style="font-weight: bold;">藥物勾選清單</h5>
 
-              <label for="watch_id">Watch_ID：</label>
-              <input type="text" id="watch_id"><br>
+              <h6>吸入型藥物：</h6>
+              <input name="medicine" type="checkbox" value="Berotec"> 備勞喘噴霧劑：(Berotec, Fenoterol)<br>
+              <input name="medicine" type="checkbox" value="BerodualN"> 備喘全噴霧劑：(Berodual N, Fenoterol + Ipratropium)<br>
+              <input name="medicine" type="checkbox" value="Combivent"> 冠喘衛噴霧劑：(Combivent, Salbutamol + Ipratropium)<br>
+              <input name="medicine" type="checkbox" value="Seretide"> 使肺泰乾粉吸入劑：(Seretide, Fluticasone propionate + Salmeterol)<br>
+              <input name="medicine" type="checkbox" value="Spiriva"> 適喘樂吸入劑：(Spiriva, Tiotropium)<br>
+              <input name="medicine" type="checkbox" value="Atrovent"> 定喘樂吸入劑：(Atrovent Nebuliser Soln, Ipratropium)<br>
+              <br>
+              <h6>口服型類固醇：</h6>
+              <input name="medicine" type="checkbox" value="Prednisone"> 強的松/去氫可的松 (Prednisone)<br>
+              <input name="medicine" type="checkbox" value="Donison"> 康速龍 (Donison, Prednisone)<br>
+              <input name="medicine" type="checkbox" value="Methylprednisolone"> 甲基培尼皮質醇 (Methylprednisolone)<br>
+              <input name="medicine" type="checkbox" value="Hydrocortisone"> 氫化可體松 (Hydrocortisone)<br>
+              <input name="medicine" type="checkbox" value="Dexamethasone"> 地塞米松 (Dexamethasone)<br>
+              <br>
+              <h6>其它藥物：（不同藥物請用,分開）</h6>
+              <textarea type="text" id="drug_other" rows="3" cols="40"></textarea>
+              <br>
             </div>
           </div>
-          <div class="row">
-            <div class="column" align="left" style="padding: 0px 10px 0px 40px;">
-              <br><h4 style="font-weight: bold;">服用藥物</h4>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column" align="left" style="padding: 0px 10px 0px 80px;">
-              <h5 style="font-weight: bold;">  吸入型</h5>
-            </div>
-          </div>
-          <div class="row" align="center">
-            <div class="column" align="left" style="margin: 0 auto 0 80px;" >
-              <h5>β2致效劑(β2-agonists)</h5>
-              <input name="medicine" type="checkbox" value="Fenoterol"> Fenoterol(骨骼肌輕微震顫)><br>
-              <input name="medicine" type="checkbox" value="Salbutamol"> Salbutamol<br>
-              <input name="medicine" type="checkbox" value="Formoterol"> Formoterol<br>
-              <input name="medicine" type="checkbox" value="Indacaterol"> Indacaterol(咳嗽、鼻炎)<br>
-              <input name="medicine" type="checkbox" value="Salmeterol"> Salmeterol(肌肉痙攣)<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 auto 0 auto;">
-              <h5>抗蕈毒鹼藥物(anticholinergic drugs)</h5>
-              <input name="medicine" type="checkbox" value="IpratropiumBormide"> Ipratropium Bormide(咳嗽、視力模糊)<br>
-              <input name="medicine" type="checkbox" value="Vilanterol"> Vilanterol<br>
-              <input name="medicine" type="checkbox" value="Glycopyrronium"> Glycopyrronium(咳嗽、鼻炎)<br>
-              <input name="medicine" type="checkbox" value="Tiotropium"> Tiotropium(咳嗽、視力模糊)<br>
-              <input name="medicine" type="checkbox" value="Umeclidinium"> Umeclidinium<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 auto 0 auto;">
-              <h5>吸入型類固醇(inhaled corticosteroids)</h5>
-              <input name="medicine" type="checkbox" value="Beclomethasone"> Beclomethasone<br>
-              <input name="medicine" type="checkbox" value="Budesonide"> Budesonide(咳嗽)<br>
-              <input name="medicine" type="checkbox" value="FluticasonePropionate"> Fluticasone Propionate<br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column" align="left" style="padding: 0px 10px 0px 80px;">
-              <br><h5 style="font-weight: bold;">  口服型</h5>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column" align="left" style="margin: 0 auto 0 80px;">
-              <h5>抑制劑(Phosphodiesterase-4)</h5>
-              <input name="medicine" type="checkbox" value="Roflumilast"> Roflumilast<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 auto 0 auto;">
-              <h5>茶鹼類(methylxanthines)</h5>
-              <input name="medicine" type="checkbox" value="Aminophylline"> Aminophylline(肌肉抽筋)<br>
-              <input name="medicine" type="checkbox" value="Theophylline"> Theophylline<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 auto 0 auto;">
-              <h5>口服刑類固醇(oral steroids)</h5>
-              <input name="medicine" type="checkbox" value="OralSteroids"> Oral Steroids(口服類固醇)<br>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column" align="left" style="padding: 0px 10px 0px 40px;">
-              <br><h4 style="font-weight: bold;">疾病史</h4>
-            </div>
-          </div>
-          <div class="row"> <!-- HeartDisease Hypertension Diabetes Arrhythmia HeartFailure Stroke -->
-            <div class="column" align="left" style="margin: 0 20px 0 80px;">
+          <div class="column" align="right" style="padding: 0px 10px 0px 5px; width: 25%;">
+          <br>
+            <div style="padding: 0px 10px 0px 40px;" align="left">
+              <h5 style="font-weight: bold;">疾病史</h5>
+            
               <input name="case" type="checkbox" value="HeartDisease"> 心臟病<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 20px 0 20px;">
               <input name="case" type="checkbox" value="Hypertension"> 高血壓<br>
-              
-            </div>
-            <div class="column" align="left" style="margin: 0 20px 0 20px;">
               <input name="case" type="checkbox" value="Diabetes"> 糖尿病<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 20px 0 20px;">
               <input name="case" type="checkbox" value="Arrhythmia"> 心律不整<br>
-            </div>
-            <div class="column" align="left" style="margin: 0 20px 0 20px;">
               <input name="case" type="checkbox" value="HeartFailure"> 心衰竭<br>
-              
+              <input name="case" type="checkbox" value="Stroke"> 中風<br><br>
+              <h6>其他疾病：（不同疾病請用,分開）</h6>
+              <textarea type="text" id="history_other" rows="7" cols="25"></textarea>
             </div>
-            <div class="column" align="left" style="margin: 0 20px 0 20px;">
-              <input name="case" type="checkbox" value="Stroke"> 中風<br>
-            </div>
-          </div>
-          <div class="row" align="right">
-            <div class="column" align="right" style="padding: 0px 10px 0px 5px; margin: 0 0 0 auto;" >
+            <br><br>
+            <div align="right" >
               <button  class="button2" id="patient_save">儲存</button>
               <button  class="button2" id="patient_delete">刪除</button>
               <button  class="button2" id="patient_update">更新</button>
               <button  class="button2" id="patient_close">取消</button>
-           </div>
-         </div>
-         <div class="row" align="right">
-            <textarea type="text" id="history" rows="3" cols="40" style="display: none;"></textarea>
-            <textarea type="text" id="drug" rows="3" cols="40" style="display: none;"></textarea>
-         </div>
-          <p>
-          <h5 id="patient_Result" align="right" style="color:red"></h5>
+            </div>
+          </div>
+        </div>
+        <div class="row" align="right">
+          <textarea type="text" id="history" rows="3" cols="40" style="display: none;"></textarea>
+          <textarea type="text" id="drug" rows="3" cols="40" style="display: none;"></textarea>
+          <textarea type="text" id="history_other_post" rows="3" cols="40" style="display: none;"></textarea>
+          <textarea type="text" id="drug_other_post" rows="3" cols="40" style="display: none;"></textarea>
+        </div>
+        <p>
+        <h5 id="patient_Result" align="right" style="color:red"></h5>
       </div>
       <br>
 	    <!-- PatientDataTable-->
@@ -494,9 +491,9 @@ else{
                     <th>年齡</th>
 	                  <th>性別</th>
 	                  <th>BMI</th>
-                    <th>Env_ID</th>
-                    <th>BLE_ID</th>
-                    <th>Watch_ID</th>
+                    <th>環境ID</th>
+                    <th>藍芽ID</th>
+                    <th>手錶ID</th>
 	              </tr>
 	          </thead>
 	      </table>
@@ -505,7 +502,7 @@ else{
 	    <footer class="sticky-footer">
 	      <div class="container">
 	        <div class="text-center">
-	          <small>Copyright © Your Website 2017</small>
+	          <small>COPD Walk © 2018</small>
 	        </div>
 	      </div>
 	    </footer>

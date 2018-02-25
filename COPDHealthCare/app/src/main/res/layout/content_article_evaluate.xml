@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="評估是否患有慢性阻塞性肺疾病 ( COPD )，先詢問相關抽煙或工作史 (工作時需曝露在有害的微塵粒子中) 並搭配相關量表來評估，相關量表可使用"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="1. 經修改的英國醫學研究會問卷 ( the modified British Medical Research Council；mMRC )"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="2. 慢性阻塞性肺疾病評估測試 ( COPD Assessment Test；CAT )"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text=""/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="除了上述的病史及問卷，胸部Ｘ光片及肺功能檢查儀 (Spirometry) 的測定對確定診斷是必要的，任何可能患COPD的病人都應進行該項檢查。肺功能檢查儀 (Spirometry) 是測試肺功能最常用的方法，吸入支氣管擴張劑之後，檢查顯示 用力呼氣一秒量/用力呼氣 (FEV1/FVC) 小於0.7，代表呼氣氣流受阻，可能有呼吸道阻塞的情形。"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text=""/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>

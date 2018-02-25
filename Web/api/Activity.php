@@ -76,6 +76,23 @@ class Activity{
 			return $getById_dataArray;
 		}
 	}
+	function getByUser($uid){
+		//connet db
+		require 'connect.php';
+		mysqli_select_db($con,"activity");
+		
+		//query data by method
+		$getById_sql = "SELECT activity.uid, activity.id, activity.step, activity.bp, activity.data, activity.start_time, activity.end_time, activity.distance, activity.h_i_time, user.id, user.lname, user.fname, user.age FROM activity, user WHERE activity.uid = '$uid' AND activity.uid = user.id";
+		$getById_result = mysqli_query($con,$getById_sql);
+		
+		if(mysqli_num_rows($getById_result) == 0) {
+			return 'NULL';
+		}
+		else {
+			$getById_dataArray = mysqli_fetch_all($getById_result,MYSQLI_ASSOC);
+			return $getById_dataArray;
+		}
+	}
 	function add($input){
 		//connet db
 		require 'connect.php';

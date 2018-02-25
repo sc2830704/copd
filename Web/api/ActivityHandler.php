@@ -20,38 +20,42 @@ class ActivityHandler extends SimpleRest{
 			case 'get':
 				if($this->action == 'getall'){
 					$activity_all = new Activity();
-					$this->set_status_code($this->encodeJson($activity_all->getAll()));
+					echo $this->set_status_code($activity_all->getAll());
 					break;
 				}
 				else if($this->action == 'getbytime'){
 					$activity_time = new Activity();
-					$this->set_status_code($this->encodeJson($activity_time->getByTime($this->id)));
+					echo $this->set_status_code($activity_time->getByTime($this->id));
 					break;
 				}
 				else if($this->action == 'getbyid'){
 					$activity_id = new Activity();
-					$this->set_status_code($this->encodeJson($activity_id->getById($this->id)));
+					echo $this->set_status_code($activity_id->getById($this->id));
+					break;
+				}else if($this->action == 'getbyuser'){
+					$activity_id = new Activity();
+					echo $this->set_status_code($activity_id->getByUser($this->id));
 					break;
 				}
 			case 'post':
 				if($this->action == 'add'){
 					$activity_add = new Activity();
-					$this->set_status_code($this->encodeJson($activity_add->add($this->input)));
+					echo $this->set_status_code($activity_add->add($this->input));
 					break;
 				}
 				else if($this->action == 'update'){
 					$activity_update = new Activity();
-					$this->set_status_code($this->encodeJson($activity_update->updatebyid($this->input)));
+					echo $this->set_status_code($activity_update->updatebyid($this->input));
 					break;
 				}
 			case 'delete':
 				if($this->action == 'delete'){
 					$activity_delete = new Activity();
-					$this->set_status_code($this->encodeJson($activity_delete->delete($this->id)));
+					echo $this->set_status_code($activity_delete->delete($this->id));
 					break;
 				}
 			default:
-				$this ->setHttpHeaders('application/json', 404);
+				$this ->setHttpHeaders('text/html', 404);
 				echo 'URL Error!';
 		}
 	}
@@ -62,21 +66,21 @@ class ActivityHandler extends SimpleRest{
 	}
 	
 	public function set_status_code($responseData) {
-		if($responseData == '"NULL"') {
-			$this ->setHttpHeaders('application/json', 601);
-			echo 'Error: No data avaliable.';
+		if($responseData == 'NULL') {
+			$this ->setHttpHeaders('text/html', 601);
+			return 'Error: No data avaliable.';
 		}
-		else if($responseData == '"EXIST"') {
-			$this ->setHttpHeaders('application/json', 602);
-			echo 'Error: This account is already existence.';
+		else if($responseData == 'EXIST') {
+			$this ->setHttpHeaders('text/html', 602);
+			return 'Error: This account is already existence.';
 		}
-		else if($responseData == '"EMPTY"') {
-			$this ->setHttpHeaders('application/json', 603);
-			echo 'Error: Data is empty.';
+		else if($responseData == 'EMPTY') {
+			$this ->setHttpHeaders('text/html', 603);
+			return 'Error: Data is empty.';
 		}
 		else {
 			$this ->setHttpHeaders('application/json', 200);
-			echo $responseData;
+			return $this ->encodeJson($responseData);
 		}
 	}
 

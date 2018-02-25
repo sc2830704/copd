@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="      慢性阻塞性肺病 ( Chronic Obstructive Pulmonary Disease, COPD) 是一種呼吸道長期發炎導致無法恢復之呼吸道阻塞，使得氣體無法通暢地進出呼吸道的疾病，其中包括了有「慢性支氣管炎」與「肺氣腫」兩大類型；由於肺部氣體交換功能不良，病患往往出現「咳、痰、悶、喘」的症狀。全球每10秒鐘就有一個人死於COPD，台灣一年更有超過5千人因COPD死亡。肺阻塞無法痊癒，但是一種可以預防及治療的常見慢性疾病。"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/introduce1"
+        />
+
+</LinearLayout>
