@@ -1,5 +1,7 @@
 package com.ntust.mitlab.copdwalk.Service;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -16,6 +18,9 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.ntust.mitlab.copdwalk.MainActivity;
+import com.ntust.mitlab.copdwalk.R;
+import com.ntust.mitlab.copdwalk.StepService.SensorListener;
 import com.ntust.mitlab.copdwalk.util.MyException;
 import com.ntust.mitlab.copdwalk.util.MyShared;
 
@@ -59,6 +64,8 @@ public class BluetoothLeService extends Service {
     public final static String BT_CONNECTED_FAIL ="BT_CONNECTED_FAIL";
     public final static String NO_DEVICE = "NO_DEVICE";
     public final static String TYPE = "DEVICE_TYPE";
+    Notification notification;
+
     public enum DEVICE_TYPE {
         WATCH("DEVICE_WATCH"),
         SPO2("DEVICE_SPO2"),
@@ -177,6 +184,7 @@ public class BluetoothLeService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG_BLE,"Service on bind");
+
         return mBinder;
     }
     @Override
@@ -424,8 +432,20 @@ public class BluetoothLeService extends Service {
         return bleGatts.get(address).getServices();
     }
     public BluetoothGattService getGattSerivce(String address, UUID uuid){
-
         return bleGatts.get(address).getService(uuid);
-
     }
+    public void stratForeground(){
+
+        Notification.Builder builder = new Notification.Builder(this);
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        builder.setContentTitle("COPD Walk");
+        builder.setContentText("運動中");
+        builder.setSmallIcon(R.drawable.ic_lungs);
+        builder.setContentIntent(pendingIntent);
+        notification = builder.build();
+        startForeground(1,notification);//讓service變成前景對象，顯示在狀態欄中
+    }
+
 }

@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    原文網址：https://read01.com/yyj4d.html
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <application
@@ -65,9 +66,11 @@
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <service android:name=".StepService.SensorListener" android:enabled="true">
+        <service
+            android:name=".StepService.SensorListener"
+            android:enabled="true">
             <intent-filter>
-                <action android:name="com.ntust.SensorLinstner"/>
+                <action android:name="com.ntust.SensorLinstner" />
             </intent-filter>
         </service>
         <service
@@ -88,12 +91,16 @@
         <activity
             android:name=".HealthArticleActivity"
             android:label="@string/title_activity_health_article"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HistoryDetailActivity"
-            android:label="@string/title_activity_history_detail"></activity>
+            android:label="@string/title_activity_history_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MeasurementActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
-
-    原文網址：https://read01.com/yyj4d.html
 </manifest>

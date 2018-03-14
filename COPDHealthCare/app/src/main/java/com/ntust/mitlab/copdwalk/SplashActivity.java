@@ -105,7 +105,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void processFinish(int state, String result, String endPoint) {
                     if(state==200){
-                        Toast.makeText(SplashActivity.this,"update sucess",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SplashActivity.this,"同步環境感測裝置:成功",Toast.LENGTH_SHORT).show();
                         MyShared.setData(SplashActivity.this,"isEnvSync","true");
                     }
                     else{
@@ -210,4 +210,8 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

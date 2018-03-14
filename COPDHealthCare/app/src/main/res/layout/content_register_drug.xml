@@ -112,6 +112,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="10"
                         android:id="@+id/etDrugOther"/>
                 </LinearLayout>
             </LinearLayout>
@@ -123,12 +124,16 @@
                 android:gravity="right">
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
                     android:id="@+id/btnBack"
                     android:text="上一頁"/>
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_margin="3dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnGo2History"
                     android:text="下一頁"/>

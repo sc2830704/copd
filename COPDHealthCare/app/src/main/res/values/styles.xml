@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/md_Orange_800</item>
         <item name="colorPrimaryDark">@color/md_Orange_900</item>
@@ -21,17 +21,19 @@
         <item name="android:textViewStyle">@style/MyText20</item>
     </style>
 
+
     <style name="MyText20" parent="android:Widget.TextView">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/md_Grey_700</item>
     </style>
 
-    <style name="Theme_event_text" parent="AppTheme">
-        <item name="android:textViewStyle">@style/MyText30</item>
+    <style name="MyText30" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/content_event_status</item>
+        <item name="android:textColor">@color/md_Grey_700</item>
     </style>
 
-    <style name="MyText30" parent="android:Widget.TextView">
-        <item name="android:textSize">30sp</item>
+    <style name="TextEventDevice" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/content_event_device</item>
         <item name="android:textColor">@color/md_Grey_700</item>
     </style>
 

@@ -1,6 +1,8 @@
 package com.ntust.mitlab.copdwalk;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -34,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
     NumberPicker numberPicker;
     RadioButton radioMale, radioFemale;
     String account, password, passwordCheck,lname, fname,age , sex, bmi;
-    Boolean debug = BuildConfig.DEBUG;
+    Boolean debug = true;
     ViewFlipper vf;
     private boolean validateAccount;
 
@@ -234,13 +236,6 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
             @Override
             public void onClick(View v) {
                 vf.setDisplayedChild(0);
-//                LinearLayout ll = (LinearLayout) findViewById(R.id.test);
-//                LayoutTransition layoutTransition = ll.getLayoutTransition();
-//                layoutTransition.enableTransitionType(LayoutTransition.CHANGING);
-//                if(ll.getVisibility()==View.VISIBLE)
-//                    ll.setVisibility(View.GONE);
-//                else
-//                    ll.setVisibility(View.VISIBLE);
             }
         });
         btnCancel = (Button) findViewById(R.id.btnCancel);
@@ -338,14 +333,53 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
                     validateAccount = true;
                 break;
             case "/user/add":
-                if(state==200)
-                    finishRegister(account,password);
-                else
+                if(state==200){
+//                    finishRegister(account,password);
+                    Intent intent = new Intent();
+                    intent.putExtra("account",account);
+                    intent.setClass(this,MeasurementActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(state==602){
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setMessage("帳號已存在")
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
                     Log.d("state"," "+state);
+                }else{
+                    new AlertDialog.Builder(RegisterActivity.this)
+                            .setMessage("系統錯誤請稍後重試")
+                            .setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+                }
                 break;
         }
         Log.d("processFinish ", "endPoint "+endPoint);
         Log.d("processFinish ", "result "+result);
         Log.d("processFinish ", "state "+state);
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("確定離開?")
+                .setNegativeButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .show();
     }
 }

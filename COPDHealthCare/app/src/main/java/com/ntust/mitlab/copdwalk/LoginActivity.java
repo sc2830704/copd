@@ -37,7 +37,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     TextView tvForgetPwd,tvRegister;
     ProgressBar progressBar;
     public final static int REGISTER_CODE = 100;
-    private boolean debug = BuildConfig.DEBUG;
+    private boolean debug = false;
+    private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -147,19 +148,29 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         setupActivity(result);
                     }else if(status==601){
                         //無activity資料
+                    }else{
+                        Toast.makeText(this,"系統錯誤，請稍後重試",Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
+                    syncDaily();
+                    break;
+                case "/daily/getbyuser":
+                    progressBar.setVisibility(View.INVISIBLE);
+                    if(status==200){
+                        Log.d("result",result);
+                        setupDaily(result);
+                    }else if(status==601){
+                        //無activity資料
                         progressBar.setVisibility(View.INVISIBLE);
                     }else{
                         Toast.makeText(this,"系統錯誤，請稍後重試",Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                     }
-
                     Intent intent = new Intent();
                     intent.setClass(this,MainActivity.class);
                     startActivity(intent);
                     this.finish();
                     progressBar.setVisibility(View.INVISIBLE);
-                    break;
-                case "/daily/getbyuser":
                     break;
             }
     }
@@ -172,12 +183,36 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     }
     private void syncDaily(){
         String id = MyShared.getData(this,"id");
-        HttpTask httpTask = new HttpTask("GET",null,"/activity/getbyuser",id);
+        HttpTask httpTask = new HttpTask("GET",null,"/daily/getbyuser",id);
         httpTask.setCallback(this);
         httpTask.execute();
+    }
+    //save Daily data from cloud to local sqlite
+    private void setupDaily(String result){
+        long date;
+        int step, h_i_time, distance;
+        try {
+            JSONArray jsonArray = new JSONArray(result);
+            JSONObject jobj;
+            for(int i=0; i<jsonArray.length(); i++) {
+                jobj = jsonArray.getJSONObject(i);
+
+                Log.d("setupActivity","jobj"+jobj.toString());
+
+                step = jobj.getInt("step");
+                h_i_time = jobj.getInt("h_i_time");
+                distance = jobj.getInt("distance");
+                date = df.parse(jobj.getString("date")).getTime();
+
+                DBHelper dbHelper = DBHelper.getInstance(this);
+                dbHelper.saveDaily(date, step, h_i_time, distance);
+            }
+        } catch (JSONException | ParseException e) {
+            e.printStackTrace();
+        }
 
     }
-
+    //save Activity data from cloud to local sqlite
     private void setupActivity(String result) {
         String step, bp, data, distance, h_i_time;
         Long start_time, end_time;
@@ -209,6 +244,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
     }
 
+    //save Profile data from cloud to local sqlite
     public void setupProfile(String data) {
         try {
             JSONObject jobj = new JSONObject(data);

@@ -530,6 +530,7 @@ public class DeviceActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case android.R.id.home:
+                setResult(0);
                 finish();
                 return true;
         }

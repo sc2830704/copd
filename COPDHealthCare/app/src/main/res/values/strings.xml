@@ -130,4 +130,5 @@
     <string name="title_activity_health_article">HealthArticleActivity</string>
 
     <string name="title_activity_history_detail">HistoryDetailActivity</string>
+    <string name="setting">設定</string>
 </resources>

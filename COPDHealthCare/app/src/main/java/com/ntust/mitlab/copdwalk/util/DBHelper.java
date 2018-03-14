@@ -29,7 +29,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String TABLE_DAILY = "daily";
     private final  String TAG = "DBHelper";
     private static DBHelper instance;
-    private static final int VERSION = 2;
     private static final AtomicInteger openCounter = new AtomicInteger();
     private DBHelper(Context context) {
         super(context, DB_NAME, null, 1);
@@ -102,7 +101,49 @@ public class DBHelper extends SQLiteOpenHelper {
             onCreate(db);
         }
     }
-    //儲存每日的步數
+    //取得一段時間內的步數總和
+    public int getDailySteps(Long start, Long end){
+        Cursor c = getReadableDatabase().query(
+                TABLE_DAILY,
+                new String[]{"SUM(step)"},
+                "date >= ? AND date <= ?",
+                new String[]{String.valueOf(start), String.valueOf(end)},
+                null,
+                null,
+                null);
+//改為輸出json 包含高強度運動時間
+//        JSONArray jsonArray = new JSONArray();
+//        while(c.moveToNext()){
+//            JSONObject jobj = new JSONObject();
+//            try {
+//                jobj.put("steps", c.getInt(0));
+//                jobj.put("distance",c.getInt(1));
+//                jobj.put("h_i_time",c.getInt(2));
+//                jobj.put("start_time",c.getLong(3));
+//                jobj.put("end_time",c.getLong(4));
+//                jobj.put("bp",c.getString(5));
+//                jobj.put("data",c.getString(6));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//            jsonArray.put(jobj);
+//
+//        }
+//        c.close();
+//        return jsonArray.toString();
+
+
+        int totalSteps;
+        if(c.getCount() == 0)
+            totalSteps = 0;
+        else{
+            c.moveToFirst();
+            totalSteps = c.getInt(0);
+        }
+        c.close();
+        return totalSteps;
+    }
+    //儲存每日的步數，每天一筆
     public boolean saveDaily(long date, int step, int h_i_time, int distance){
         boolean flag = false;
         //檢查同一天是否已經有資料，已經存在傳回false
@@ -169,33 +210,7 @@ public class DBHelper extends SQLiteOpenHelper {
         c.close();
         return jsonArray.toString();
     }
-    public String getAllDaily(){
-        Cursor c = getReadableDatabase().query(
-                TABLE_DAILY,
-                new String[]{"date","step","h_i_time","distance","sync_flag"},
-                null,
-                null,
-                null,
-                null,
-                "date DESC");
-        JSONArray jsonArray = new JSONArray();
-        while(c.moveToNext()){
-            JSONObject jobj = new JSONObject();
-            try {
-                jobj.put("date", c.getLong(0));
-                jobj.put("step",c.getInt(1));
-                jobj.put("h_i_time",c.getInt(2));
-                jobj.put("distance",c.getLong(3));
-                jobj.put("sync_flag",c.getInt(4));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jsonArray.put(jobj);
 
-        }
-        c.close();
-        return jsonArray.toString();
-    }
     public boolean saveActivity(long date, int steps, String bp, String data, int h_i_time, int distance, long start_time, long end_time){
         boolean flag = false;
         getWritableDatabase().beginTransaction();
@@ -283,10 +298,9 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put("date", -1);
             getWritableDatabase().insert(TABLE_PDO, null, values);
         }
-        if (BuildConfig.DEBUG) {
-//            Logger.log("saving current steps in db: " + steps);
-        }
     }
+
+    //記錄每分鐘的步數
     public boolean saveSteps(long date, int steps){
         getWritableDatabase().beginTransaction();
         boolean newEntryCreated = false;
@@ -297,10 +311,10 @@ public class DBHelper extends SQLiteOpenHelper {
             getWritableDatabase().insert(TABLE_PDO, null, values);
             newEntryCreated = true;
             getWritableDatabase().setTransactionSuccessful();
-            if (BuildConfig.DEBUG) {
-//                Logger.log("saving minute steps in db: " + steps);
-            }
-        } finally {
+        }catch (Exception ex) {
+            newEntryCreated = false;
+        }finally
+        {
             getWritableDatabase().endTransaction();
         }
         return newEntryCreated;
@@ -315,9 +329,7 @@ public class DBHelper extends SQLiteOpenHelper {
         c.close();
         return re;
     }
-    public int getHISteps(long start, long end){
-        return 1;
-    }
+
     public int getSteps(long start, long end){
         Cursor c = getReadableDatabase()
                 .query(TABLE_PDO, new String[]{"SUM(steps)"}, "date >= ? AND date <= ?",

@@ -1,0 +1,25 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="app_bar_height">160dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="content_event_status">18sp</dimen>
+    <dimen name="content_event_value">14sp</dimen>
+    <dimen name="content_event_unit">10sp</dimen>
+    <dimen name="content_event_device">12sp</dimen>
+    <dimen name="content_main_progressbar">15dp</dimen>
+    <dimen name="content_main_item">14sp</dimen>
+    <dimen name="content_main_text">12sp</dimen>
+    <dimen name="content_main_updatetime">10sp</dimen>
+    <dimen name="content_health_title">22sp</dimen>
+    <dimen name="content_health_subtitle">18sp</dimen>
+    <dimen name="content_health_button">15sp</dimen>
+    <dimen name="content_measurement_title">18sp</dimen>
+    <dimen name="content_measurement_question">14sp</dimen>
+    <dimen name="content_measurement_description">14sp</dimen>
+</resources>

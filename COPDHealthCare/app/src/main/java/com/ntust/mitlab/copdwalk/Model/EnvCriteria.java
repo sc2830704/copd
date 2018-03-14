@@ -32,14 +32,14 @@ public class EnvCriteria {
             message = "空氣品質良好，可外出運動";
             isOkToWork = true;
         }
-        if(pm25>36){
+        if(pm25>54){
             isOkToWork = false;
-            message = "目前PM2.5>36，請避免外出運動";
+            message = "目前PM2.5>54，請避免外出運動";
         }
 
         else if(pm25>36 && pm25<53){
             isOkToWork = false;
-            message = "目前PM2.5>" + pm25 + "，請避免外出運動";
+            message = "目前PM2.5>" + pm25 + "，請減少外出運動";
         }
         else{
             message = "空氣品質良好，可外出運動";

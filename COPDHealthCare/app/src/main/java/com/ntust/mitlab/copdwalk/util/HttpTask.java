@@ -81,6 +81,8 @@ public class HttpTask extends AsyncTask<Void,Void,String> {
                     return "No data avaliable";
                 case 602:
                     return "account exist";
+                case 603:
+                    return "missing require column";
                 case 604:
                     return "auth fail";
             }

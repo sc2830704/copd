@@ -10,10 +10,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="16dp"
-        android:textSize="28sp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/content_health_title"
         android:textColor="@color/md_Black"
         android:text="慢性阻塞性肺病" />
     <TextView
@@ -21,15 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="22sp"
+        android:layout_marginBottom="12dp"
+        android:textSize="@dimen/content_health_subtitle"
         android:textColor="@color/md_Black"
         android:text="@string/large_text" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
@@ -38,49 +38,49 @@
             android:layout_height="wrap_content"
             android:text = "慢性阻塞性肺疾病簡介"
             android:id="@+id/btnIntroduce"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
          android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "診斷與評估"
             android:id="@+id/btnEvaluate"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "患者身體活動原則"
             android:id="@+id/btnPrinciple"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "藥物治療"
             android:id="@+id/btnTherapy"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "疾病症狀"
             android:id="@+id/btnSymptom"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "危險因子"
             android:id="@+id/btnFactory"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text = "危險因子控制"
             android:id="@+id/btnControl"
-            android:textSize="20sp"
+            android:textSize="@dimen/content_health_button"
             android:theme="@style/AppTheme.Button"/>
     </LinearLayout>
 

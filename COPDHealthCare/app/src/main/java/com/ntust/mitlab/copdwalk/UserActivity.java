@@ -60,8 +60,10 @@ public class UserActivity extends AppCompatActivity {
         String bmi = MyShared.getData(this,"bmi");
         String drug = parseJsonArray(MyShared.getData(this,"drug"));
         String history = parseJsonArray(MyShared.getData(this,"history"));
-        String[] title = new String[]{"帳號", "姓名" , "年齡" , "性別" ,"BMI","用藥","病史"};
-        String[] text  = new String[]{id, name, age, sex, bmi, drug, history};
+        String drug_other = parseJsonArray(MyShared.getData(this,"drug_other"));
+        String history_other = parseJsonArray(MyShared.getData(this,"history_other"));
+        String[] title = new String[]{"帳號", "姓名" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        String[] text  = new String[]{id, name, age, sex, bmi, drug, history, drug_other,history_other};
         for(int i = 0 ; i < title.length ; i++){
             HashMap<String , String> hashMap = new HashMap<>();
             hashMap.put("title" , title[i]);

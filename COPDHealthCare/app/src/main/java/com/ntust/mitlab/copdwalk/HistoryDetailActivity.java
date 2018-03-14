@@ -1,20 +1,35 @@
 package com.ntust.mitlab.copdwalk;
 
-import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.ValueShape;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  */
@@ -22,20 +37,36 @@ public class HistoryDetailActivity extends AppCompatActivity {
    TextView tv;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY, tvStartTime, tvTime, tvSteps, tvH_I_Time, tvDBPBefore, tvSBPBefore, tvDBPAfter, tvSBPAfter,tvDistance;
-    private JSONObject data;
+    private JSONObject actData;
+    private LineChartView chart;
+    private LineChartData chartData;
+    private int numberOfPoints=120;
+    private int numberOfLines = 1;
+    float[][] randomNumbersTab = new float[2][numberOfPoints];
+    private boolean hasAxes = true;
+    private boolean hasAxesNames = true;
+    private boolean hasLines = true;
+    private boolean hasPoints = false;
+    private ValueShape shape = ValueShape.CIRCLE;
+    private boolean isFilled = false;
+    private boolean hasLabels = true;
+    private boolean isCubic = false;
+    private boolean hasLabelForSelected = false;
+    private boolean pointsHaveDifferentColor;
+    private boolean hasGradientToTransparent = false;
+    private SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_detail);
         setupToolbar();
         initialUI();
-        data = getActivityData(getIntent().getStringExtra("row"));
-        if(data!=null)
-            setUpUI(data);
+        actData = getActivityData(getIntent().getStringExtra("row"));
+        if(actData!=null)
+            setUpUI(actData);
 
 
     }
-
     private void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("運動紀錄");
@@ -45,15 +76,17 @@ public class HistoryDetailActivity extends AppCompatActivity {
     }
 
     private void setUpUI(JSONObject data) {
+        JSONArray exeData = new JSONArray();
         try {
             Long start_time = data.getLong("start_time");
             Long end_time = data.getLong("end_time");
-            int h_i_time = data.getInt("h_i_time");
-            int distance = data.getInt("distance");
-            int steps = data.getInt("steps");
             JSONObject bp = new JSONObject(data.getString("bp"));
             JSONObject after = new JSONObject(bp.getString("after"));
             JSONObject before = new JSONObject(bp.getString("before"));
+            exeData = new JSONArray(data.getString("data"));
+            int h_i_time = data.getInt("h_i_time");
+            int distance = data.getInt("distance");
+            int steps = data.getInt("steps");
             int sbpAfter = (int) after.getDouble("sbp");
             int dbpAfter = (int) after.getDouble("dbp");
             int sbpBefore = (int) before.getDouble("sbp");
@@ -71,8 +104,14 @@ public class HistoryDetailActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        try {
+            generateData(exeData);
+        } catch (JSONException e) {
+            Toast.makeText(HistoryDetailActivity.this,"opps 出錯ㄌ",Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
-
     private void initialUI() {
         tvStartTime = findViewById(R.id.tvStartTime);
         tvTime = findViewById(R.id.tvTime);
@@ -83,9 +122,82 @@ public class HistoryDetailActivity extends AppCompatActivity {
         tvDBPAfter = findViewById(R.id.tvDBPAfter);
         tvSBPAfter = findViewById(R.id.tvSBPAfter);
         //tvDistance = findViewById(R.id.tvDistance);
+        chart = findViewById(R.id.chart);
+        chart.setOnValueTouchListener(new ValueTouchListener());
 
     }
+    private void generateData(JSONArray exeData) throws JSONException, ParseException {
 
+        ArrayList<Line> lines = new ArrayList<>();  //要塞進chart的資料
+        ArrayList<PointValue> hr = new ArrayList<>();   //hr的資料
+        ArrayList<PointValue> spo2 = new ArrayList<>(); //spo2的資料
+        ArrayList<AxisValue> axisValues = new ArrayList<>(); // x軸座標和間格
+        for(int i=0; i<exeData.length();i++){
+            JSONObject obj = (JSONObject) exeData.get(i);
+            hr.add(new PointValue(i, (float) obj.getDouble("hr")));
+            spo2.add(new PointValue(i, (float) obj.getDouble("spo2")));
+
+            if(exeData.length()>5 && i%(exeData.length()/5)==0){
+                axisValues.add(new AxisValue(i).setLabel(sdf.format(new Date(obj.getLong("datetime")))));            }
+            else
+                axisValues.add(new AxisValue(i).setLabel(""));
+
+        }
+        Line line = new Line(hr);
+        line.setColor(ChartUtils.COLORS[0]);
+        line.setShape(shape);
+        line.setCubic(isCubic);
+        line.setFilled(isFilled);
+        line.setHasLabels(hasLabels);
+        line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+        line.setHasLines(hasLines);
+        line.setHasPoints(hasPoints);
+        if (pointsHaveDifferentColor){
+            line.setPointColor(ChartUtils.COLORS[(0 + 1) % ChartUtils.COLORS.length]);
+        }
+        lines.add(line);
+
+        line = new Line(spo2);
+        line.setColor(ChartUtils.COLORS[1]);
+        line.setShape(shape);
+        line.setCubic(isCubic);
+        line.setFilled(isFilled);
+        line.setHasLabels(hasLabels);
+        line.setHasLabelsOnlyForSelected(hasLabelForSelected);
+        line.setHasLines(hasLines);
+        line.setHasPoints(hasPoints);
+        if (pointsHaveDifferentColor){
+            line.setPointColor(ChartUtils.COLORS[(1 + 1) % ChartUtils.COLORS.length]);
+        }
+        lines.add(line);
+
+
+        chartData = new LineChartData(lines);
+
+        if (hasAxes) {
+            Axis axisX = new Axis(axisValues);
+            Axis axisSPO2 = new Axis().setHasLines(true);
+            Axis axisHR = new Axis().setHasLines(true);
+            if (hasAxesNames) {
+                axisX.setName("時間");
+                axisX.setTextColor(Color.BLACK);
+                axisSPO2.setName("SPO2");
+                axisSPO2.setTextColor(Color.BLACK);
+                axisHR.setName("HR");
+                axisHR.setTextColor(Color.BLACK);
+            }
+            chartData.setAxisXBottom(axisX);
+            chartData.setAxisYLeft(axisSPO2);
+            chartData.setAxisYRight(axisHR);
+        } else {
+            chartData.setAxisXBottom(null);
+            chartData.setAxisYLeft(null);
+        }
+
+        chartData.setBaseValue(Float.NEGATIVE_INFINITY);
+        chart.setLineChartData(chartData);
+
+    }
     private JSONObject getActivityData(String row) {
         try {
             return new JSONObject(row);
@@ -127,6 +239,18 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private class ValueTouchListener implements LineChartOnValueSelectListener {
 
+        @Override
+        public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
+        }
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
 
 }

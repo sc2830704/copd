@@ -10,6 +10,7 @@ import com.ntust.mitlab.copdwalk.Service.BluetoothLeService;
 
 public class MyApp extends Application {
     BluetoothLeService mBluetoothService;
+    public static boolean isSPO2Disable = false;
     private String myState;
     public BluetoothLeService getBluetoothService() {
         return mBluetoothService;

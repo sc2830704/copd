@@ -67,7 +67,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.BLUETOOTH;
 import static com.ntust.mitlab.copdwalk.Model.GattAttributes.Characterstic_SPO2_UUID;
 import static com.ntust.mitlab.copdwalk.Model.GattAttributes.CommandUUID;
 import static com.ntust.mitlab.copdwalk.Model.GattAttributes.SerialPortUUID;
@@ -114,10 +113,9 @@ public class MainActivity extends AppCompatActivity
     private Date start_time, end_time;
     JSONArray dataJson = new JSONArray();
     private final int AdTextSize = 25;
-    AlertDialog notiftAd ;
+    AlertDialog notifyAd;
     private ExerciseHelper eh;
     private boolean syncStepSenor = false;
-    private boolean debug = false;
     private Handler taskHandler = new Handler(){
         @Override
         public void handleMessage(Message message) {
@@ -150,17 +148,17 @@ public class MainActivity extends AppCompatActivity
                     updateUI(STATE_BAD_AFTERTEST);
                     break;
                 case 8:
-                    if(!notiftAd.isShowing()){
-                        notiftAd.setTitle("運動小幫手");
-                        notiftAd.setMessage("您運動中的指尖血氧飽和度(SpO2)已低於安全標準(90%)，建議您暫停活動；休息10分鐘後再次測量，待數值於安全標準並諮詢專業醫護人員再進行活動");
-                        notiftAd.show();
+                    if(!notifyAd.isShowing()){
+                        notifyAd.setTitle("運動小幫手");
+                        notifyAd.setMessage("您運動中的指尖血氧飽和度(SpO2)已低於安全標準(90%)，建議您暫停活動；休息10分鐘後再次測量，待數值於安全標準並諮詢專業醫護人員再進行活動");
+                        notifyAd.show();
                     }
                     break;
                 case 9:
-                    if(!notiftAd.isShowing()){
-                        notiftAd.setTitle("運動小幫手");
-                        notiftAd.setMessage("請確認您的手環是否正確穿戴");
-                        notiftAd.show();
+                    if(!notifyAd.isShowing()){
+                        notifyAd.setTitle("運動小幫手");
+                        notifyAd.setMessage("請確認您的手環是否正確穿戴");
+                        notifyAd.show();
                     }
 
                     break;
@@ -204,9 +202,9 @@ public class MainActivity extends AppCompatActivity
         @Override
         public void run() {
             msg = new Message();
+
             time++;
             msg.what=4;
-            msg.arg1=time;
             msg.arg1=time;
             taskHandler.sendMessage(msg);
             JSONObject jobj = new JSONObject();
@@ -307,7 +305,7 @@ public class MainActivity extends AppCompatActivity
         }
         DBHelper dbHelper = DBHelper.getInstance(this);
         steps_today = dbHelper.getSteps(Util.getTodayStart(),Util.getTodayEnd());
-        steps_week = dbHelper.getSteps(Util.getLastWeek(),Util.getTodayEnd());
+        steps_week = dbHelper.getDailySteps(Util.getLastWeek(),Util.getTodayEnd());
         Log.d("steps_today",steps_today+"");
         setClock();
         //啟用計步service
@@ -317,6 +315,32 @@ public class MainActivity extends AppCompatActivity
         //註冊ble broadcast service
         registerReceiver(broadcastReceiver, makeGattUpdateIntentFilter());
         eh = new ExerciseHelper();
+
+        //檢查是否有支援陀螺儀的功能
+        SensorManager sm = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        if (sensor == null) {
+            AlertDialog ad = new AlertDialog.Builder(this).setTitle(R.string.no_sensor)
+                    .setMessage(R.string.no_sensor_explain)
+                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(final DialogInterface dialogInterface) {
+                            //finish();
+                        }
+                    }).setNeutralButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(final DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            }).show();
+
+            setDialogParam(ad);
+        } else {
+            sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI, 0);
+        }
+
+
     }
     private String clockParser(int secs){
         int sec = secs%60;
@@ -332,16 +356,23 @@ public class MainActivity extends AppCompatActivity
         return  time + ":" + String.format("%02d", min) + ":" + String.format("%02d", sec);
     }
     private void getEnv() {
+        //檢查envid是否同步到雲端
+        String isEnvSync = MyShared.getData(MainActivity.this, "isEnvSync");
+        if(isEnvSync!=null && isEnvSync.equals("false")){
+            tvUpdateTime.setText("裝置尚未同步成功，請重新啟動APP");
+            return;
+        }
+
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        String id = MyShared.getData(this,"id");
         if(netInfo!= null && netInfo.isConnected()){
-            String id = "a001";
             myAsyncTask = new HttpTask("GET",null, "/env/getbyuser",id);
             myAsyncTask.setCallback(this);
             myAsyncTask.execute();
         }else{
-//            tvUpdateTime.setText("無法連線到網路");
+            tvUpdateTime.setText("無法連線到網路");
         }
     }
     public void initialUI(){
@@ -376,7 +407,7 @@ public class MainActivity extends AppCompatActivity
         tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_red_700))));
         tvWatchState.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_red_700))));
         progressBar = vf.findViewById(R.id.progressBar);
-        notiftAd = new AlertDialog.Builder(MainActivity.this)
+        notifyAd = new AlertDialog.Builder(MainActivity.this)
                 .create();
 
         currentPage = 0;
@@ -395,6 +426,8 @@ public class MainActivity extends AppCompatActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_main);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView tvHello = navigationView.getHeaderView(0).findViewById(R.id.tvHello);
+        tvHello.setText(MyShared.getData(this,"name")+" 您好");
     }
     public Button.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
@@ -425,8 +458,25 @@ public class MainActivity extends AppCompatActivity
                         setDialogParam(ad);
                     }
                     else if(eh.workState==STATE_WORKING){
-                        timer.cancel();
-                        endExercise();
+                        AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("結束運動?")
+                                .setMessage("按下\"是\"，結束並進入後測")
+                                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        timer.cancel();
+                                        endExercise();
+                                    }
+                                })
+                                .show();
+
+                        setDialogParam(ad);
                     }
                     break;
                 case R.id.btnGoAct:
@@ -521,7 +571,7 @@ public class MainActivity extends AppCompatActivity
             mBluetoothLeService.sendData(deviceWatch,"menu.bp," );
             Thread.sleep(300);
             mBluetoothLeService.sendData(deviceWatch,"icon.bp," );
-            if(debug)
+            if(MyApp.isSPO2Disable)
                 return;
             mBluetoothLeService.sendSPO2(deviceSPO2,"a");
         } catch (InterruptedException e) {
@@ -540,26 +590,29 @@ public class MainActivity extends AppCompatActivity
             mBluetoothLeService.sendData(deviceWatch,"menu.hr," );
             Thread.sleep(300);
             mBluetoothLeService.sendData(deviceWatch,"icon.hr," );
-            if(debug)
+            if(MyApp.isSPO2Disable)
                 return;
             mBluetoothLeService.sendSPO2(deviceSPO2,"a");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        mBluetoothLeService.stratForeground(); //啟動前台服務以降低APP被回收機率
+
     }
     private void endExercise(){
         end_time = Calendar.getInstance().getTime();
         timer.cancel();
         updateUI(STATE_END);
         mBluetoothLeService.sendData(deviceWatch,"menu.hr," );
-        if(debug)
+        if(MyApp.isSPO2Disable)
             return;
         mBluetoothLeService.sendSPO2(deviceSPO2,"b");
+        mBluetoothLeService.stopForeground(true); //結束foreground
     }
     private void endPreTest(){
         updateUI(STATE_NONE);
         mBluetoothLeService.sendData(deviceWatch,"menu.bp," );
-        if(debug)
+        if(MyApp.isSPO2Disable)
             return;
         mBluetoothLeService.sendSPO2(deviceSPO2,"b");
     }
@@ -579,7 +632,7 @@ public class MainActivity extends AppCompatActivity
             mBluetoothLeService.sendData(deviceWatch,"menu.bp," );
             Thread.sleep(300);
             mBluetoothLeService.sendData(deviceWatch,"icon.bp," );
-            if(debug)
+            if(MyApp.isSPO2Disable)
                 return;
             mBluetoothLeService.sendSPO2(deviceSPO2,"a");
         } catch (InterruptedException e) {
@@ -617,24 +670,16 @@ public class MainActivity extends AppCompatActivity
             return false;
         }else if(tvWatchState.getText().equals("已斷線")){
             Toast.makeText(MainActivity.this,"裝置重新連線...",Toast.LENGTH_SHORT).show();
-            if(connectDevice(DEVICE_TYPE.WATCH)){
-                tvWatchState.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                tvWatchState.setText("已連線");
-                Toast.makeText(MainActivity.this,"連線完成...",Toast.LENGTH_SHORT).show();
-            }
+            connectDevice(DEVICE_TYPE.WATCH);
+            tvWatchState.setText("連線中...");
             return false;
         }else if(tvWatchState.getText().equals("連線失敗")){
             Toast.makeText(MainActivity.this,"未偵測到裝置",Toast.LENGTH_SHORT).show();
             return false;
         }
-//        else if(!mBluetoothLeService.isCharAvaiable(MyShared.getData(MainActivity.this,DEVICE_TYPE.WATCH.toString()), DEVICE_TYPE.WATCH)){
-//            Toast.makeText(MainActivity.this,"與裝置同步中...",Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-        if(debug)
+        if(MyApp.isSPO2Disable)
             return true;
         if(MyShared.getData(MainActivity.this, DEVICE_TYPE.SPO2.toString())==null){
-            //Toast.makeText(MainActivity.this, "血氧裝置尚未設定 請到'我的裝置'中設定", Toast.LENGTH_LONG).show();
             AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
                     .setTitle("血氧未設定")
                     .setMessage("到'我的裝置'中設定")
@@ -657,21 +702,19 @@ public class MainActivity extends AppCompatActivity
             return false;
         }else if(tvSPO2State.getText().equals("已斷線")){
             Toast.makeText(MainActivity.this,"裝置重新連線...",Toast.LENGTH_SHORT).show();
-            if(connectDevice(DEVICE_TYPE.SPO2)){
-                tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                tvSPO2State.setText("已連線");
-                Toast.makeText(MainActivity.this,"連線完成...",Toast.LENGTH_SHORT).show();
-            }
+            connectDevice(DEVICE_TYPE.SPO2);
+            tvSPO2State.setText("連線中...");
+//            tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
             return false;
-        }else if(tvSPO2State.getText().equals("連線失敗")){
-            Toast.makeText(MainActivity.this,"未偵測到裝置",Toast.LENGTH_SHORT).show();
+        }else if(tvSPO2State.getText().equals("連線中...")){
+//            Toast.makeText(MainActivity.this,"未偵測到裝置",Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
-    public boolean connectDevice(DEVICE_TYPE type){
+    public void connectDevice(DEVICE_TYPE type){
         try {
-            return mBluetoothLeService.connectGatt(MyShared.getData(MainActivity.this, type.toString()));
+            mBluetoothLeService.connectGatt(MyShared.getData(MainActivity.this, type.toString()));
         } catch (MyException e) {
             switch (e.getMessage()){
                 case BT_NOT_ENABLE:
@@ -688,7 +731,6 @@ public class MainActivity extends AppCompatActivity
                     break;
             }
         }
-        return false;
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
@@ -718,6 +760,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("MyApp.isSPO2Disable",""+MyApp.isSPO2Disable);
         envTimer = new Timer();
         envTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -732,29 +775,7 @@ public class MainActivity extends AppCompatActivity
         //tvStep.setText(String.valueOf(steps_today));
         readStepGoal();
 
-        //檢查是否有支援陀螺儀的功能
-        SensorManager sm = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor = sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        if (sensor == null) {
-            AlertDialog ad = new AlertDialog.Builder(this).setTitle(R.string.no_sensor)
-                    .setMessage(R.string.no_sensor_explain)
-                    .setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(final DialogInterface dialogInterface) {
-                            finish();
-                        }
-                    }).setNeutralButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(final DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    }).show();
 
-            setDialogParam(ad);
-        } else {
-            sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI, 0);
-        }
     }
     private void setDialogParam(AlertDialog ad){
         TextView textView = (TextView) ad.findViewById(android.R.id.message);
@@ -818,25 +839,14 @@ public class MainActivity extends AppCompatActivity
             {
                 //對已設定的裝置進行連線
                 if(MyShared.getData(MainActivity.this,DEVICE_TYPE.SPO2.toString())!=null){
+                    connectDevice(DEVICE_TYPE.SPO2);
                     tvSPO2State.setText("連線中...");
-                    if(connectDevice(DEVICE_TYPE.SPO2)){
-                        tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                        tvSPO2State.setText("已連線");
-                    }
-                    else
-                        tvSPO2State.setText("連線失敗");
                 }else{
                     tvSPO2State.setText("尚未設定");
                 }
                 if(MyShared.getData(MainActivity.this,DEVICE_TYPE.WATCH.toString())!=null){
-                    tvWatchState.setText("連線中...");;
-                    if(connectDevice(DEVICE_TYPE.WATCH)){
-                        tvWatchState.setText("已連線");
-                        tvWatchState.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                    }
-
-                    else
-                        tvWatchState.setText("連線失敗");
+                    connectDevice(DEVICE_TYPE.WATCH);
+                    tvWatchState.setText("連線中...");
                 }else{
                     tvWatchState.setText("尚未設定");
                 }
@@ -1259,7 +1269,21 @@ public class MainActivity extends AppCompatActivity
                     })
                     .show();
         else{
-            super.onBackPressed();
+            new AlertDialog.Builder(MainActivity.this)
+                    .setMessage("確定退出?")
+                    .setNegativeButton("退出APP", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setPositiveButton("不", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .show();
         }
     }
     @Override
@@ -1272,12 +1296,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
             Intent intent = new Intent();
             intent.setClass(this,LoginActivity.class);
             clearData();
             startActivity(intent);
             finish();
+            return true;
+        }else if (id == R.id.action_settings) {
+            Intent intent = new Intent();
+            intent.setClass(this,SettingActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -1308,23 +1337,23 @@ public class MainActivity extends AppCompatActivity
         }  else if (id == R.id.nav_profile) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,UserActivity.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
             return false;   //讓navigation選擇的保留在原本的項目
 
         } else if (id == R.id.nav_history) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,HistoryActivity.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
             return false;   //讓navigation選擇的保留在原本的項目
         } else if (id == R.id.nav_education) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,HealthEducationActivity.class);
-            startActivityForResult(intent, 0);
+            startActivity(intent);
             return false;   //讓navigation選擇的保留在原本的項目
         }  else if (id == R.id.nav_device) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,DeviceActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent,0);
             return false;   //讓navigation選擇的保留在原本的項目
         }
         return true;
@@ -1461,24 +1490,14 @@ public class MainActivity extends AppCompatActivity
         }
         //對已設定的裝置進行連線
         if(MyShared.getData(MainActivity.this,DEVICE_TYPE.SPO2.toString())!=null){
+            connectDevice(DEVICE_TYPE.SPO2);
             tvSPO2State.setText("連線中...");
-            if(connectDevice(DEVICE_TYPE.SPO2)){
-                tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                tvSPO2State.setText("已連線");
-            }
-            else
-                tvSPO2State.setText("連線失敗");
         }else{
             tvSPO2State.setText("尚未設定");
         }
         if(MyShared.getData(MainActivity.this,DEVICE_TYPE.WATCH.toString())!=null){
-            tvWatchState.setText("連線中...");;
-            if(connectDevice(DEVICE_TYPE.WATCH)){
-                tvWatchState.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-                tvWatchState.setText("已連線");
-            }
-            else
-                tvWatchState.setText("連線失敗");
+            connectDevice(DEVICE_TYPE.SPO2);
+            tvSPO2State.setText("連線中...");
         }else{
             tvWatchState.setText("尚未設定");
         }

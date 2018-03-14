@@ -26,11 +26,12 @@
         android:layout_marginTop="5dp"
         android:text="        利用鼻子吸氣（由1數到3）→如吹蠟燭般的將嘴唇噘成圓形(嘟嘴)，緩慢將氣吐出來→呼氣的時間約為吸氣時間的2倍（由1數到6"
         />
+
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/p1"
-        />
+        android:background="@drawable/p1" />
 
     <TextView
         android:layout_width="wrap_content"

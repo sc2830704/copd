@@ -2,6 +2,8 @@ package com.ntust.mitlab.copdwalk.Model;
 
 import android.util.Log;
 
+import com.ntust.mitlab.copdwalk.MyApp;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -15,7 +17,6 @@ public class ExerciseHelper {
     public float sbpBefore, dbpBefore, sbpAfter, dbpAfter, hrBefore, spo2Before, hrAfeter, spo2After;
     public ArrayList<Float> sbps_60, dbps_60, spo2s_60, hrs_60, sbps_5s, dbps_5s, spo2s_5s, hrs_5s;
     public float avgSpo2, avgSbp, avgDbp, avgHR;
-    private boolean debug = false;
     public ExerciseHelper(){
         sbps_60 = new ArrayList<>();
         dbps_60 = new ArrayList<>();
@@ -28,7 +29,7 @@ public class ExerciseHelper {
         workState = 0;
     }
     public boolean isPreTestOk(){
-        if(debug)
+        if(MyApp.isSPO2Disable)
             return true;
         if(sbps_60.isEmpty()){
             workMessage = "血壓測量不完整";
@@ -50,7 +51,7 @@ public class ExerciseHelper {
         return true;
     }
     public boolean isAfterTestOk(){
-        if(debug)
+        if(MyApp.isSPO2Disable)
             return true;
         if(sbps_60.isEmpty()){
             workMessage = "血壓測量不完整";
@@ -91,7 +92,7 @@ public class ExerciseHelper {
         avgHR = avgHR/hrs_60.size();
     }
     public boolean isOkToWork(){
-        if(debug){
+        if(MyApp.isSPO2Disable){
             return true;
         }
         if(avgSpo2<92){
@@ -129,7 +130,7 @@ public class ExerciseHelper {
         return true;
     }
     public void savePreTestData(){
-        if(debug){
+        if(MyApp.isSPO2Disable){
                 dbpBefore = 80;
                 sbpBefore = 110;
                 return;
@@ -140,7 +141,7 @@ public class ExerciseHelper {
         spo2Before = floatToSecnondDec(avgSpo2);
     }
     public void saveAfterTestData(){
-        if(debug){
+        if(MyApp.isSPO2Disable){
                 dbpAfter = 80;
                 sbpAfter = 110;
                 return;

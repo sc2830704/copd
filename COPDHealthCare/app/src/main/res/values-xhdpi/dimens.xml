@@ -8,18 +8,14 @@
     <dimen name="appbar_padding_top">8dp</dimen>
     <dimen name="app_bar_height">160dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="content_event_status">28sp</dimen>
-    <dimen name="content_event_value">22sp</dimen>
+    <dimen name="content_event_status">30sp</dimen>
+    <dimen name="content_event_value">24sp</dimen>
     <dimen name="content_event_unit">20sp</dimen>
     <dimen name="content_event_device">14sp</dimen>
-    <dimen name="content_main_progressbar">30dp</dimen>
     <dimen name="content_main_item">20sp</dimen>
     <dimen name="content_main_text">18sp</dimen>
     <dimen name="content_main_updatetime">16sp</dimen>
-    <dimen name="content_health_title">28sp</dimen>
-    <dimen name="content_health_subtitle">22sp</dimen>
-    <dimen name="content_health_button">20sp</dimen>
     <dimen name="content_measurement_title">24sp</dimen>
-    <dimen name="content_measurement_question">18sp</dimen>
+    <dimen name="content_measurement_question">20sp</dimen>
     <dimen name="content_measurement_description">16sp</dimen>
 </resources>

@@ -12,23 +12,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:theme="@style/MyTheme">
-
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:text="今日目標"
+            android:textSize="@dimen/content_main_item"
             android:textColor="#111111" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/content_main_progressbar"
             android:layout_margin="5dp"
             android:background="@color/md_lime_50"
             android:progress="50"
@@ -43,8 +43,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/MyTheme"
+        android:layout_weight="3.5"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="vertical"
         >
@@ -54,18 +54,20 @@
             android:layout_height="wrap_content"
             android:text="運動建議"
             android:textColor="#111111"
+            android:textSize="@dimen/content_main_item"
             android:layout_gravity="left"/>
 
         <ImageView
             android:id="@+id/imageState"
-            android:layout_width="90dp"
-            android:layout_height="86dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:textSize="@dimen/content_main_text"
             android:id="@+id/tvStatus"
             android:text="--"/>
         <Button
@@ -80,9 +82,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:layout_height="0dp"
         android:gravity="center"
-        android:theme="@style/MyTheme"
         android:orientation="vertical"
         >
 
@@ -93,24 +95,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:gravity="center">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:text="@string/env_info"
+                    android:textSize="@dimen/content_main_item"
                     android:textColor="#111111"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/content_main_updatetime"
                     android:text="@string/LastUpdateTime" />
                 <TextView
                     android:id="@+id/tvUpdateTime"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="14sp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/none" />
@@ -126,6 +129,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/content_main_text"
                     android:text="@string/temperature" />
 
                 <TextView
@@ -140,7 +144,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="@string/humidity" />
+                    android:text="@string/humidity"
+                    android:textSize="@dimen/content_main_text" />
 
                 <TextView
                     android:id="@+id/tvHumd"
@@ -148,7 +153,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/none" />
+                    android:text="@string/none"
+                    android:textSize="@dimen/content_main_text" />
             </LinearLayout>
 
 
@@ -161,26 +167,30 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="@string/pm25" />
+                    android:text="@string/pm25"
+                    android:textSize="@dimen/content_main_text"/>
                 <TextView
                     android:id="@+id/tvPM25"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/none" />
+                    android:text="@string/none"
+                    android:textSize="@dimen/content_main_text"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="@string/UV" />
+                    android:text="@string/UV"
+                    android:textSize="@dimen/content_main_text" />
                 <TextView
                     android:id="@+id/tvUV"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/none" />
+                    android:text="@string/none"
+                    android:textSize="@dimen/content_main_text" />
             </LinearLayout>
 
         </LinearLayout>
@@ -203,7 +213,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:textColor="#111111"
-                    android:text="@string/weakly_step"/>
+                    android:text="@string/weakly_step"
+                    android:textSize="@dimen/content_main_item"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -220,7 +231,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="@string/step"/>
+                    android:text="@string/step"
+                    android:textSize="@dimen/content_main_text"/>
 
                 <TextView
                     android:id="@+id/tvStepWeek"
@@ -228,7 +240,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/none" />
+                    android:text="@string/none"
+                    android:textSize="@dimen/content_main_text" />
             </LinearLayout>
 
         </LinearLayout>

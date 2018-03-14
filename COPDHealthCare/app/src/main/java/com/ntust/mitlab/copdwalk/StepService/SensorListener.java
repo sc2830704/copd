@@ -146,7 +146,7 @@ public class SensorListener extends Service implements SensorEventListener {
         reRegisterSensor();
         //設定sensorlistener為前景對象
         Notification.Builder builder = new Notification.Builder(this);//新建Notification.Builder对象
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, SensorListener.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
         builder.setContentTitle("COPD Walk");
@@ -198,12 +198,6 @@ public class SensorListener extends Service implements SensorEventListener {
             sm.unregisterListener(this);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (BuildConfig.DEBUG) {
-            if (sm.getSensorList(Sensor.TYPE_STEP_COUNTER).size() < 1) {
-                Log.d("SensorListener","GG");
-                return; // emulator
-            }
         }
         // enable batching with delay of max 5 min
         sm.registerListener(this, sm.getDefaultSensor(Sensor.TYPE_STEP_COUNTER),
