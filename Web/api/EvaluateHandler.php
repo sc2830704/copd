@@ -2,8 +2,8 @@
 //------------------------------------------------------------------------------------EnvHandler
 require_once('connect.php');
 require_once('SimpleRest.php');
-require_once('Env.php');
-class EnvHandler extends SimpleRest{
+require_once('Evaluate.php');
+class EvaluateHandler extends SimpleRest{
 	public $method, $action, $id, $input;
 	//constructor
 	public function __construct($method,$params,$input){
@@ -20,29 +20,14 @@ class EnvHandler extends SimpleRest{
 		switch($this->method){
 			case 'get':
 				if($this->action == 'getall'){
-					$env_all = new Env();
-					echo $this->set_status_code($env_all->getAll());
-					break;
-				}
-				else if($this->action == 'getbyid'){
-					$env_id = new Env();
-					echo $this->set_status_code($env_id->getById($this->id));
-					break;
-				}
-				else if($this->action == 'getbyuser'){
-					$env_id = new Env();
-					echo $this->set_status_code($env_id->getByUser($this->id));
-					break;
-				}
-				else if($this->action == 'getbytime'){
-					$env_time = new Env();
-					echo $this->set_status_code($env_time->getByTime($this->input));
+					$evaluate_all = new Evaluate();
+					echo $this->set_status_code($evaluate_all->getAll());
 					break;
 				}
 			case 'post':
 				if($this->action == 'add'){
-					$env_add = new Env();
-					echo $this->set_status_code($env_add->add($this->input));
+					$evaluate_add = new Evaluate();
+					echo $this->set_status_code($evaluate_add->add($this->input));
 					break;
 				}
 			default:

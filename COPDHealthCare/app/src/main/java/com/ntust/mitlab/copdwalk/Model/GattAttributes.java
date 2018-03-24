@@ -14,21 +14,18 @@ public class GattAttributes {
 
     //write data from BLE device, we use this characteristic
     public static String CLIENT_CHARACTERISTIC_CONFIG_ZOE = "00002902-0000-1000-8000-00805f9b34fb";
-    public static String CLIENT_CHARACTERISTIC_CONFIG_CHIP = "00002901-0000-1000-8000-00805f9b34fb";
     public static String CLIENT_CHARACTERISTIC_CONFIG_NEW = "00002902-0000-1000-8000-00805f9b34fb";
+    public static String CLIENT_CHARACTERISTIC_CONFIG_CHIP = "00002901-0000-1000-8000-00805f9b34fb";
 
     public static final UUID UUID_DATA_WRITE	= UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
     public static final String CommandUUID="0000dfb2-0000-1000-8000-00805f9b34fb";
-    public static final String ModelNumberStringUUID="00002a24-0000-1000-8000-00805f9b34fb";
     //public static final UUID SerialPortUUID= UUID.fromString("0000dfb1-0000-1000-8000-00805f9b34fb");
 
     //read data from phone to BLE device, we use this characteristic
     public static final UUID UUID_DATA_READ	= UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
-    public static final UUID SerialPortUUID= UUID.fromString("0000dfb1-0000-1000-8000-00805f9b34fb");
     public static final UUID Characterstic_SPO2_UUID = UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb");
     //read data from phone to BLE device, we use this service
     public static final UUID UUID_SERVICE_ZOE	= UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
-    public static final UUID UUID_SERVICE_SPO2_glove = UUID.fromString("0000dfb0-0000-1000-8000-00805f9b34fb");
     public static final UUID UUID_SERVICE_SPO2_wrist = UUID.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
 
     static

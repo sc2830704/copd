@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ntust.mitlab.copdwalk.Callback.AsyncResponse;
+import com.ntust.mitlab.copdwalk.Service.BluetoothLeService;
 import com.ntust.mitlab.copdwalk.util.DBHelper;
 import com.ntust.mitlab.copdwalk.util.MyShared;
 import com.ntust.mitlab.copdwalk.util.HttpTask;
@@ -259,7 +260,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             MyShared.setData(this,"history_other", jobj.getString("history_other"));
             MyShared.setData(this,"drug", jobj.getString("drug"));
             MyShared.setData(this,"drug_other", jobj.getString("drug_other"));
-            MyShared.setData(this,"env_id", jobj.getString("env_id"));
+            MyShared.setData(this, BluetoothLeService.DEVICE_TYPE.ENV.toString(), jobj.getString("env_id"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

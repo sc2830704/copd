@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    原文網址：https://read01.com/yyj4d.html
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <application

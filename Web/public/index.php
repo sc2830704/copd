@@ -68,9 +68,6 @@ $(document).ready(function(){
           </div>
           <div class="form-group">
             <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
-              <p></p>
               <text align="text-center" style="color:red" id="login_msg"></text>
             </div>
           </div>

@@ -8,7 +8,7 @@ class Env{
 		mysqli_select_db($con,"env");
 
 		//query data by method
-		$getAll_sql = "SELECT * FROM env";
+		$getAll_sql = "SELECT * FROM env ORDER BY datetime DESC";
 		$getAll_result = mysqli_query($con,$getAll_sql);
 		
 		if(mysqli_num_rows($getAll_result) == 0) {
@@ -19,12 +19,26 @@ class Env{
  			return $getAll_dataArray;
 		}
 	}
-	function getByTime($id){
+	function getByTime($input){
 		//connet db
 		require 'connect.php';
 		mysqli_select_db($con,"env");
 
-		if($id=='week'){
+		$start_time = $input['start_time'];
+		$end_time = $input['end_time'];
+
+		//$getbytime_sql = "SELECT * FROM `env` WHERE `datetime` LIKE '$id %'";
+		$getbytime_sql = "SELECT * FROM env WHERE datetime >='$start_time' AND datetime <='$end_time'";
+		$getbytime_result = mysqli_query($con,$getbytime_sql);
+		if(mysqli_num_rows($getbytime_result) == 0) {
+			return 'NULL';
+		}
+		else {
+			$getbytime_data = mysqli_fetch_all($getbytime_result,MYSQLI_ASSOC);
+			return $getbytime_data;
+		}
+
+		/*if($id=='week'){
 			//make time
 			$starttime_week = date ("Y-m-d H:i:s" , mktime(date('H')+7, date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 			$endtime_week = date ("Y-m-d H:i:s" , mktime(date('H')+7, date('i'), date('s'), date('m'), date('d')-7, date('Y'))) ;
@@ -57,7 +71,7 @@ class Env{
 				$getbymonth_data = mysqli_fetch_all($getbymonth_result,MYSQLI_ASSOC);
 				return $getbymonth_data;
 			}
-		}
+		}*/
 	}
 	function getByUser($userid){
 		//connet db
@@ -81,8 +95,11 @@ class Env{
 		require 'connect.php';
 		mysqli_select_db($con,"env");
 		
+		//make time
+		$starttime_week = date ("Y-m-d H:i:s" , mktime(date('H')+7, date('i'), date('s'), date('m'), date('d')-1, date('Y'))) ;
+		$endtime_week = date ("Y-m-d H:i:s" , mktime(date('H')+7, date('i'), date('s'), date('m'), date('d'), date('Y'))) ;
 		//query data by method
-		$getById_sql = "SELECT * FROM env WHERE deviceid = 'A002' OR deviceid = 'A003'";
+		$getById_sql = "SELECT * FROM env WHERE (deviceid = 'A002' OR deviceid = 'A003') AND datetime >='$starttime_week' AND datetime <='$endtime_week'";
 		$getById_result = mysqli_query($con,$getById_sql);
 
 		if(mysqli_num_rows($getById_result) == 0) {

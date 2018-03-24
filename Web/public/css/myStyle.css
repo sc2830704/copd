@@ -43,3 +43,38 @@
 .button3{
 	margin: auto;
 }
+
+/*********************************************************以下彈出視窗的css
+
+/* The Modal (background) 
+.modal {
+  margin: 0 auto auto auto;
+  display: none;
+  position: fixed;
+  padding-top: 5px;
+  width: 20%;
+  height: 28%;
+  background-color: #FFFFF0;
+  border:2px solid;
+  border-radius:10px;
+}
+
+.close {
+  color: black;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer
+}*/

@@ -77,7 +77,7 @@ public class DeviceActivity extends AppCompatActivity {
     public void handleMessage(Message msg) {
         switch (msg.what){
             case 1:
-                String device_id = msg.getData().getString("env_id");
+                String device_id = msg.getData().getString(DEVICE_TYPE.ENV.toString());
                 tvEnv.setText(device_id);
                 btnEnv.setText("移除");
                 MyShared.setData(DeviceActivity.this,DEVICE_TYPE.ENV.toString(),device_id);
@@ -104,12 +104,12 @@ public class DeviceActivity extends AppCompatActivity {
                     //設定Env_Id
 //                    String device_id = response.substring(2,response.length());//去掉多兩個多的空白字元
                     String device_id = response.substring(2,response.length()).trim(); //去掉多餘空白&換行
-                    MyShared.setData(DeviceActivity.this, "env_id", device_id);
+                    MyShared.setData(DeviceActivity.this, DEVICE_TYPE.ENV.toString(), device_id);
                     //prepare message for handler
                     Message msg = new Message();
                     msg.what=1;
                     Bundle bundle = new Bundle();
-                    bundle.putString("env_id",device_id);
+                    bundle.putString(DEVICE_TYPE.ENV.toString(),device_id);
                     msg.setData(bundle);
                     uiHandler.sendMessage(msg);
                     // 開啟hot spot for linkit 7688 DUO
@@ -149,7 +149,7 @@ public class DeviceActivity extends AppCompatActivity {
             json.put("drug", MyShared.getData(DeviceActivity.this, "drug"));
             json.put("history_other", MyShared.getData(DeviceActivity.this, "history_other"));
             json.put("drug_other", MyShared.getData(DeviceActivity.this, "drug_other"));
-            json.put("env_id", device_id);
+            json.put(DEVICE_TYPE.ENV.toString(), device_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -398,7 +398,7 @@ public class DeviceActivity extends AppCompatActivity {
         }else{
             tvEnv.setText("---");
             btnEnv.setText("驗證");
-            MyShared.setData(DeviceActivity.this ,"env_id", "");
+            MyShared.setData(DeviceActivity.this ,DEVICE_TYPE.OTHERS.toString(), "");
             MyShared.remove(DeviceActivity.this, DEVICE_TYPE.ENV.toString());
         }
     }

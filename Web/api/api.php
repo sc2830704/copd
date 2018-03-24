@@ -5,6 +5,7 @@ require_once('EnvHandler.php');
 require_once('ActivityHandler.php');
 require_once('DailyHandler.php');
 require_once('AdminHandler.php');
+require_once('EvaluateHandler.php');
 $method = $_SERVER['REQUEST_METHOD'];
 $params = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $controller = $params[0];
@@ -40,6 +41,10 @@ $queryStr = $_SERVER['QUERY_STRING'];
 	case 'admin':
 		$adminHandler = new AdminHandler($method,$params,$input);
 		$adminHandler->response();
+		break;
+	case 'evaluate':
+		$evaluateHandler = new EvaluateHandler($method,$params,$input);
+		$evaluateHandler->response();
 		break;
 	default:
 		header("http/ 404");

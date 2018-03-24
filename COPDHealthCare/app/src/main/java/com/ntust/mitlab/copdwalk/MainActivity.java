@@ -68,8 +68,6 @@ import java.util.TimerTask;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static com.ntust.mitlab.copdwalk.Model.GattAttributes.Characterstic_SPO2_UUID;
-import static com.ntust.mitlab.copdwalk.Model.GattAttributes.CommandUUID;
-import static com.ntust.mitlab.copdwalk.Model.GattAttributes.SerialPortUUID;
 import static com.ntust.mitlab.copdwalk.Model.GattAttributes.UUID_DATA_WRITE;
 import static com.ntust.mitlab.copdwalk.Service.BluetoothLeService.BT_CONNECTED_FAIL;
 import static com.ntust.mitlab.copdwalk.Service.BluetoothLeService.BT_IS_CONNECTED;
@@ -944,7 +942,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             }
-            else  if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
+            else if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)){
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
                         BluetoothAdapter.ERROR);
                 switch (state) {
@@ -1195,20 +1193,10 @@ public class MainActivity extends AppCompatActivity
             List<BluetoothGattCharacteristic> mGattCharacteristics = GattService.getCharacteristics();
             for (BluetoothGattCharacteristic gattCharacteristic : mGattCharacteristics) {
                 String uuidStr = gattCharacteristic.getUuid().toString();
-                if (UUID_DATA_WRITE.toString().equals(uuidStr)) {
+                if (uuidStr.equals(UUID_DATA_WRITE.toString())) {
                         mBluetoothLeService.setCharacteristicNotification(gattCharacteristic,true,address, BluetoothLeService.DEVICE_TYPE.WATCH);
                         mBluetoothLeService.readCharacteristic(gattCharacteristic,address);
-                }
-                else if(uuidStr.equals(SerialPortUUID.toString())){
-                    Log.d(TAG_Broadcast,"SerialPortUUID:"+uuidStr);
-                    mBluetoothLeService.setCharacteristicNotification(gattCharacteristic,true,address,BluetoothLeService.DEVICE_TYPE.SPO2);
-                    mBluetoothLeService.readCharacteristic(gattCharacteristic,address);
-
-                }
-                else if(uuidStr.equals(CommandUUID)){
-                    Log.d(TAG_Broadcast,"CommandUUID:"+uuidStr);
-                    mBluetoothLeService.setCharacteristicNotification(gattCharacteristic,true,address,BluetoothLeService.DEVICE_TYPE.SPO2);
-                    mBluetoothLeService.readCharacteristic(gattCharacteristic,address);
+                        Log.d("Characterstic_WATCH","UUID_DATA_WRITE:"+uuidStr);
                 }else if(uuidStr.equals(Characterstic_SPO2_UUID.toString())){
                     Log.d("Characterstic_SPO2_UUID","UUidStr:"+uuidStr);
                     mBluetoothLeService.setCharacteristicNotification(gattCharacteristic,true,address,BluetoothLeService.DEVICE_TYPE.SPO2);
@@ -1222,7 +1210,6 @@ public class MainActivity extends AppCompatActivity
         MyShared.remove(this,DEVICE_TYPE.SPO2.toString());
         MyShared.remove(this,DEVICE_TYPE.WATCH.toString());
         MyShared.remove(this,DEVICE_TYPE.ENV.toString());
-        MyShared.remove(this,"oldstep");
         MyShared.remove(this,"stepUnSave");
         MyShared.remove(this,"id");
         MyShared.remove(this,"pwd");
@@ -1234,7 +1221,7 @@ public class MainActivity extends AppCompatActivity
         MyShared.remove(this,"bmi");
         MyShared.remove(this,"drug");
         MyShared.remove(this,"drug_other");
-        MyShared.remove(this,"env_id");
+        MyShared.remove(this,"DEVICE_TYPE.ENV.toString()");
         DBHelper dbHelper = DBHelper.getInstance(MainActivity.this);
         dbHelper.clearTable();
     }
@@ -1387,9 +1374,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void processFinish(int status, String result, String endPoint) {
         switch (endPoint){
-            case "/daily/add":
-                MyShared.setData(MainActivity.this,"oldstep","0");
-                break;
             case "/activity/add":
                 if(status==200){
                     Toast.makeText(MainActivity.this,"運動結果上傳成功",Toast.LENGTH_SHORT).show();

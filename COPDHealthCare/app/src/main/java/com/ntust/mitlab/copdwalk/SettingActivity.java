@@ -34,7 +34,7 @@ public class SettingActivity extends AppCompatActivity {
                             .setPositiveButton("確認", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    //目前是在onDestory中更新
                                 }
                             })
                             .show();

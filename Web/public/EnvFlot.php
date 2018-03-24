@@ -38,7 +38,7 @@
   <script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
 </head>
 
-<body onload="JavaScript:AutoRefresh(60000);">
+<body>
   <!-- center   -->
   <div class="content-wrapper" style="padding-left: 5px">
     <div class="row" id="PersonalDataAndFlot" ">
@@ -57,12 +57,15 @@ $(document).ready(function(){
 function print(){
   $.ajax({
     type: "GET",
-    url: "../apiv1/env/getbyid/A002",
+    url: "../apiv1/env/getall",
     dataType: "json",
     data: {
     },
     success: function(data) {
       LoadActivityFlotChart(data);
+    },
+    error: function() {
+    	alert("近24小時沒有資料");
     }
   })
 }
@@ -70,9 +73,11 @@ function LoadActivityFlotChart(Data) {
   console.log(Data);
   var arr2_temperature = [];
   var arr2_humidity = [];
+  var arr2_pm25 = [];
   var arr3_temperature = [];
   var arr3_humidity = [];
-  for (var i in Data) {
+  var arr3_pm25 = [];
+  for (i=199;i>=0;i--) {
     if(Data[i].deviceid=='A002'){
       arr2_temperature.push([
         Data[i].datetime,
@@ -81,6 +86,10 @@ function LoadActivityFlotChart(Data) {
       arr2_humidity.push([
         Data[i].datetime,
         parseFloat(Data[i].humidity)
+      ]);
+      arr2_pm25.push([
+        Data[i].datetime,
+        parseFloat(Data[i].pm25)
       ]);
     }
     else {
@@ -92,13 +101,17 @@ function LoadActivityFlotChart(Data) {
         Data[i].datetime,
         parseFloat(Data[i].humidity)
       ]);
+      arr3_pm25.push([
+        Data[i].datetime,
+        parseFloat(Data[i].pm25)
+      ]);
     }
   }
-  getData2(arr2_temperature,arr2_humidity);
-  getData3(arr3_temperature,arr3_humidity);
+  getData2(arr2_temperature,arr2_humidity,arr2_pm25);
+  getData3(arr3_temperature,arr3_humidity,arr3_pm25);
 }
 
-function getData2(arr_temperature,arr_humidity) {
+function getData2(arr_temperature,arr_humidity,arr_pm25) {
     console.time('line');
   Highcharts.chart('flot', {
 
@@ -115,7 +128,7 @@ function getData2(arr_temperature,arr_humidity) {
       },
 
       subtitle: {
-          text: '溫度與濕度'
+          text: '溫濕度與PM2.5'
       },
 
       tooltip: {
@@ -135,13 +148,18 @@ function getData2(arr_temperature,arr_humidity) {
         name: '濕度',
         data: arr_humidity,
         lineWidth: 0.5
+      },
+      {
+        name: 'PM2.5',
+        data: arr_pm25,
+        lineWidth: 0.5
       }]
 
   });
   console.timeEnd('line');
 } 
 
-function getData3(arr_temperature,arr_humidity) {
+function getData3(arr_temperature,arr_humidity,arr_pm25) {
     console.time('line');
   Highcharts.chart('flot2', {
 
@@ -158,7 +176,7 @@ function getData3(arr_temperature,arr_humidity) {
       },
 
       subtitle: {
-          text: '溫度與濕度'
+          text: '溫濕度與PM2.5'
       },
 
       tooltip: {
@@ -177,6 +195,11 @@ function getData3(arr_temperature,arr_humidity) {
       {
         name: '濕度',
         data: arr_humidity,
+        lineWidth: 0.5
+      },
+      {
+        name: 'PM2.5',
+        data: arr_pm25,
         lineWidth: 0.5
       }]
 

@@ -28,17 +28,38 @@ else{
   <!--   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">   -->
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/popper/popper.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <!-- <script src="vendor/datatables/jquery.dataTables.js"></script>-->
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script> 
+  <!-- Custom scripts for this page-->
+  <script src="js/sb-admin-datatables.min.js"></script>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="css\myStyle.css">
+  <link rel="stylesheet" href="..\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css">
+  <script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
+
+  <!-- DataTable for Mobile -->
+  <script src="js/rowReorder.min.js"></script>
+  <script src="js/responsive.min.js"></script>
+  <link rel="stylesheet" href="css\responsive.dataTables.min.css">
+  <link rel="stylesheet" href="css\rowReorder.dataTables.min.css">
 </head>
 
-<script src="js/jquery-1.11.3.min.js"></script>
-<link rel="stylesheet" href="css\myStyle.css">
-<link rel="stylesheet" href="..\DataTables\DataTables-1.10.16\css\jquery.dataTables.min.css">
-<script type="text/JavaScript" src="..\DataTables\DataTables-1.10.16\js\jquery.dataTables.min.js"></script>
 
 <script type="text/JavaScript">
-
   $(document).ready(function(){
-    var patientDataTable = $('#patientTable').DataTable();
+    var patientDataTable = $('#patientTable').DataTable({
+      rowReorder: {
+        selector: 'td:nth-child(2)'
+      },
+      responsive: true
+    });
     getPatientData();
     
     $("#NewPatient").click(function(){
@@ -56,11 +77,20 @@ else{
     $("#patient_delete").click(function() {
       delete_data();
     })
-    $(document).on("click", "tr[class='odd'],tr[class='even']", function(){
+    $('#patientTable').on('click', 'tr', function(){
+      var row = $(this).children('td:first-child').text();
+      row==''? '':click_row(row);
+    });
+    /*$(document).on("click", "tr[class='odd'],tr[class='even']", function(){
       var row = $(this).children('td:first-child').text();
       click_row(row);
-    })
+    })*/
   });
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  } 
 
   function getPatientData() {
     $.ajax({
@@ -86,8 +116,6 @@ else{
         patientData[i].age,
         patientData[i].sex==1?'男':(patientData[i].sex==0?'女':null),
         patientData[i].bmi,
-        //patientData[i].drug,
-        //patientData[i].history,
         patientData[i].env_id,
         patientData[i].ble_id,
         patientData[i].watch_id
@@ -133,8 +161,8 @@ else{
         env_id: $("#env_id").val(),
         ble_id: $("#ble_id").val(),
         watch_id: $("#watch_id").val(),
-        drug_other: $("#drug_other_post").val(),
-        history_other: $("#history_other_post").val()
+        drug_other: $("#drug_other").val(),
+        history_other: $("#history_other").val()
       },
       success: function(data) { 
         getPatientData();
@@ -148,25 +176,25 @@ else{
   }
 
   function get_medicine(){
-    var medicine_other = [];
+    //var medicine_other = [];
     var medicine_selected=[];
 
-    var medicine_reg= $("#drug_other").val().replace(/,/g,"\",\"") + '';
+    /*var medicine_reg= $("#drug_other").val().replace(/,/g,"\",\"") + '';
     if(medicine_reg==''){
-      document.getElementById('drug_other_post').value = '["None"]';
+      document.getElementById('drug_other_post').value = '[""]';
     }
     else{
       medicine_other = ['["' + medicine_reg + '"]'];
       console.log(medicine_other);
       document.getElementById('drug_other_post').value = medicine_other;
-    }
+    }*/
 
     $("[name=medicine]:checkbox:checked").each(function(){
       medicine_selected.push($(this).val());
     });
     medicine_selected = medicine_selected + '';
     if(medicine_selected==''){
-    	document.getElementById('drug').value = '["None"]';
+    	document.getElementById('drug').value = '[]';
     }
     else{
       //console.log(medicine_selected);
@@ -178,10 +206,10 @@ else{
     }
   }
   function get_case(){
-    var case_other = [];
+    //var case_other = [];
     var case_selected=[];
 
-    var case_reg= $("#history_other").val().replace(/,/g,"\",\"") + '';
+    /*var case_reg= $("#history_other").val().replace(/,/g,"\",\"") + '';
     if(case_reg==''){
       document.getElementById('history_other_post').value = '["None"]';
     }
@@ -189,14 +217,14 @@ else{
       case_other = ['["' + case_reg + '"]'];
       console.log(case_other);
       document.getElementById('history_other_post').value = case_other;
-    }
+    }*/
 
     $("[name=case]:checkbox:checked").each(function(){
       case_selected.push($(this).val());
     });
     case_selected = case_selected + '';
     if(case_selected==''){
-     	document.getElementById('history').value = '["None"]';
+     	document.getElementById('history').value = '[]';
     }
     else{
         var history_arr = case_selected.split(',');
@@ -206,6 +234,7 @@ else{
   }
 
   function click_row(row){
+    //topFunction();
     $.ajax({
       type: "GET",
       url: "../apiv1/user/getbyid/" + row,
@@ -225,12 +254,10 @@ else{
         document.getElementById('watch_id').value = data.watch_id;
         data.history = JSON.parse(data.history);
         data.drug = JSON.parse(data.drug);
-        data.drug_other = JSON.parse(data.drug_other);
-        data.history_other = JSON.parse(data.history_other);
+        //data.drug_other = JSON.parse(data.drug_other);
+        //data.history_other = JSON.parse(data.history_other);
         document.getElementById('drug_other').value = data.drug_other;
         document.getElementById('history_other').value = data.history_other;
-        //var history_arr = data.history.split(',');
-        //var drug_arr = data.drug.split(',');
         
         $("input[name='medicine']").prop("checked", false);
         $("input[name='case']").prop("checked", false);
@@ -289,98 +316,26 @@ else{
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="homepage.php">Welcome COPD Manage System</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="HomePage">
-          <a class="nav-link" href="homepage.php">
-            <i class="fa fa-fw fa-windows"></i>
-            <span class="nav-link-text">COPD首頁</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Patient">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-child"></i>
-            <span class="nav-link-text" id="test">病患資料</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
-            <li>
-              <a href="PatientPage.php">Patient</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Environment">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-bank"></i>
-            <span class="nav-link-text" id="test">環境資料</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-            <li>
-              <a href="EnvironmentPage.php">Environment</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Daily">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDailyPages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text" id="test">每日統計</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseDailyPages">
-            <li>
-              <a href="DailyPage.php">Daily</a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Activity">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseActivityPages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-bar-chart-o"></i>
-            <span class="nav-link-text" id="test">活動紀錄</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseActivityPages">
-            <li>
-              <a href="ActivityPage.php">Activity</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-       <text align="text-center" style="margin: auto; color:yellow; padding-right: 10px" id="login_msg">Hello! <?php echo $_SESSION['account'] ?></text>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <?php require('module.php'); ?>
 
-
-<!-- center   -->
-
-  <div class="content-wrapper" style="padding-left: 5px">
+  <!-- center -->
+  <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="download_table" align="right">
-              <button onclick="window.location.href='Download_Patient_PDF.php'">PDF 下載</button>
-              <button onclick="window.location.href='Download_Patient_Excel.php'">EXCEL 下載</button>&nbsp;
-              &nbsp;<button id="NewPatient">新增資料</button>
-        </div>
+      <div class="col-xs-12 col-md-12 col-lg-12" align="right">
+            <button onclick="window.location.href='Download_Patient_PDF.php'">PDF</button>
+            <button onclick="window.location.href='Download_Patient_Excel.php'">EXCEL</button>&nbsp;
+            &nbsp;<button id="NewPatient">新增資料</button>
+      </div>
+      <br>
 	    <!-- /.container-fluid-->
-	    <!-- Download Page -->
-	    <!-- PatientManage-->
-      <div class="edit_table" id="PatientManage" style="display:none; width: 100%">
-        <div class="row">
-          <div class="column" align="right" style="padding: 0px 10px 0px 5px; width: 25%;"><br>
-              <h5 align="left" style="font-weight: bold; padding-left: 20px;">病患資料表</h5>
+      <!-- PatientManage-->
+      <div class="row" id="PatientManage" style="display: none; padding: 0px 10px 0px 10px;">
+        <div class="col-xs-12 col-md-12 col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;病患資料表
+            </div>
+            <div class="card-body" align="right" style="margin: auto">
               <label for="fname">姓氏：</label>
               <input type="text" id="fname"> <br>
 
@@ -391,7 +346,7 @@ else{
               <input type="text" id="age"> <br>
 
               <label for="sex">性別：</label>
-              <select id="sex" style="width: 173px;">
+              <select id="sex" style="width: 72%;">
                 <option value="1">男</option>
                 <option value="0">女</option>
               </select> <br>
@@ -416,23 +371,26 @@ else{
 
               <label for="watch_id">手錶ID：</label>
               <input type="text" id="watch_id"> <br><br>
-	      
-	      <h6 style="color: red;">[備註] 帳號若包含英文字母需小寫</h6>
-	      <h6 style="color: red;">     (輸入大寫會自動轉為小寫)</h6>
-	      
+          
+              <h6 style="color: red;">[備註] 帳號若包含英文字母需小寫</h6>
+              <h6 style="color: red;">     (輸入大寫會自動轉為小寫)</h6>
+            </div>
+            <div class="card-footer"></div>
           </div>
-          <div class="column" align="left" style="padding: 0px 10px 0px 5px; width: 50%">
-          <br>
-            <div style="padding: 0px 10px 0px 40px;">
-              <h5 style="font-weight: bold;">藥物勾選清單</h5>
-
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-5">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa fa-list-ol"></i>&nbsp;&nbsp;藥物勾選清單
+            </div>
+            <div class="card-body" align="left" style="margin: auto">
               <h6>吸入型藥物：</h6>
               <input name="medicine" type="checkbox" value="Berotec"> 備勞喘噴霧劑：(Berotec, Fenoterol)<br>
               <input name="medicine" type="checkbox" value="BerodualN"> 備喘全噴霧劑：(Berodual N, Fenoterol + Ipratropium)<br>
               <input name="medicine" type="checkbox" value="Combivent"> 冠喘衛噴霧劑：(Combivent, Salbutamol + Ipratropium)<br>
-              <input name="medicine" type="checkbox" value="Seretide"> 使肺泰乾粉吸入劑：(Seretide, Fluticasone propionate + Salmeterol)<br>
               <input name="medicine" type="checkbox" value="Spiriva"> 適喘樂吸入劑：(Spiriva, Tiotropium)<br>
               <input name="medicine" type="checkbox" value="Atrovent"> 定喘樂吸入劑：(Atrovent Nebuliser Soln, Ipratropium)<br>
+              <input name="medicine" type="checkbox" value="Seretide"> 使肺泰乾粉吸入劑：(Seretide, Fluticasone propionate + Salmeterol)<br>
               <br>
               <h6>口服型類固醇：</h6>
               <input name="medicine" type="checkbox" value="Prednisone"> 強的松/去氫可的松 (Prednisone)<br>
@@ -441,108 +399,68 @@ else{
               <input name="medicine" type="checkbox" value="Hydrocortisone"> 氫化可體松 (Hydrocortisone)<br>
               <input name="medicine" type="checkbox" value="Dexamethasone"> 地塞米松 (Dexamethasone)<br>
               <br>
-              <h6>其它藥物：（不同藥物請用,分開）</h6>
-              <textarea type="text" id="drug_other" rows="3" cols="40"></textarea>
-              <br>
+              <h6>其它藥物：</h6>
+              <textarea type="text" id="drug_other" rows="3" cols="25"></textarea>
             </div>
+            <div class="card-footer"></div>
           </div>
-          <div class="column" align="right" style="padding: 0px 10px 0px 5px; width: 25%;">
-          <br>
-            <div style="padding: 0px 10px 0px 40px;" align="left">
-              <h5 style="font-weight: bold;">疾病史</h5>
-            
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-3">
+          <div class="card">
+            <div class="card-header">
+              <i class="fa fa-heartbeat"></i>&nbsp;&nbsp;疾病史
+            </div>
+            <div class="card-body" align="left" style="margin: auto">
               <input name="case" type="checkbox" value="HeartDisease"> 心臟病<br>
               <input name="case" type="checkbox" value="Hypertension"> 高血壓<br>
               <input name="case" type="checkbox" value="Diabetes"> 糖尿病<br>
               <input name="case" type="checkbox" value="Arrhythmia"> 心律不整<br>
               <input name="case" type="checkbox" value="HeartFailure"> 心衰竭<br>
               <input name="case" type="checkbox" value="Stroke"> 中風<br><br>
-              <h6>其他疾病：（不同疾病請用,分開）</h6>
-              <textarea type="text" id="history_other" rows="7" cols="25"></textarea>
+              <h6>其他疾病：</h6>
+              <textarea type="text" id="history_other" rows="5" cols="25"></textarea>
+              <textarea type="text" id="history" rows="3" cols="40" style="display: none;"></textarea>
+              <textarea type="text" id="drug" rows="3" cols="40" style="display: none;"></textarea>
+              <div align="right" >
+                <h5 id="patient_Result" align="right" style="color:red"></h5>&nbsp;&nbsp;
+                <button  class="button2" id="patient_save">儲存</button>
+                <button  class="button2" id="patient_delete">刪除</button>
+                <button  class="button2" id="patient_update">更新</button>
+                <button  class="button2" id="patient_close">取消</button>
+              </div>
             </div>
-            <br><br>
-            <div align="right" >
-              <button  class="button2" id="patient_save">儲存</button>
-              <button  class="button2" id="patient_delete">刪除</button>
-              <button  class="button2" id="patient_update">更新</button>
-              <button  class="button2" id="patient_close">取消</button>
-            </div>
+            <div class="card-footer"></div>
           </div>
         </div>
-        <div class="row" align="right">
-          <textarea type="text" id="history" rows="3" cols="40" style="display: none;"></textarea>
-          <textarea type="text" id="drug" rows="3" cols="40" style="display: none;"></textarea>
-          <textarea type="text" id="history_other_post" rows="3" cols="40" style="display: none;"></textarea>
-          <textarea type="text" id="drug_other_post" rows="3" cols="40" style="display: none;"></textarea>
-        </div>
-        <p>
-        <h5 id="patient_Result" align="right" style="color:red"></h5>
       </div>
       <br>
-	    <!-- PatientDataTable-->
-	    <div id="datatable_patient_visible">
-	      <table id="patientTable" class="display" cellspacing="0" width="100%" >
-            
-	          <thead>
-	              <tr>
-	                  <th>帳號</th>
-	                  <th>名字</th>
-	                  <th>姓氏</th>
-                    <th>年齡</th>
-	                  <th>性別</th>
-	                  <th>BMI</th>
-                    <th>環境ID</th>
-                    <th>藍芽ID</th>
-                    <th>手錶ID</th>
-	              </tr>
-	          </thead>
-	      </table>
-	    </div>
-	    <!-- /.content-wrapper-->
-	    <footer class="sticky-footer">
-	      <div class="container">
-	        <div class="text-center">
-	          <small>COPD Walk © 2018</small>
-	        </div>
-	      </div>
-	    </footer>
-	    <!-- Scroll to Top Button-->
-	    <a class="scroll-to-top rounded" href="#page-top">
-	      <i class="fa fa-angle-up"></i>
-	    </a>
-	    <!-- Logout Modal-->
-	    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	      <div class="modal-dialog" role="document">
-	        <div class="modal-content">
-	          <div class="modal-header">
-	            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-	            <button class="close" type="button" data-dismiss="modal" aria-label="Close" >
-	              <span aria-hidden="true">×</span>
-	            </button>
-	          </div>
-	          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-	          <div class="modal-footer">
-	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-	            <a class="btn btn-primary" href="index.php">Logout</a>
-	          </div>
-	        </div>
-	      </div>
-	    </div>
-	    <!-- Bootstrap core JavaScript-->
-	    <script src="vendor/jquery/jquery.min.js"></script>
-	    <script src="vendor/popper/popper.min.js"></script>
-	    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	    <!-- Core plugin JavaScript-->
-	    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	    <!-- Page level plugin JavaScript-->
-	    <script src="vendor/chart.js/Chart.min.js"></script>
-	    <script src="vendor/datatables/jquery.dataTables.js"></script>
-	    <!-- <script src="vendor/datatables/dataTables.bootstrap4.js"></script> -->
-	    <!-- Custom scripts for all pages-->
-	    <script src="js/sb-admin.min.js"></script>
-	    <!-- Custom scripts for this page-->
-	    <script src="js/sb-admin-datatables.min.js"></script>
+      <!-- PatientDataTable-->
+      <div id="datatable_patient_visible" style="width: 98%; margin: auto;">
+        <table id="patientTable" class="display" cellspacing="0" width="100%" >
+          <thead>
+            <tr>
+              <th>帳號</th>
+              <th>姓氏</th>
+              <th>名字</th>
+              <th>年齡</th>
+              <th>性別</th>
+              <th>BMI</th>
+              <th>環境ID</th>
+              <th>藍芽ID</th>
+              <th>手錶ID</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <!-- /.content-wrapper-->
+      <!-- Logout Button + Footer -->
+      <?php require('footer_and_logout.php'); ?>
     </div>
+  </div>
+  <!-- 左邊縮排需要的.js -->
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/sb-admin.min.js"></script>
 </body>
 
 </html>
