@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ntust.mitlab.copdwalk.MeasurementActivity"
-    android:orientation="vertical">
-
+    >
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -21,265 +17,16 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </android.support.design.widget.AppBarLayout>
-
-    <ScrollView
+    <ViewFlipper
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:id="@+id/viewFlipper"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_alignParentStart="true">
+        <include layout="@layout/content_measurement_mmrc" />
+        <include layout="@layout/content_measurement_cat" />
+    </ViewFlipper>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="呼吸困難量表"
-                android:textColor="@color/md_Black"
-                android:textSize="@dimen/content_measurement_title"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="下列問題是要藉由評估您呼吸困難的程度，以瞭解慢性阻塞性肺疾病的情況。請您勾選最符合您的情況的答案（限填一格）"
-                android:textColor="@color/md_Grey_700"
-                android:textSize="@dimen/content_measurement_description" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rgMmrc">
-
-                    <RadioButton
-                        android:id="@+id/rb0"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"
-                        android:text="０級：我只有在激烈運動時才感覺到呼吸困難。"
-                        android:textSize="@dimen/content_measurement_question" />
-
-                    <RadioButton
-                        android:id="@+id/rb1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"
-                        android:text="１級：我在平路快速行走或上小斜坡時感覺呼吸短促。"
-                        android:textSize="@dimen/content_measurement_question" />
-
-                    <RadioButton
-                        android:id="@+id/rb2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"
-                        android:text="２級：我在平路時即會因呼吸困難而走得比同齡的朋友慢，或是我以正常步調走路時必須停下來才能呼吸。"
-                        android:textSize="@dimen/content_measurement_question" />
-
-                    <RadioButton
-                        android:id="@+id/rb3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"
-                        android:text="３級：我在平路約行走 100 公尺或每隔幾分鐘就需停下來呼吸。"
-                        android:textSize="@dimen/content_measurement_question" />
-
-                    <RadioButton
-                        android:id="@+id/rb4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layoutDirection="rtl"
-                        android:text="４級：我因為呼吸困難而無法外出，或是穿脫衣物時感到呼吸困難。"
-                        android:textSize="@dimen/content_measurement_question" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
-
-
-                    </LinearLayout>
-
-                </RadioGroup>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="慢性阻塞性肺病評估測試(CAT)"
-                android:textColor="@color/md_Black"
-                android:textSize="@dimen/content_measurement_title"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="請依照下列問題描述，越符合描述的給愈多星(最多5顆)，完全不符合描述給0顆星"
-                android:textColor="@color/md_Grey_700"
-                android:textSize="@dimen/content_measurement_description" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1.我一直在咳嗽"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt1"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2.我胸腔裡有很多痰"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3.我胸悶的感覺很嚴重"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt3" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4.當我在爬坡或爬一層樓題時，感覺非常喘不過來"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt4" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5.我的居家活動受到很大的限制"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt5" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6.因為我的肺部有疾病我完全沒有信心外出"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt6" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7.因為我的肺部疾病我睡得不安穩"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt7" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8.我一點活力都沒有"
-                    android:textSize="@dimen/content_measurement_question" />
-                <RatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rt8" />
-            </LinearLayout>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:background="@color/md_Orange_500"
-                android:id="@+id/send"
-                android:text="送出"/>
-        </LinearLayout>
-    </ScrollView>
 
 
 </LinearLayout>

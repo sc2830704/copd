@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
+
 import com.ntust.mitlab.copdwalk.Callback.AsyncResponse;
 import com.ntust.mitlab.copdwalk.util.HttpTask;
 import com.ntust.mitlab.copdwalk.util.MyShared;
@@ -21,14 +23,17 @@ public class MeasurementActivity extends AppCompatActivity {
     private JSONObject jsonObject = new JSONObject();
     private int mmrc=-1, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8;
     private RatingBar rt1, rt2, rt3, rt4, rt5, rt6,rt7,rt8;
-    private Button btnSend;
+    private Button btnSend,btnBack2mMRC,btnGo2CAT;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String endPoint_AddEvaluate="/evaluate/add";
     private String account;
+    ViewFlipper vf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement);
+
+        vf = (ViewFlipper) findViewById(R.id.viewFlipper);
         setupToolbar();
         initialUI();
         if(getIntent().getStringExtra("account")!=null)
@@ -37,15 +42,15 @@ public class MeasurementActivity extends AppCompatActivity {
             account = MyShared.getData(this,"id");
     }
     private void initialUI() {
-        rgMmrc = findViewById(R.id.rgMmrc);
-        rt1 = findViewById(R.id.rt1);
-        rt2 = findViewById(R.id.rt2);
-        rt3 = findViewById(R.id.rt3);
-        rt4 = findViewById(R.id.rt4);
-        rt5 = findViewById(R.id.rt5);
-        rt6 = findViewById(R.id.rt6);
-        rt7 = findViewById(R.id.rt7);
-        rt8 = findViewById(R.id.rt8);
+        rgMmrc = vf.findViewById(R.id.rgMmrc);
+        rt1 = vf.findViewById(R.id.rt1);
+        rt2 = vf.findViewById(R.id.rt2);
+        rt3 = vf.findViewById(R.id.rt3);
+        rt4 = vf.findViewById(R.id.rt4);
+        rt5 = vf.findViewById(R.id.rt5);
+        rt6 = vf.findViewById(R.id.rt6);
+        rt7 = vf.findViewById(R.id.rt7);
+        rt8 = vf.findViewById(R.id.rt8);
         rt1.setStepSize(1);
         rt2.setStepSize(1);
         rt3.setStepSize(1);
@@ -54,7 +59,21 @@ public class MeasurementActivity extends AppCompatActivity {
         rt6.setStepSize(1);
         rt7.setStepSize(1);
         rt8.setStepSize(1);
-        btnSend = findViewById(R.id.send);
+        btnBack2mMRC = (Button) findViewById(R.id.btnBack2mMRC);
+        btnGo2CAT = (Button) findViewById(R.id.btnGo2CAT);
+        btnBack2mMRC.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vf.setDisplayedChild(0);
+            }
+        });
+        btnGo2CAT.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vf.setDisplayedChild(1);
+            }
+        });
+        btnSend = (Button) findViewById(R.id.send);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

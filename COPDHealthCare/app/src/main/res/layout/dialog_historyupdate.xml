@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textColor="@color/md_Black"
+            android:textStyle="bold"
+            android:text="病史"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbHeartDisease"
+                android:textSize="18sp"
+                android:text="心臟病"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbHypertension"
+                android:textSize="18sp"
+                android:text="高血壓"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbDiabetes"
+                android:textSize="18sp"
+                android:text="糖尿病"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbArrhythmia"
+                android:textSize="18sp"
+                android:text="心律不整"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbHeartFailure"
+                android:textSize="18sp"
+                android:text="心衰竭"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/cbStroke"
+                android:textSize="18sp"
+                android:text="中風"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

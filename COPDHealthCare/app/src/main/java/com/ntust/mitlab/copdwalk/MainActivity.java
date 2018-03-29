@@ -17,6 +17,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -24,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -297,6 +299,17 @@ public class MainActivity extends AppCompatActivity
         //取的Application層級服務
         myApp =  (MyApp)getApplication();
         //取得權限
+        //取得系統定位服務
+        LocationManager status = (LocationManager) (this.getSystemService(Context.LOCATION_SERVICE));
+        if (status.isProviderEnabled(LocationManager.GPS_PROVIDER) || status.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+            {
+            //如果GPS或網路定位開啟，呼叫locationServiceInitial()更新位置
+            }
+        else
+            {
+            Toast.makeText(this, "請開啟定位服務", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));	//開啟設定頁面
+            }
         int permission = ActivityCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION);
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{ACCESS_COARSE_LOCATION}, REQUEST_COARSE_LOCATION_PERMISSIONS);

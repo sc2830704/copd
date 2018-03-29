@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/COPDHealthCare.iml" filepath="$PROJECT_DIR$/COPDHealthCare.iml" />
-      <module fileurl="file://D:\github\copd\COPDHealthCare\COPDHealthCare.iml" filepath="D:\github\copd\COPDHealthCare\COPDHealthCare.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\github\copd\COPDHealthCare\app\app.iml" filepath="D:\github\copd\COPDHealthCare\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jsch-0.1.54/jsch-0.1.54.iml" filepath="$PROJECT_DIR$/jsch-0.1.54/jsch-0.1.54.iml" />
-      <module fileurl="file://D:\github\copd\COPDHealthCare\jsch-0.1.54\jsch-0.1.54.iml" filepath="D:\github\copd\COPDHealthCare\jsch-0.1.54\jsch-0.1.54.iml" />
     </modules>
   </component>
 </project>

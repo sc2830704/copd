@@ -1,9 +1,6 @@
 package com.ntust.mitlab.copdwalk;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -11,16 +8,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.ntust.mitlab.copdwalk.Callback.AsyncResponse;
@@ -30,7 +31,6 @@ import com.ntust.mitlab.copdwalk.util.MyShared;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,11 +49,12 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     CheckBox cbBerotec, cbBerodualN, cbCombivent, cbSeretide, cbSpiriva, cbAtrovent;
     CheckBox cbDexamethasone, cbHydrocortisone, cbMethylprednisolone, cbDonison, cbPrednisone;
     CheckBox cbHeartDisease, cbHypertension, cbDiabetes, cbArrhythmia, cbHeartFailure, cbStroke;
+    Button drugyes,drugno;
 
     private String account,password,fname,lname;
-    private static String id,name, age, sex, bmi, drug, history, drug_other,history_other;
-    private JSONArray drugJobj;
-
+    private String id,name, age, sex, bmi, drug, history, drug_other,history_other;
+    private String stringdrug,stringhistory;
+    private JSONArray jsondrug,jsonhistory;
     private final int AdTextSize = 25;
 
     @Override
@@ -62,15 +63,18 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         setContentView(R.layout.activity_user);
         listView = (ListView) findViewById(R.id.listView);
 
+//        String[] strGroup = {"字串1", "字串2", "字串3", "字串4", "字串5", "字串6"};
+//        final ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                this, android.R.layout.simple_list_item_1, strGroup);
+
         //取得帳號.密碼.原姓名
         account=MyShared.getData(this,"id");
         password=MyShared.getData(this,"pwd");
         String[] name = MyShared.getData(this,"name").split(" ");
         fname= name[0];
         lname= name[1];
-       /* JSONObject object = (JSONObject) new JSONTokener(drug).nextValue();
-        JSONArray locations = object.getJSONArray("listings");*/
-
+        stringdrug=MyShared.getData(this,"drug");
+        stringhistory=MyShared.getData(this,"history");
 
         listView.setAdapter(getListItem());
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,18 +108,20 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             //drug
                             cbdrugDialog(position);
                             break;
-                        /*case 6:
+                        case 6:
                             //history
-                            history=Content;
+                            cbhistoryDialog(position);
                             break;
                         case 7:
                             //drug_other
-                            drug_other=Content;
+                            final EditText etotherdrug = new EditText(UserActivity.this);
+                            etDialog(position,etotherdrug);
                             break;
                         case 8:
                             //history_other
-                            history_other=Content;
-                            break;*/
+                            final EditText etotherhistory = new EditText(UserActivity.this);
+                            etDialog(position,etotherhistory);
+                            break;
                     }
 //                Toast.makeText(UserActivity.this,id+","+position,Toast.LENGTH_SHORT).show();
                 }
@@ -123,7 +129,6 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         });
         setupToolbar();
     }
-
     private ListAdapter getListItem() {
         tvName = (TextView)findViewById(R.id.tvName);
         tvName.setText(MyShared.getData(this,"name"));
@@ -137,8 +142,10 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         bmi = MyShared.getData(this,"bmi");
         drug = parseJsonArray(MyShared.getData(this,"drug"));
         history = parseJsonArray(MyShared.getData(this,"history"));
-        drug_other = parseJsonArray(MyShared.getData(this,"drug_other"));
-        history_other = parseJsonArray(MyShared.getData(this,"history_other"));
+        //drug_other = parseJsonArray(MyShared.getData(this,"drug_other"));
+        drug_other = MyShared.getData(this,"drug_other");
+        //history_other = parseJsonArray(MyShared.getData(this,"history_other"));
+        history_other = MyShared.getData(this,"history_other");
         String[] title = new String[]{"帳號", "姓名" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
         String[] text  = new String[]{id, name, age, sex, bmi, drug, history, drug_other,history_other};
         for(int i = 0 ; i < title.length ; i++){
@@ -199,9 +206,14 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             case 2:
                                 age=Content;
                                 break;
-
                             case 4:
                                 bmi=Content;
+                                break;
+                            case 7:
+                                drug_other=Content;
+                                break;
+                            case 8:
+                                history_other=Content;
                                 break;
                         }
                         HttpPost();
@@ -252,45 +264,77 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         setDialogParam(ad);
     }
 
-    private void cbdrugDialog(final int position ){
+    private void cbdrugDialog(int position ){
         String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
-        AlertDialog ad = new AlertDialog.Builder(UserActivity.this)
-                .setTitle("修改" + title[position])
-                .setMessage("按下\"是\"確認修改")
-                .setView(R.layout.dialog_drugupdate)
-                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder ad = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialoglayout = inflater.inflate(R.layout.dialog_drugupdate, null);
+        cbBerotec = (CheckBox) dialoglayout.findViewById(R.id.cbBerotec);
+        cbBerodualN = (CheckBox) dialoglayout.findViewById(R.id.cbBerodualN);
+        cbCombivent = (CheckBox) dialoglayout.findViewById(R.id.cbCombivent);
+        cbSeretide = (CheckBox) dialoglayout.findViewById(R.id.cbSeretide);
+        cbSpiriva = (CheckBox) dialoglayout.findViewById(R.id.cbSpiriva);
+        cbAtrovent = (CheckBox) dialoglayout.findViewById(R.id.cbAtrovent);
+
+        cbDexamethasone = (CheckBox) dialoglayout.findViewById(R.id.cbDexamethasone);
+        cbHydrocortisone = (CheckBox) dialoglayout.findViewById(R.id.cbHydrocortisone);
+        cbMethylprednisolone = (CheckBox) dialoglayout.findViewById(R.id.cbMethylprednisolone);
+        cbDonison = (CheckBox) dialoglayout.findViewById(R.id.cbDonison);
+        cbPrednisone = (CheckBox) dialoglayout.findViewById(R.id.cbPrednisone);
+                ad.setTitle("修改" + title[position]);
+                ad.setMessage("按下\"是\"確認修改");
+                ad.setView(dialoglayout);
+        final AlertDialog alert = ad.show();
+        dialoglayout.findViewById(R.id.drugyes).setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                stringdrug = getDrug().toString();
+                HttpPost();
+                alert.dismiss();
+            }
+        });
+        dialoglayout.findViewById(R.id.drugno).setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                alert.cancel();
+            }
+        });
+    }
+
+    private void cbhistoryDialog(final int  position ){
+        String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        final AlertDialog.Builder ad = new AlertDialog.Builder(this);
+        final AlertDialog alert = ad.create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialoglayout = inflater.inflate(R.layout.dialog_historyupdate, null);
+        cbHeartDisease = (CheckBox) dialoglayout.findViewById(R.id.cbHeartDisease);
+        cbHypertension = (CheckBox) dialoglayout.findViewById(R.id.cbHypertension);
+        cbDiabetes = (CheckBox) dialoglayout.findViewById(R.id.cbDiabetes);
+        cbArrhythmia = (CheckBox) dialoglayout.findViewById(R.id.cbArrhythmia);
+        cbHeartFailure = (CheckBox) dialoglayout.findViewById(R.id.cbHeartFailure);
+        cbStroke = (CheckBox) dialoglayout.findViewById(R.id.cbStroke);
+        ad.setTitle("修改" + title[position]);
+        ad.setMessage("按下\"是\"確認修改");
+        ad.setView(dialoglayout);
+        ad.setPositiveButton("是", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (position){
+                    case 6:
+                        stringhistory = getHistory().toString();
+                        break;
+                }
+                HttpPost();
+            }
+        });
+        ad.setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        switch (position){
-                            case 5:
-                                drugJobj=getDrug();
-                        }
-                        HttpPost();
                     }
-                })
-                .setNegativeButton("否", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        });
+        ad.show();
 
-                    }
-                })
-                .show();
-
-        cbBerotec = (CheckBox) findViewById(R.id.cbBerotec);
-        cbBerodualN = (CheckBox) findViewById(R.id.cbBerodualN);
-        cbCombivent = (CheckBox) findViewById(R.id.cbCombivent);
-        cbSeretide = (CheckBox) findViewById(R.id.cbSeretide);
-        cbSpiriva = (CheckBox) findViewById(R.id.cbSpiriva);
-        cbAtrovent = (CheckBox) findViewById(R.id.cbAtrovent);
-
-        cbDexamethasone = (CheckBox) findViewById(R.id.cbDexamethasone);
-        cbHydrocortisone = (CheckBox) findViewById(R.id.cbHydrocortisone);
-        cbMethylprednisolone = (CheckBox) findViewById(R.id.cbMethylprednisolone);
-        cbDonison = (CheckBox) findViewById(R.id.cbDonison);
-        cbPrednisone = (CheckBox) findViewById(R.id.cbPrednisone);
-
-        setDialogParam(ad);
     }
 
     private void setDialogParam(AlertDialog ad){
@@ -301,8 +345,8 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     private void HttpPost(){
-        JSONArray historyJobj = getHistory();
-        JSONArray drugJobj = getDrug();
+        JSONArray historyJobj = tranJsonarray(stringhistory);
+        JSONArray drugJobj = tranJsonarray(stringdrug);
         String otherDrug = getOtherDrug();
         String otherHisory = getOtherHistory();
         JSONObject jobj = new JSONObject();
@@ -324,9 +368,41 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         HttpTask httpTask = new HttpTask("POST",jobj,"/user/update",null);
         httpTask.setCallback(UserActivity.this);
         httpTask.execute();
+        setData();
+        listView.setAdapter(null);
+        listView.setAdapter(getListItem());
     }
-
+    private JSONArray tranJsonarray (String jArray){
+        JSONArray obj = new JSONArray();
+        try {
+            JSONArray jsonArray = new JSONArray(jArray);
+            //取前3樣物件，以逗號分隔，剩餘的以...表示
+            for(int i=0; i<jsonArray.length(); i++){
+                obj.put(jsonArray.getString(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
     private JSONArray getHistory(){
+        JSONArray jsonArray = new JSONArray();
+        if(cbHeartDisease.isChecked())
+            jsonArray.put("HeartDisease");
+        if(cbHypertension.isChecked())
+            jsonArray.put("Hypertension");
+        if(cbDiabetes.isChecked())
+            jsonArray.put("Diabetes");
+        if(cbArrhythmia.isChecked())
+            jsonArray.put("Arrhythmia");
+        if(cbHeartFailure.isChecked())
+            jsonArray.put("HeartFailure");
+        if(cbStroke.isChecked())
+            jsonArray.put("Stroke");
+
+        return jsonArray;
+    }
+    private JSONArray getDrug(){
         JSONArray jsonArray = new JSONArray();
         if(cbBerotec.isChecked())
             jsonArray.put("Berotec");
@@ -350,13 +426,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
             jsonArray.put("Donison");
         if(cbPrednisone.isChecked())
             jsonArray.put("Prednisone");
-        //jsonArray.put(history);
 
-        return jsonArray;
-    }
-    private JSONArray getDrug(){
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(drug);
         return jsonArray;
     }
     private String getOtherDrug(){
@@ -373,15 +443,18 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     public void setData() {
+        JSONArray historyJobj = tranJsonarray(stringhistory);
+        JSONArray drugJobj = tranJsonarray(stringdrug);
+        sex=(sex=="男")? "1" : (sex=="女")? "0": sex;
         Log.d("id",""+id);
         MyShared.setData(this,"name", fname+" "+lname);
         MyShared.setData(this,"pwd", password);
         MyShared.setData(this,"age", age);
         MyShared.setData(this,"sex", sex);
         MyShared.setData(this,"bmi", bmi);
-        MyShared.setData(this,"history", history);
+        MyShared.setData(this,"history", historyJobj.toString());
         MyShared.setData(this,"history_other", history_other);
-        MyShared.setData(this,"drug", drug);
+        MyShared.setData(this,"drug", drugJobj.toString());
         MyShared.setData(this,"drug_other", drug_other);
     }
     @Override
@@ -402,7 +475,6 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    setData();
                                 }
                             })
                             .show();

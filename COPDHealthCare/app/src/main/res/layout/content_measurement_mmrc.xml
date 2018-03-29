@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ntust.mitlab.copdwalk.MeasurementActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="呼吸困難量表"
+                android:textColor="@color/md_Black"
+                android:textSize="@dimen/content_measurement_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="下列問題是要藉由評估您呼吸困難的程度，以瞭解慢性阻塞性肺疾病的情況。請您勾選最符合您的情況的答案（限填一格）"
+                android:textColor="@color/md_Grey_700"
+                android:textSize="@dimen/content_measurement_description" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rgMmrc">
+
+                    <RadioButton
+                        android:id="@+id/rb0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:text="０級：我只有在激烈運動時才感覺到呼吸困難。"
+                        android:textSize="@dimen/content_measurement_question" />
+
+                    <RadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:text="１級：我在平路快速行走或上小斜坡時感覺呼吸短促。"
+                        android:textSize="@dimen/content_measurement_question" />
+
+                    <RadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:text="２級：我在平路時即會因呼吸困難而走得比同齡的朋友慢，或是我以正常步調走路時必須停下來才能呼吸。"
+                        android:textSize="@dimen/content_measurement_question" />
+
+                    <RadioButton
+                        android:id="@+id/rb3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:text="３級：我在平路約行走 100 公尺或每隔幾分鐘就需停下來呼吸。"
+                        android:textSize="@dimen/content_measurement_question" />
+
+                    <RadioButton
+                        android:id="@+id/rb4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layoutDirection="rtl"
+                        android:text="４級：我因為呼吸困難而無法外出，或是穿脫衣物時感到呼吸困難。"
+                        android:textSize="@dimen/content_measurement_question" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+
+                    </LinearLayout>
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGo2CAT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="下一頁" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
