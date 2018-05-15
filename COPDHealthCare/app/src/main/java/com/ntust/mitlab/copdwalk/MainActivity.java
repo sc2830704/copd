@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity
             STATE_BAD_ADVICE=6,STATE_AFTERTEST=7, STATE_BAD_AFTERTEST=8, STATE_GOOD_AFTERTEST=9;
     private final int MILL_SECONDS_MINUTES = 60*1000;
     private int stepGoal, steps_today, steps_week;
+    private boolean steps_state;
     private int currentPage;
     private NavigationView navigationView;
     private MyApp myApp;
@@ -795,12 +796,27 @@ public class MainActivity extends AppCompatActivity
         ad.getButton(AlertDialog.BUTTON_NEGATIVE).setTextSize(AdTextSize);
     }
     private void readStepGoal() {
+
         if(steps_week/7<5000)
             stepGoal = 7000;
-        else if(steps_week/7>=5000 && steps_week/7<9000)
+        else if (steps_week/7>=(stepGoal)){
+            steps_state=true;
+        }
+        if(steps_state) {
+            stepGoal += 500;
+            steps_state=false;
+            if(stepGoal>=9000)
+                stepGoal = 9000;
+        }
+        else {
+            stepGoal -= 500;
+            if (stepGoal<=7000)
+                stepGoal = 7000;
+        }
+        /*else if(steps_week/7>=5000 && steps_week/7<9000)
             stepGoal = 9000;
         else
-            stepGoal = 9000;
+            stepGoal = 9000;*/
         progressBar.setMax(stepGoal);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             progressBar.setProgress(steps_today,true);
@@ -1232,9 +1248,13 @@ public class MainActivity extends AppCompatActivity
         MyShared.remove(this,"history");
         MyShared.remove(this,"history_other");
         MyShared.remove(this,"bmi");
+        MyShared.remove(this,"height");
+        MyShared.remove(this,"weight");
         MyShared.remove(this,"drug");
         MyShared.remove(this,"drug_other");
-        MyShared.remove(this,"DEVICE_TYPE.ENV.toString()");
+        MyShared.remove(this,"env_id");
+        MyShared.remove(this,"RegisterSuccess");
+        MyShared.remove(this,"CAT_Score");
         DBHelper dbHelper = DBHelper.getInstance(MainActivity.this);
         dbHelper.clearTable();
     }
@@ -1339,8 +1359,12 @@ public class MainActivity extends AppCompatActivity
             intent.setClass(MainActivity.this,UserActivity.class);
             startActivity(intent);
             return false;   //讓navigation選擇的保留在原本的項目
-
-        } else if (id == R.id.nav_history) {
+        }  else if (id == R.id.nav_measurement) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this,UserMeasurementActivity.class);
+            startActivity(intent);
+            return false;   //讓navigation選擇的保留在原本的項目
+        }  else if (id == R.id.nav_history) {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this,HistoryActivity.class);
             startActivity(intent);

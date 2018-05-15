@@ -26,17 +26,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+
 public class RegisterActivity extends AppCompatActivity implements AsyncResponse {
+    Float bmicaculate;
     Button btnNext, btnOK, btnBack, btnCancel, btnBack2Drug, btnGo2History;
-    EditText  etAccount, etPassword, etPasswordCheck, etLname ,etFname, etAge, etBMI;
+    EditText  etAccount, etPassword, etPasswordCheck, etLname ,etFname, etAge, etHeight,etWeight;
     CheckBox cbBerotec, cbBerodualN, cbCombivent, cbSeretide, cbSpiriva, cbAtrovent;
     CheckBox cbDexamethasone, cbHydrocortisone, cbMethylprednisolone, cbDonison, cbPrednisone;
     CheckBox cbHeartDisease, cbHypertension, cbDiabetes, cbArrhythmia, cbHeartFailure, cbStroke;
     EditText etDrugOther, etHistoryOther;
     NumberPicker numberPicker;
     RadioButton radioMale, radioFemale;
-    String account, password, passwordCheck,lname, fname,age , sex, bmi;
-    Boolean debug = true;
+    String account, password, passwordCheck, lname, fname, age, sex, bmi, height, weight;
+    Boolean debug = false;
     ViewFlipper vf;
     private boolean validateAccount;
 
@@ -56,7 +59,8 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
             etFname.setText("rao");
             etLname.setText("ray");
             etAge.setText("20");
-            etBMI.setText("20");
+            etWeight.setText("60");
+            etHeight.setText("180");
             radioMale.setChecked(debug);
         }
 
@@ -95,7 +99,8 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
         fname  = etFname.getText().toString();
         age = etAge.getText().toString();
         sex = null;
-        bmi = etBMI.getText().toString();
+        height=etHeight.getText().toString();
+        weight=etWeight.getText().toString();
 
         Log.d("pwd",password);
         Log.d("fname",fname);
@@ -131,11 +136,17 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
         }else if(sex==null){
             Toast.makeText(RegisterActivity.this,"請選擇性別",Toast.LENGTH_SHORT).show();
             return;
-        }else if(bmi.equals("")){
-            etBMI.setError("請輸入BMI");
+        }else if(height.equals("")){
+            etHeight.setError("請輸入身高");
             return;
-        }else if(Float.parseFloat(bmi)>50){
-            etBMI.setError("請輸入正確的BMI");
+        }else if(Float.parseFloat(height)>240){
+            etHeight.setError("請輸入正確的身高");
+            return;
+        }else if(weight.equals("")){
+            etWeight.setError("請輸入體重");
+            return;
+        }else if(Float.parseFloat(weight)>200){
+            etWeight.setError("請輸入正確的體重");
             return;
         }else if(!validateAccount){
             etAccount.setError("請輸入新的帳號");
@@ -207,12 +218,13 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
         etPasswordCheck =  vf.findViewById(R.id.etPasswordCheck);
         etFname =  vf.findViewById(R.id.etFname);
         etLname =  vf.findViewById(R.id.etLname);
+        etHeight=  vf.findViewById(R.id.etHeight);
+        etWeight =  vf.findViewById(R.id.etWeight);
         radioMale =  vf.findViewById(R.id.radioMale);
         radioFemale =  vf.findViewById(R.id.radioFemale);
         btnNext = (Button) findViewById(R.id.btnNext);
         btnBack2Drug = (Button) findViewById(R.id.btnBack2Drug);
         btnGo2History = (Button) findViewById(R.id.btnGo2History);
-        etBMI = vf.findViewById(R.id.etBMI);
         btnGo2History.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -254,6 +266,9 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
                 JSONArray drugJobj = getDrug();
                 String otherDrug = getOtherDrug();
                 String otherHisory = getOtherHistory();
+                bmicaculate=(Float.parseFloat(weight)/((Float.parseFloat(height)/100)*(Float.parseFloat(height)/100)));
+                DecimalFormat decimalFormat = new DecimalFormat("#.##");//小數點第二位下四捨五入
+                bmi = decimalFormat.format(bmicaculate);
                 JSONObject jobj = new JSONObject();
                 try {
                     jobj.put("id",account);
@@ -262,6 +277,8 @@ public class RegisterActivity extends AppCompatActivity implements AsyncResponse
                     jobj.put("lname",lname);
                     jobj.put("age",age);
                     jobj.put("sex",sex);
+                    jobj.put("height",height);
+                    jobj.put("weight",weight);
                     jobj.put("bmi",bmi);
                     jobj.put("history", historyJobj.toString());
                     jobj.put("drug", drugJobj.toString());

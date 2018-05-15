@@ -105,6 +105,8 @@ public class DeviceActivity extends AppCompatActivity {
 //                    String device_id = response.substring(2,response.length());//去掉多兩個多的空白字元
                     String device_id = response.substring(2,response.length()).trim(); //去掉多餘空白&換行
                     MyShared.setData(DeviceActivity.this, DEVICE_TYPE.ENV.toString(), device_id);
+                    MyShared.setData(DeviceActivity.this,"env_id", device_id);
+                    Log.d("device_id:",device_id);
                     //prepare message for handler
                     Message msg = new Message();
                     msg.what=1;
@@ -144,12 +146,15 @@ public class DeviceActivity extends AppCompatActivity {
             json.put("lname", lname);
             json.put("age", MyShared.getData(DeviceActivity.this, "age"));
             json.put("sex", MyShared.getData(DeviceActivity.this, "sex"));
+            json.put("height", MyShared.getData(DeviceActivity.this, "height"));
+            json.put("weight", MyShared.getData(DeviceActivity.this, "weight"));
             json.put("bmi", MyShared.getData(DeviceActivity.this, "bmi"));
             json.put("history", MyShared.getData(DeviceActivity.this, "history"));
             json.put("drug", MyShared.getData(DeviceActivity.this, "drug"));
             json.put("history_other", MyShared.getData(DeviceActivity.this, "history_other"));
             json.put("drug_other", MyShared.getData(DeviceActivity.this, "drug_other"));
-            json.put(DEVICE_TYPE.ENV.toString(), device_id);
+//            json.put(DEVICE_TYPE.ENV.toString(), device_id);
+            json.put("env_id",device_id);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -395,6 +400,8 @@ public class DeviceActivity extends AppCompatActivity {
 
             etSsid.setText(ApManager.getApID(DeviceActivity.this));
             etPwd.setText(ApManager.getKey(DeviceActivity.this));
+//            etSsid.setText("MITLAB-NETGEAR_R6400");
+//            etPwd.setText("mitlab1234567890");
         }else{
             tvEnv.setText("---");
             btnEnv.setText("驗證");

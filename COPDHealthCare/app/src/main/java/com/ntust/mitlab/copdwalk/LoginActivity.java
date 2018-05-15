@@ -256,6 +256,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             MyShared.setData(this,"age", jobj.getString("age"));
             MyShared.setData(this,"sex", jobj.getString("sex"));
             MyShared.setData(this,"bmi", jobj.getString("bmi"));
+            MyShared.setData(this,"height", jobj.getString("height"));
+            MyShared.setData(this,"weight", jobj.getString("weight"));
             MyShared.setData(this,"history", jobj.getString("history"));
             MyShared.setData(this,"history_other", jobj.getString("history_other"));
             MyShared.setData(this,"drug", jobj.getString("drug"));

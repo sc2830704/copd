@@ -62,6 +62,7 @@ public class ApManager {
             getConfigMethod = wifiManager.getClass().getMethod("getWifiApConfiguration");
             WifiConfiguration wifiConfig = (WifiConfiguration) getConfigMethod.invoke(wifiManager);
             ssid = wifiConfig.SSID;
+            Log.d("APManager","ssid="+ssid);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }

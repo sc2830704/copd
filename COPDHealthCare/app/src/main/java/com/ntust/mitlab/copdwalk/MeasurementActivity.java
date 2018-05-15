@@ -14,6 +14,8 @@ import android.widget.ViewFlipper;
 import com.ntust.mitlab.copdwalk.Callback.AsyncResponse;
 import com.ntust.mitlab.copdwalk.util.HttpTask;
 import com.ntust.mitlab.copdwalk.util.MyShared;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -26,7 +28,7 @@ public class MeasurementActivity extends AppCompatActivity {
     private Button btnSend,btnBack2mMRC,btnGo2CAT;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String endPoint_AddEvaluate="/evaluate/add";
-    private String account;
+    private String account, RegisterSuccess;
     ViewFlipper vf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +112,7 @@ public class MeasurementActivity extends AppCompatActivity {
             Toast.makeText(this ,"請填寫呼吸困難量表", Toast.LENGTH_SHORT).show();
             return;
         }
+        setData();
         try {
             jsonObject.put("uid", account);
             jsonObject.put("mmrc", mmrc);
@@ -134,8 +137,14 @@ public class MeasurementActivity extends AppCompatActivity {
                 switch (endPoint){
                     case "/evaluate/add":
                         if(state==200){
-                            Toast.makeText(MeasurementActivity.this, "註冊完成，請登入", Toast.LENGTH_SHORT).show();
+                            RegisterSuccess=MyShared.getData(MeasurementActivity.this,"RegisterSuccess");
+                            if (RegisterSuccess==null)
+                                Toast.makeText(MeasurementActivity.this, "註冊完成，請登入", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(MeasurementActivity.this, "填寫完畢", Toast.LENGTH_SHORT).show();
                             finish();
+                            RegisterSuccess="true";
+                            MyShared.setData(MeasurementActivity.this,"RegisterSuccess",RegisterSuccess);
                         }
                         else
                             Toast.makeText(MeasurementActivity.this ,"系統錯誤請稍後重試", Toast.LENGTH_SHORT).show();
@@ -144,6 +153,13 @@ public class MeasurementActivity extends AppCompatActivity {
             }
         });
         httpTask.execute();
+    }
+    public void setData() {
+        int Score;
+        Score = (int) rt1.getRating() + (int) rt2.getRating() + (int) rt3.getRating() + (int) rt4.getRating()
+                + (int) rt5.getRating() + (int) rt6.getRating() + (int) rt7.getRating() + (int) rt8.getRating();
+        Log.d("Score","Score="+Score);
+        MyShared.setData(this,"CAT_Score",Integer.toString(Score));
     }
     @Override
     public void onBackPressed() {

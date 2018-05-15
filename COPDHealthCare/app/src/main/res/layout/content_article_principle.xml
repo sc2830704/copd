@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="7dp">
+    android:layout_margin="7dp"
+    android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:text="(一)呼吸訓練 "
         android:textSize="30sp"
-        android:layout_marginTop="5dp"
-        android:text="呼吸訓練 "/>
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:layout_marginTop="5dp"
-        android:textStyle="bold"
         android:text="1. 噘嘴式呼吸："
-        />
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:layout_marginTop="5dp"
         android:text="        利用鼻子吸氣（由1數到3）→如吹蠟燭般的將嘴唇噘成圓形(嘟嘴)，緩慢將氣吐出來→呼氣的時間約為吸氣時間的2倍（由1數到6"
-        />
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -36,218 +38,320 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:layout_marginTop="5dp"
-        android:textStyle="bold"
         android:text="2. 腹式呼吸："
-        />
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
         android:layout_marginTop="5dp"
         android:text="        吸氣時應使腹部鼓起，吐氣時使腹部凹下"
-        />
+        android:textSize="24sp" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/p1"
-        />
+        android:background="@drawable/p1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:text="(二)合適的運動訓練建議"
         android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:text="運動訓練 "/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        android:text="1.	慢性阻塞性肺疾病患者合適的運訓練建議 "/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/p5"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:text="2.	運動的順序"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/p3"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="心肺訓練："
         android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(1)如:「步行」、騎腳踏車、爬樓梯、游泳等"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(2)每次連續20-60分鐘， 3-5天/周"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(3)每次從事心肺訓練前需暖身5至10分鍾，訓練後也需冷卻5至10分鍾(見下方-(三)運動的順序)"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="肌肉強度與耐力訓練："
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(1)阻力訓練(上肢/下肢)，如:啞鈴、彈力帶"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(2)每次2-5種不同動作，重複8-15下/種類，2-3天/周"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="靈活度訓練："
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(1)伸展主要大肌群，動作如同暖身的拉筋動作"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="(2)每個部位伸展開後停住10-30秒，重複4次，2-3天/周"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textStyle="bold"
-        android:text="3.	步行的運動量建議"/>
+        android:text="(三)運動的順序"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/p3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="(四)步行的運動量建議"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/p11"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/p9"
+            android:id="@+id/imageViewp9" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="230dp">
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageViewp9"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
                 android:layout_marginTop="10dp"
-                android:textStyle="bold"
-                android:text="4.	COPD運動注意事項"/>
+                android:text="(五)COPD運動注意事項"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
                 android:layout_marginTop="10dp"
-                android:text="自我監測"/>
+                android:text="自我監測"
+                android:textSize="24sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="	休息狀態(運動前)的指尖血氧飽和濃度(SPO2)若 ≦ 92%，不宜運動"/>
+                    android:text="	休息狀態(運動前)的指尖血氧飽和濃度(SPO2)若 ≦ 92%，不宜運動"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="運動狀態指尖血氧飽和濃度(SPO2)若 小於 90%，或有不適症狀，應暫停活動，待休息片刻，指尖血氧濃度 大於 92% 與不適症狀緩解後，才可以重新開始運動。"/>
+                    android:text="運動狀態指尖血氧飽和濃度(SPO2)若 小於 90%，或有不適症狀，應暫停活動，待休息片刻，指尖血氧濃度 大於 92% 與不適症狀緩解後，才可以重新開始運動。"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="注意運動前後是否有出現不適症狀，喘、咳、疲憊、睡眠障礙等情形，若持續未改善請先諮詢醫生後再執行運動。"/>
+                    android:text="注意運動前後是否有出現不適症狀，喘、咳、疲憊、睡眠障礙等情形，若持續未改善請先諮詢醫生後再執行運動。"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="爬樓梯：站立時吸氣，上下樓梯時呼氣，勿憋氣。"/>
+                    android:text="爬樓梯：站立時吸氣，上下樓梯時呼氣，勿憋氣。"
+                    android:textSize="24sp" />
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/p7" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
                 android:layout_marginTop="5dp"
-                android:text="運動前準備"/>
+                android:text="運動前準備"
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="避免飯前/後一小時劇烈運動。"/>
+                    android:text="避免飯前/後一小時劇烈運動。"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="	適時補充能量，少量多餐，可避免餐後呼吸困難及過度飽足感。"/>
+                    android:text="	適時補充能量，少量多餐，可避免餐後呼吸困難及過度飽足感。"
+                    android:textSize="24sp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="按醫囑服用藥物，外出運動時要攜帶隨身藥物。"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="攜帶水壺以方便適度補充水分，可多喝水，幫助痰液變稀"/>
+                    android:text="按醫囑服用藥物，外出運動時要攜帶隨身藥物。"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/ic_dot"/>
+                    android:background="@drawable/ic_dot" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24sp"
-                    android:text="至寒冷的戶外運動可使用圍巾、口罩遮住口鼻，預防乾冷的空氣使氣管收縮。"/>
+                    android:text="攜帶水壺以方便適度補充水分，可多喝水，幫助痰液變稀"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/p8" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_dot" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="至寒冷的戶外運動可使用圍巾、口罩遮住口鼻，預防乾冷的空氣使氣管收縮。"
+                    android:textSize="24sp" />
             </LinearLayout>
 
             <TextView

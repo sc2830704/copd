@@ -16,6 +16,8 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <application
@@ -58,6 +60,7 @@
         <activity
             android:name=".HistoryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -86,6 +89,9 @@
         <activity android:name=".EventActivity" />
         <activity
             android:name=".HealthEducationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserMeasurementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HealthArticleActivity"

@@ -89,8 +89,6 @@ public class HealthEducationActivity extends AppCompatActivity {
         btnTherapy.setOnClickListener(btnListener);
         btnFactory.setOnClickListener(btnListener);
         btnControl.setOnClickListener(btnListener);
-
-
     }
 
 

@@ -81,6 +81,7 @@ public class SplashActivity extends AppCompatActivity {
         String isEnvSync = MyShared.getData(SplashActivity.this, "isEnvSync");
         if(isEnvSync!=null && isEnvSync.equals("false")){
             String device_id = MyShared.getData(SplashActivity.this, "env_id");
+            Log.d("SplashActivity","device_id:"+device_id);
             JSONObject json = new JSONObject();
             try {
                 json.put("id", MyShared.getData(SplashActivity.this, "id"));
@@ -91,6 +92,8 @@ public class SplashActivity extends AppCompatActivity {
                 json.put("lname", lname);
                 json.put("age", MyShared.getData(SplashActivity.this, "age"));
                 json.put("sex", MyShared.getData(SplashActivity.this, "sex"));
+                json.put("height", MyShared.getData(SplashActivity.this, "height"));
+                json.put("weight", MyShared.getData(SplashActivity.this, "weight"));
                 json.put("bmi", MyShared.getData(SplashActivity.this, "bmi"));
                 json.put("history", MyShared.getData(SplashActivity.this, "history"));
                 json.put("drug", MyShared.getData(SplashActivity.this, "drug"));

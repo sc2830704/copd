@@ -12,15 +12,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
@@ -32,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +39,7 @@ import java.util.List;
  */
 
 public class UserActivity extends AppCompatActivity implements AsyncResponse {
-
+    Float bmicaculate;
     TextView tvName;
     ListView listView;
     ListAdapter listAdapter;
@@ -52,10 +50,12 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     Button drugyes,drugno;
 
     private String account,password,fname,lname;
-    private String id,name, age, sex, bmi, drug, history, drug_other,history_other;
+    private String id,name, age, sex, height, weight, bmi, drug, history, drug_other,history_other;
+    private String prefname,prelname,preage,preheight,preweight;
     private String stringdrug,stringhistory;
-    private JSONArray jsondrug,jsonhistory;
     private final int AdTextSize = 25;
+
+    private boolean post=true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,16 +63,13 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         setContentView(R.layout.activity_user);
         listView = (ListView) findViewById(R.id.listView);
 
-//        String[] strGroup = {"字串1", "字串2", "字串3", "字串4", "字串5", "字串6"};
-//        final ArrayAdapter<String> adapter = new ArrayAdapter<>(
-//                this, android.R.layout.simple_list_item_1, strGroup);
-
-        //取得帳號.密碼.原姓名
+        //取得帳號.密碼.原姓名.
         account=MyShared.getData(this,"id");
         password=MyShared.getData(this,"pwd");
         String[] name = MyShared.getData(this,"name").split(" ");
         fname= name[0];
         lname= name[1];
+        //先拿出方便轉換
         stringdrug=MyShared.getData(this,"drug");
         stringhistory=MyShared.getData(this,"history");
 
@@ -84,6 +81,8 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                     switch (position){
                         case 1:
                             //name
+                            prefname=fname;
+                            prelname=lname;
                             final EditText etlname = new EditText(UserActivity.this);
                             etDialog(position,etlname);
                             final EditText etfname = new EditText(UserActivity.this);
@@ -91,6 +90,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             break;
                         case 2:
                             //age
+                            preage=age;
                             final EditText etage = new EditText(UserActivity.this);
                             etage.setInputType(InputType.TYPE_CLASS_NUMBER);
                             etDialog(position,etage);
@@ -100,24 +100,31 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             rbDialog(position);
                             break;
                         case 4:
-                            final EditText etbmi = new EditText(UserActivity.this);
-                            etbmi.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            etDialog(position,etbmi);
+                            preheight=height;
+                            final EditText etheight = new EditText(UserActivity.this);
+                            etheight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                            etDialog(position,etheight);
                             break;
                         case 5:
+                            preweight=weight;
+                            final EditText etweight = new EditText(UserActivity.this);
+                            etweight.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                            etDialog(position,etweight);
+                            break;
+                        case 7:
                             //drug
                             cbdrugDialog(position);
                             break;
-                        case 6:
+                        case 8:
                             //history
                             cbhistoryDialog(position);
                             break;
-                        case 7:
+                        case 9:
                             //drug_other
                             final EditText etotherdrug = new EditText(UserActivity.this);
                             etDialog(position,etotherdrug);
                             break;
-                        case 8:
+                        case 10:
                             //history_other
                             final EditText etotherhistory = new EditText(UserActivity.this);
                             etDialog(position,etotherhistory);
@@ -139,15 +146,18 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         name = MyShared.getData(this,"name");
         age = MyShared.getData(this,"age");
         sex = MyShared.getData(this,"sex").equals("1")?"男":"女";
-        bmi = MyShared.getData(this,"bmi");
+        //bmi = MyShared.getData(this,"bmi");
+        height=MyShared.getData(this,"height");
+        weight=MyShared.getData(this,"weight");
+        bmi=MyShared.getData(this,"bmi");
         drug = parseJsonArray(MyShared.getData(this,"drug"));
         history = parseJsonArray(MyShared.getData(this,"history"));
         //drug_other = parseJsonArray(MyShared.getData(this,"drug_other"));
         drug_other = MyShared.getData(this,"drug_other");
         //history_other = parseJsonArray(MyShared.getData(this,"history_other"));
         history_other = MyShared.getData(this,"history_other");
-        String[] title = new String[]{"帳號", "姓名" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
-        String[] text  = new String[]{id, name, age, sex, bmi, drug, history, drug_other,history_other};
+        String[] title = new String[]{"帳號","姓名","年齡","性別","身高","體重","bmi","用藥","病史","其他用藥","其他病史"};
+        String[] text  = new String[]{id, name, age, sex, height, weight, bmi, drug, history, drug_other,history_other};
         for(int i = 0 ; i < title.length ; i++){
             HashMap<String , String> hashMap = new HashMap<>();
             hashMap.put("title" , title[i]);
@@ -187,7 +197,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     private void etDialog(final int position , final EditText editText){
-        String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        String[] title = new String[]{"姓氏","名字","年齡","性別","身高","體重","bmi","用藥","病史","其他用藥","其他病史"};
         AlertDialog ad = new AlertDialog.Builder(UserActivity.this)
                 .setTitle("修改" + title[position])
                 .setMessage("按下\"是\"確認修改")
@@ -199,24 +209,70 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                         switch (position){
                             case 0:
                                 fname=Content;
+                                if(fname.equals("")){
+                                    fname=prefname;
+                                    post=false;
+                                }
+                                else{
+                                    post=true;
+                                }
                                 break;
                             case 1:
                                 lname=Content;
+                                if(lname.equals("")){
+                                    lname=prelname;
+                                    post=false;
+                                }
+                                else{
+                                    post=true;
+                                }
                                 break;
                             case 2:
                                 age=Content;
+                                if(age.equals("")){
+                                    age=preage;
+                                    post=false;
+                                }
+                                else{
+                                    post=true;
+                                }
+                                Log.d("age now:",""+age);
+                                Log.d("preage",""+preage);
                                 break;
                             case 4:
-                                bmi=Content;
+                                height=Content;
+                                if(height.equals("")){
+                                    height=preheight;
+                                    post=false;
+                                }
+                                else{
+                                    post=true;
+                                }
                                 break;
-                            case 7:
+                            case 5:
+                                weight=Content;
+                                if(weight.equals("")){
+                                    weight=preweight;
+                                    post=false;
+                                }
+                                else{
+                                    post=true;
+                                }
+                                break;
+                            case 9:
                                 drug_other=Content;
                                 break;
-                            case 8:
+                            case 10:
                                 history_other=Content;
                                 break;
                         }
-                        HttpPost();
+                        if(post==true) {
+                            HttpPost();
+                        }
+                        else{
+                            post=false;
+                            NotifyAlertDialog();
+                        }
                     }
                 })
                 .setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -226,12 +282,11 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                     }
                 })
                 .show();
-
         setDialogParam(ad);
     }
 
     private void rbDialog(final int position ){
-        String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        String[] title = new String[]{"帳號","姓名","年齡","性別","身高","體重","bmi","用藥","病史","其他用藥","其他病史"};
         AlertDialog ad = new AlertDialog.Builder(UserActivity.this)
                 .setTitle("修改" + title[position])
                 .setMessage("按下\"是\"確認修改")
@@ -265,7 +320,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
     }
 
     private void cbdrugDialog(int position ){
-        String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        String[] title = new String[]{"帳號","姓名","年齡","性別","身高","體重","bmi","用藥","病史","其他用藥","其他病史"};
         final AlertDialog.Builder ad = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dialoglayout = inflater.inflate(R.layout.dialog_drugupdate, null);
@@ -296,13 +351,13 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         dialoglayout.findViewById(R.id.drugno).setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v) {
-                alert.cancel();
+                alert.dismiss();
             }
         });
     }
 
     private void cbhistoryDialog(final int  position ){
-        String[] title = new String[]{"姓氏", "名字" , "年齡" , "性別" ,"BMI","用藥","病史","其他用藥","其他病史"};
+        String[] title = new String[]{"帳號","姓名","年齡","性別","身高","體重","bmi","用藥","病史","其他用藥","其他病史"};
         final AlertDialog.Builder ad = new AlertDialog.Builder(this);
         final AlertDialog alert = ad.create();
         LayoutInflater inflater = getLayoutInflater();
@@ -320,7 +375,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (position){
-                    case 6:
+                    case 8:
                         stringhistory = getHistory().toString();
                         break;
                 }
@@ -337,6 +392,19 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
 
     }
 
+    private void NotifyAlertDialog(){
+        AlertDialog ad = new AlertDialog.Builder(UserActivity.this)
+                .setTitle("輸入錯誤")
+                .setMessage("請輸入正確的值")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+
+        setDialogParam(ad);
+    }
     private void setDialogParam(AlertDialog ad){
         TextView textView = (TextView) ad.findViewById(android.R.id.message);
         textView.setTextSize(AdTextSize);
@@ -350,6 +418,9 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         String otherDrug = getOtherDrug();
         String otherHisory = getOtherHistory();
         JSONObject jobj = new JSONObject();
+        bmicaculate=(Float.parseFloat(weight)/((Float.parseFloat(height)/100)*(Float.parseFloat(height)/100)));
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");//小數點第二位下四捨五入
+        bmi = decimalFormat.format(bmicaculate);
         try {
             jobj.put("id",account);
             jobj.put("pwd",password);
@@ -357,6 +428,8 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
             jobj.put("lname",lname);
             jobj.put("age",age);
             jobj.put("sex",sex.toString());
+            jobj.put("height",height);
+            jobj.put("weight",weight);
             jobj.put("bmi",bmi);
             jobj.put("history", historyJobj.toString());
             jobj.put("drug", drugJobj.toString());
@@ -368,9 +441,7 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         HttpTask httpTask = new HttpTask("POST",jobj,"/user/update",null);
         httpTask.setCallback(UserActivity.this);
         httpTask.execute();
-        setData();
-        listView.setAdapter(null);
-        listView.setAdapter(getListItem());
+
     }
     private JSONArray tranJsonarray (String jArray){
         JSONArray obj = new JSONArray();
@@ -451,7 +522,9 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
         MyShared.setData(this,"pwd", password);
         MyShared.setData(this,"age", age);
         MyShared.setData(this,"sex", sex);
-        MyShared.setData(this,"bmi", bmi);
+        MyShared.setData(this,"height",height);
+        MyShared.setData(this,"weight",weight);
+        MyShared.setData(this,"bmi",bmi);
         MyShared.setData(this,"history", historyJobj.toString());
         MyShared.setData(this,"history_other", history_other);
         MyShared.setData(this,"drug", drugJobj.toString());
@@ -475,6 +548,9 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    setData();
+                                    listView.setAdapter(null);
+                                    listView.setAdapter(getListItem());
                                 }
                             })
                             .show();
@@ -496,7 +572,11 @@ public class UserActivity extends AppCompatActivity implements AsyncResponse {
                             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    fname=prefname;
+                                    lname=prelname;
+                                    age=preage;
+                                    height=preheight;
+                                    weight=preweight;
                                 }
                             })
                             .show();
