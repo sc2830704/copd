@@ -79,6 +79,7 @@ public class DeviceActivity extends AppCompatActivity {
             case 1:
                 String device_id = msg.getData().getString(DEVICE_TYPE.ENV.toString());
                 tvEnv.setText(device_id);
+                Log.d("env_id","env_id="+device_id);
                 btnEnv.setText("移除");
                 MyShared.setData(DeviceActivity.this,DEVICE_TYPE.ENV.toString(),device_id);
                 break;
@@ -106,7 +107,6 @@ public class DeviceActivity extends AppCompatActivity {
                     String device_id = response.substring(2,response.length()).trim(); //去掉多餘空白&換行
                     MyShared.setData(DeviceActivity.this, DEVICE_TYPE.ENV.toString(), device_id);
                     MyShared.setData(DeviceActivity.this,"env_id", device_id);
-                    Log.d("device_id:",device_id);
                     //prepare message for handler
                     Message msg = new Message();
                     msg.what=1;
@@ -198,6 +198,7 @@ public class DeviceActivity extends AppCompatActivity {
         deviceAddr_Watch = MyShared.getData(this, DEVICE_TYPE.WATCH.toString());
         deviceAddr_SPO2 = MyShared.getData(this, DEVICE_TYPE.SPO2.toString());
         deviceID_ENV = MyShared.getData(this, DEVICE_TYPE.ENV.toString());
+        Log.d("env_id","env_id="+deviceID_ENV);
         initializeUI();
         myApp =  (MyApp)getApplication();
         mBluetoothLeService = myApp.getBluetoothService();
@@ -407,6 +408,7 @@ public class DeviceActivity extends AppCompatActivity {
             btnEnv.setText("驗證");
             MyShared.setData(DeviceActivity.this ,DEVICE_TYPE.OTHERS.toString(), "");
             MyShared.remove(DeviceActivity.this, DEVICE_TYPE.ENV.toString());
+            //updateDeviceID(null);
         }
     }
 

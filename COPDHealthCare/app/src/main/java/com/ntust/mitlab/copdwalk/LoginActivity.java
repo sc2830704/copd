@@ -108,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        HttpTask httpTask = new HttpTask("POST",jobj,"/user/login",null);
+            HttpTask httpTask = new HttpTask("POST",jobj,"/user/login",null);
         httpTask.setCallback(this);
         httpTask.execute();
     }
@@ -167,6 +167,20 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         Toast.makeText(this,"系統錯誤，請稍後重試",Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.INVISIBLE);
                     }
+                    syncMeasurement();
+                    break;
+                case"/evaluate/getbyid":
+                    progressBar.setVisibility(View.INVISIBLE);
+                    if(status==200){
+                        Log.d("result",result);
+                        setupMeasurement(result);
+                    }else if(status==601){
+                        //無activity資料
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }else{
+                        Toast.makeText(this,"系統錯誤，請稍後重試",Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.INVISIBLE);
+                    }
                     Intent intent = new Intent();
                     intent.setClass(this,MainActivity.class);
                     startActivity(intent);
@@ -185,6 +199,12 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     private void syncDaily(){
         String id = MyShared.getData(this,"id");
         HttpTask httpTask = new HttpTask("GET",null,"/daily/getbyuser",id);
+        httpTask.setCallback(this);
+        httpTask.execute();
+    }
+    private void syncMeasurement(){
+        String id = MyShared.getData(this,"id");
+        HttpTask httpTask = new HttpTask("GET",null,"/evaluate/getbyid",id);
         httpTask.setCallback(this);
         httpTask.execute();
     }
@@ -262,7 +282,32 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             MyShared.setData(this,"history_other", jobj.getString("history_other"));
             MyShared.setData(this,"drug", jobj.getString("drug"));
             MyShared.setData(this,"drug_other", jobj.getString("drug_other"));
-            MyShared.setData(this, BluetoothLeService.DEVICE_TYPE.ENV.toString(), jobj.getString("env_id"));
+            Log.d("env_id","env_id="+jobj.getString("env_id"));
+            if(jobj.getString("env_id").trim().length() ==0)
+                MyShared.setData(this, BluetoothLeService.DEVICE_TYPE.ENV.toString(),null);
+            else
+                MyShared.setData(this, BluetoothLeService.DEVICE_TYPE.ENV.toString(), jobj.getString("env_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setupMeasurement(String result) {
+        try {
+            int CATScore;
+            JSONArray jsonArray = new JSONArray(result);
+            JSONObject jobj;
+            for(int i=0; i<jsonArray.length(); i++) {
+                if(i==(jsonArray.length()-1)) {
+                    jobj = jsonArray.getJSONObject(i);
+                    Log.d("setupMeasurement", "" + jobj.toString());
+                    MyShared.setData(this, "mmRC_Score", jobj.getString("mmrc"));
+                    CATScore = Integer.parseInt(jobj.getString("cat1")) + Integer.parseInt(jobj.getString("cat2"))
+                            + Integer.parseInt(jobj.getString("cat3")) + Integer.parseInt(jobj.getString("cat4"))
+                            + Integer.parseInt(jobj.getString("cat5")) + Integer.parseInt(jobj.getString("cat6"))
+                            + Integer.parseInt(jobj.getString("cat7")) + Integer.parseInt(jobj.getString("cat8"));
+                    MyShared.setData(this, "CAT_Score", Integer.toString(CATScore));
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

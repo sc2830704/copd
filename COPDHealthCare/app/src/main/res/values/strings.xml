@@ -11,8 +11,8 @@
     <string name="remove">移除</string>
     <string name="pair">配對</string>
     <string name="validate">驗證</string>
-    <string name="watch">手環</string>
-    <string name="spo2">血氧裝置</string>
+    <string name="watch">手錶</string>
+    <string name="spo2">血氧手環</string>
     <string name="goal">Goal</string>
     <string name="step_size">Step size</string>
     <string name="about">About</string>
@@ -131,5 +131,5 @@
 
     <string name="title_activity_history_detail">HistoryDetailActivity</string>
     <string name="setting">設定</string>
-    <string name="CATScore">個人CAT量表分數</string>
+    <string name="CATScore">個人量表分數</string>
 </resources>

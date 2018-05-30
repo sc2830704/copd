@@ -28,7 +28,7 @@ public class MeasurementActivity extends AppCompatActivity {
     private Button btnSend,btnBack2mMRC,btnGo2CAT;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String endPoint_AddEvaluate="/evaluate/add";
-    private String account, RegisterSuccess;
+    private String account;
     ViewFlipper vf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,14 +137,12 @@ public class MeasurementActivity extends AppCompatActivity {
                 switch (endPoint){
                     case "/evaluate/add":
                         if(state==200){
-                            RegisterSuccess=MyShared.getData(MeasurementActivity.this,"RegisterSuccess");
-                            if (RegisterSuccess==null)
+                            String id=MyShared.getData(MeasurementActivity.this,"id");
+                            if (id==null)
                                 Toast.makeText(MeasurementActivity.this, "註冊完成，請登入", Toast.LENGTH_SHORT).show();
                             else
                                 Toast.makeText(MeasurementActivity.this, "填寫完畢", Toast.LENGTH_SHORT).show();
                             finish();
-                            RegisterSuccess="true";
-                            MyShared.setData(MeasurementActivity.this,"RegisterSuccess",RegisterSuccess);
                         }
                         else
                             Toast.makeText(MeasurementActivity.this ,"系統錯誤請稍後重試", Toast.LENGTH_SHORT).show();
@@ -159,11 +157,13 @@ public class MeasurementActivity extends AppCompatActivity {
         Score = (int) rt1.getRating() + (int) rt2.getRating() + (int) rt3.getRating() + (int) rt4.getRating()
                 + (int) rt5.getRating() + (int) rt6.getRating() + (int) rt7.getRating() + (int) rt8.getRating();
         Log.d("Score","Score="+Score);
+        MyShared.setData(this,"mmRC_Score",Integer.toString(mmrc));
         MyShared.setData(this,"CAT_Score",Integer.toString(Score));
     }
     @Override
     public void onBackPressed() {
         //防止使用者離開
-//        super.onBackPressed();
+        if(MyShared.getData(MeasurementActivity.this,"id")!=null)
+            super.onBackPressed();
     }
 }

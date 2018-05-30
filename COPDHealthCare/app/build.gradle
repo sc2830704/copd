@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId 'mitlab.ntust.copdwalk'
         minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 9
-        versionName "2.6"
+        targetSdkVersion 26
+        versionCode 11
+        versionName "2.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true //important
     }

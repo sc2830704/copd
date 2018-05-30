@@ -1,6 +1,7 @@
 package com.ntust.mitlab.copdwalk;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -153,6 +155,8 @@ public class MainActivity extends AppCompatActivity
                         notifyAd.setTitle("運動小幫手");
                         notifyAd.setMessage("您運動中的指尖血氧飽和度(SpO2)已低於安全標準(90%)，建議您暫停活動；休息10分鐘後再次測量，待數值於安全標準並諮詢專業醫護人員再進行活動");
                         notifyAd.show();
+                        Vibrator noVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+                        noVibrator.vibrate(1500);
                     }
                     break;
                 case 9:
@@ -691,38 +695,40 @@ public class MainActivity extends AppCompatActivity
         }
         if(MyApp.isSPO2Disable)
             return true;
-        if(MyShared.getData(MainActivity.this, DEVICE_TYPE.SPO2.toString())==null){
-            AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
-                    .setTitle("血氧未設定")
-                    .setMessage("到'我的裝置'中設定")
-                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent();
-                            intent.setClass(MainActivity.this,DeviceActivity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+        else{
+            if(MyShared.getData(MainActivity.this, DEVICE_TYPE.SPO2.toString())==null){
+                AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("血氧未設定")
+                        .setMessage("到'我的裝置'中設定")
+                        .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent();
+                                intent.setClass(MainActivity.this,DeviceActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                        }
-                    })
-                    .show();
-            setDialogParam(ad);
-            return false;
-        }else if(tvSPO2State.getText().equals("已斷線")){
-            Toast.makeText(MainActivity.this,"裝置重新連線...",Toast.LENGTH_SHORT).show();
-            connectDevice(DEVICE_TYPE.SPO2);
-            tvSPO2State.setText("連線中...");
-//            tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
-            return false;
-        }else if(tvSPO2State.getText().equals("連線中...")){
-//            Toast.makeText(MainActivity.this,"未偵測到裝置",Toast.LENGTH_SHORT).show();
-            return false;
+                            }
+                        })
+                        .show();
+                setDialogParam(ad);
+                return false;
+            }else if(tvSPO2State.getText().equals("已斷線")){
+                Toast.makeText(MainActivity.this,"裝置重新連線...",Toast.LENGTH_SHORT).show();
+                connectDevice(DEVICE_TYPE.SPO2);
+                tvSPO2State.setText("連線中...");
+    //            tvSPO2State.setTextColor(Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(MainActivity.this, R.color.md_Green_600))));
+                return false;
+            }else if(tvSPO2State.getText().equals("連線中...")){
+    //            Toast.makeText(MainActivity.this,"未偵測到裝置",Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            return true;
         }
-        return true;
     }
     public void connectDevice(DEVICE_TYPE type){
         try {
@@ -1253,8 +1259,8 @@ public class MainActivity extends AppCompatActivity
         MyShared.remove(this,"drug");
         MyShared.remove(this,"drug_other");
         MyShared.remove(this,"env_id");
-        MyShared.remove(this,"RegisterSuccess");
         MyShared.remove(this,"CAT_Score");
+        MyShared.remove(this,"mmRC_Score");
         DBHelper dbHelper = DBHelper.getInstance(MainActivity.this);
         dbHelper.clearTable();
     }

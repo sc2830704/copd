@@ -18,10 +18,10 @@ import com.ntust.mitlab.copdwalk.util.MyShared;
 
 public class UserMeasurementActivity extends AppCompatActivity {
 
-    private String CAT_Score;
+    private String CAT_Score, mmRC_Score;
 
     Button btn30, btn20, btn10, btn0, btnMeasurement;
-    TextView tvScore;
+    TextView tvCATScore, tvmmRCScore;
 
     Button.OnClickListener btnListener = new Button.OnClickListener(){
         Intent intent = new Intent();
@@ -63,12 +63,15 @@ public class UserMeasurementActivity extends AppCompatActivity {
             }
         }
     };
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_measurement);
         setUpToolbar();
         getdata();
-        tvScore = findViewById(R.id.tvScore);
+        tvmmRCScore = findViewById(R.id.tvmmRCScore);
+        tvCATScore = findViewById(R.id.tvCATScore);
         btn30 = findViewById(R.id.btn30);
         btn20 = findViewById(R.id.btn20);
         btn10 = findViewById(R.id.btn10);
@@ -79,24 +82,49 @@ public class UserMeasurementActivity extends AppCompatActivity {
         btn10.setOnClickListener(btnListener);
         btn0.setOnClickListener(btnListener);
         btnMeasurement.setOnClickListener(btnListener);
-        tvScore.setText(CAT_Score);
+        setText();
     }
     private void setUpToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("CAT量表");
+        toolbar.setTitle("mmRC與CAT量表");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
     private void getdata() {
         CAT_Score=MyShared.getData(this,"CAT_Score");
-        Log.d("Score","Score="+CAT_Score);
+        mmRC_Score=MyShared.getData(this,"mmRC_Score");
+        if(mmRC_Score==null)
+            mmRC_Score="5";
+    }
+    private void setText() {
+        tvCATScore.setText(CAT_Score);
+        switch (mmRC_Score){
+            case "0":
+                tvmmRCScore.setText("０級：我只有在激烈運動時才感覺到呼吸困難。");
+                break;
+            case "1":
+                tvmmRCScore.setText("１級：我在平路快速行走或上小斜坡時感覺呼吸短促。");
+                break;
+            case "2":
+                tvmmRCScore.setText("２級：我在平路時即會因呼吸困難而走得比同齡的朋友慢，或是我以正常步調走路時必須停下來才能呼吸。");
+                break;
+            case "3":
+                tvmmRCScore.setText("３級：我在平路約行走 100 公尺或每隔幾分鐘就需停下來呼吸。");
+                break;
+            case "4":
+                tvmmRCScore.setText("４級：我因為呼吸困難而無法外出，或是穿脫衣物時感到呼吸困難。");
+                break;
+            default:
+                tvmmRCScore.setText("請重新填寫量表");
+                break;
+        }
     }
     @Override
     protected void onRestart() {
         super.onRestart();  // Always call the superclass method first
         getdata();
-        tvScore.setText(CAT_Score);
+        setText();
         // Activity being restarted from stopped state
     }
     @Override

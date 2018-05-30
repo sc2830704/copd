@@ -16,7 +16,7 @@ public class ExerciseHelper {
     public String  workMessage, warnningMessage;
     public float sbpBefore, dbpBefore, sbpAfter, dbpAfter, hrBefore, spo2Before, hrAfeter, spo2After;
     public ArrayList<Float> sbps_60, dbps_60, spo2s_60, hrs_60, sbps_5s, dbps_5s, spo2s_5s, hrs_5s;
-    public float avgSpo2=91, avgSbp, avgDbp, avgHR;
+    public float avgSpo2, avgSbp, avgDbp, avgHR;
     public ExerciseHelper(){
         sbps_60 = new ArrayList<>();
         dbps_60 = new ArrayList<>();
@@ -131,9 +131,10 @@ public class ExerciseHelper {
     }
     public void savePreTestData(){
         if(MyApp.isSPO2Disable){
-                dbpBefore = 80;
-                sbpBefore = 110;
-                return;
+            sbpAfter = floatToSecnondDec(avgSbp);
+            dbpAfter = floatToSecnondDec(avgDbp);
+            hrAfeter = floatToSecnondDec(avgHR);
+            return;
         }
         sbpBefore = floatToSecnondDec(avgSbp);
         dbpBefore = floatToSecnondDec(avgDbp);
@@ -142,9 +143,10 @@ public class ExerciseHelper {
     }
     public void saveAfterTestData(){
         if(MyApp.isSPO2Disable){
-                dbpAfter = 80;
-                sbpAfter = 110;
-                return;
+            sbpAfter = floatToSecnondDec(avgSbp);
+            dbpAfter = floatToSecnondDec(avgDbp);
+            hrAfeter = floatToSecnondDec(avgHR);
+            return;
         }
         sbpAfter = floatToSecnondDec(avgSbp);
         dbpAfter = floatToSecnondDec(avgDbp);

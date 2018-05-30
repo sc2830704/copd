@@ -16,7 +16,7 @@
             android:title="@string/personalInfo" />
         <item
             android:id="@+id/nav_measurement"
-            android:icon="@drawable/ic_user"
+            android:icon="@drawable/ic_measurement"
             android:title="@string/CATScore" />
         <item
             android:id="@+id/nav_history"
