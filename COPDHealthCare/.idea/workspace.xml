@@ -64,11 +64,64 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12245">
-              <caret line="493" column="0" lean-forward="false" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+            <state relative-caret-position="215">
+              <caret line="395" column="63" lean-forward="true" selection-start-line="395" selection-start-column="63" selection-end-line="395" selection-end-column="63" />
               <folding>
-                <marker date="1526493789941" expanded="false" signature="58236:58253" ph="&quot;主頁&quot;" />
-                <marker date="1526493789941" expanded="false" signature="58544:58561" ph="&quot;活動&quot;" />
+                <element signature="e#5504#7582#0" expanded="true" />
+                <element signature="e#7581#7582#0" expanded="true" />
+                <element signature="e#12022#12023#0" expanded="true" />
+                <element signature="e#12062#12063#0" expanded="true" />
+                <element signature="e#14602#14620#0" expanded="true" />
+                <element signature="e#14654#14680#0" expanded="true" />
+                <element signature="e#14724#14974#0" expanded="true" />
+                <element signature="e#14973#14974#0" expanded="true" />
+                <element signature="e#15042#15350#0" expanded="true" />
+                <element signature="e#15349#15350#0" expanded="true" />
+                <element signature="e#19138#19169#0" expanded="true" />
+                <element signature="e#19171#19203#0" expanded="true" />
+                <element signature="e#19631#22487#0" expanded="true" />
+                <element signature="e#20499#20859#0" expanded="true" />
+                <element signature="e#20858#20859#0" expanded="true" />
+                <element signature="e#21590#21951#0" expanded="true" />
+                <element signature="e#21950#21951#0" expanded="true" />
+                <element signature="e#22243#22260#0" expanded="true" />
+                <element signature="e#22486#22487#0" expanded="true" />
+                <element signature="e#24976#25154#0" expanded="true" />
+                <element signature="e#25153#25154#0" expanded="true" />
+                <element signature="e#28713#29114#0" expanded="true" />
+                <element signature="e#29113#29114#0" expanded="true" />
+                <element signature="e#30265#30694#0" expanded="true" />
+                <element signature="e#30693#30694#0" expanded="true" />
+                <element signature="e#33246#33910#0" expanded="true" />
+                <element signature="e#33909#33910#0" expanded="true" />
+                <element signature="e#34223#34343#0" expanded="true" />
+                <element signature="e#34342#34343#0" expanded="true" />
+                <element signature="e#38676#43285#0" expanded="true" />
+                <element signature="e#43284#43285#0" expanded="true" />
+                <element signature="e#47200#47433#0" expanded="true" />
+                <element signature="e#47432#47433#0" expanded="true" />
+                <element signature="e#47903#48384#0" expanded="true" />
+                <element signature="e#48383#48384#0" expanded="true" />
+                <element signature="e#48434#48711#0" expanded="true" />
+                <element signature="e#48710#48711#0" expanded="true" />
+                <element signature="e#49148#49474#0" expanded="true" />
+                <element signature="e#49473#49474#0" expanded="true" />
+                <element signature="e#49526#49803#0" expanded="true" />
+                <element signature="e#49802#49803#0" expanded="true" />
+                <element signature="e#50239#50541#0" expanded="true" />
+                <element signature="e#50540#50541#0" expanded="true" />
+                <element signature="e#50589#50846#0" expanded="true" />
+                <element signature="e#50845#50846#0" expanded="true" />
+                <element signature="e#51575#51828#0" expanded="true" />
+                <element signature="e#51827#51828#0" expanded="true" />
+                <element signature="e#51876#52133#0" expanded="true" />
+                <element signature="e#52132#52133#0" expanded="true" />
+                <element signature="e#52668#53429#0" expanded="true" />
+                <element signature="e#53428#53429#0" expanded="true" />
+                <element signature="e#56598#56864#0" expanded="true" />
+                <element signature="e#56863#56864#0" expanded="true" />
+                <marker date="1530519272644" expanded="false" signature="58937:58954" ph="&quot;主頁&quot;" />
+                <marker date="1530519272644" expanded="false" signature="59245:59262" ph="&quot;活動&quot;" />
               </folding>
             </state>
           </provider>
@@ -77,38 +130,58 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+            <state relative-caret-position="310">
+              <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserMeasurementActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/UserMeasurementActivity.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2201">
-              <caret line="81" column="46" lean-forward="false" selection-start-line="81" selection-start-column="46" selection-end-line="81" selection-end-column="46" />
+            <state relative-caret-position="463">
+              <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MeasurementActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MeasurementActivity.java">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jsch-0.1.54/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3627">
-              <caret line="143" column="64" lean-forward="false" selection-start-line="143" selection-start-column="64" selection-end-line="143" selection-end-column="64" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/LoginActivity.java">
+      <file leaf-file-name="SensorListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/StepService/SensorListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8463">
-              <caret line="303" column="60" lean-forward="false" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
+            <state relative-caret-position="372">
+              <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExerciseHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/ExerciseHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1331">
+              <caret line="147" column="48" lean-forward="true" selection-start-line="147" selection-start-column="48" selection-end-line="147" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GattAttributes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/GattAttributes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="744">
+              <caret line="25" column="76" lean-forward="false" selection-start-line="25" selection-start-column="76" selection-end-line="25" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -130,18 +203,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>intent</find>
-      <find>education</find>
-      <find>註冊完成</find>
-      <find>remo</find>
-      <find>註冊</find>
-      <find>daily</find>
-      <find>syncdaily</find>
-      <find>/activity/getbyuser</find>
-      <find>運動</find>
-      <find>運動前準備</find>
-      <find>myshared</find>
-      <find>env</find>
       <find>btnenv</find>
       <find>btnEnv.setText(&quot;移除&quot;);</find>
       <find>DEVICE_TYPE.ENV.toString()</find>
@@ -160,6 +221,18 @@
       <find>env_id</find>
       <find>Log.d</find>
       <find>remove</find>
+      <find>步數</find>
+      <find>handler</find>
+      <find>裝置</find>
+      <find>geten</find>
+      <find>class</find>
+      <find>aftertest</find>
+      <find>synctask</find>
+      <find>httptask</find>
+      <find>env</find>
+      <find>getenv</find>
+      <find>doin</find>
+      <find>5000</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -2280,11 +2353,11 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/ExerciseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MeasurementActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/GattAttributes.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2310,8 +2383,59 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="COPDHealthCare" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="COPDHealthCare" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="COPDHealthCare" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="COPDHealthCare" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2402,37 +2526,14 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="COPDHealthCare" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="COPDHealthCare" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="I:/Android/sdk" />
     <property name="android.project.structure.last.selected" value="Project" />
     <property name="android.project.structure.proportion" value="0.15" />
-    <property name="device.picker.selection" value="B2NGAC5810908263" />
+    <property name="device.picker.selection" value="LC576YH04911" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="VectorAssetImportPath" value="C:\" />
@@ -2559,7 +2660,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527693135988" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530519875216" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2607,7 +2708,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527693135988" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530519875216" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2769,7 +2870,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1527693135988" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1530519875217" />
       </method>
     </configuration>
     <list size="1">
@@ -2824,7 +2925,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32951945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837528" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2834,21 +2934,21 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29176202" sideWeight="0.5181818" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55812275" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35240275" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3832952" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38373426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3919414" sideWeight="0.502809" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20427808" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" x="72" y="93" width="228" height="839" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1098862" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1251337" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1251337" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3917749" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2861,21 +2961,21 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4610984" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32951945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951945" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29176202" sideWeight="0.5181818" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14907508" sideWeight="0.48720682" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37757438" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3832952" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1251337" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1251337" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3917749" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3917749" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837528" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29061785" sideWeight="0.48181817" order="14" side_tool="false" content_ui="tabs" />
@@ -2914,198 +3014,23 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_factor_control.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="105" column="4" lean-forward="false" selection-start-line="105" selection-start-column="4" selection-end-line="105" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_health_education.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="57" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/util/ApManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1342">
-          <caret line="73" column="22" lean-forward="false" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_principle.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="5301">
-          <caret line="171" column="21" lean-forward="false" selection-start-line="171" selection-start-column="21" selection-end-line="171" selection-end-column="21" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="18" column="50" lean-forward="false" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_measurement.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="20" column="53" lean-forward="false" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_symptom.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_user_measurement.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/UserActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3509">
-          <caret line="43" column="22" lean-forward="false" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/RegisterActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="330" column="44" lean-forward="false" selection-start-line="330" selection-start-column="44" selection-end-line="330" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_therapy.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HistoryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2278">
-          <caret line="48" column="39" lean-forward="true" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_factor.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="1922">
-          <caret line="95" column="20" lean-forward="false" selection-start-line="95" selection-start-column="20" selection-end-line="95" selection-end-column="20" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_evaluate.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="38" column="4" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HealthArticleActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1617">
-          <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HealthEducationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="67" column="30" lean-forward="false" selection-start-line="67" selection-start-column="30" selection-end-line="67" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/PlayReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2170">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_introduce.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_event.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_event.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/EventActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MyApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="13" column="27" lean-forward="true" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -3116,55 +3041,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/ExerciseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1126">
-          <caret line="114" column="25" lean-forward="false" selection-start-line="114" selection-start-column="25" selection-end-line="114" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="899">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/DeviceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4030">
-          <caret line="172" column="21" lean-forward="false" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="899">
+          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="18" column="65" lean-forward="false" selection-start-line="18" selection-start-column="65" selection-end-line="18" selection-end-column="65" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsch-0.1.54/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/StepService/SensorListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2945">
-          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -3183,85 +3077,59 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_device.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_device.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement_artilce_0.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="39" column="8" lean-forward="false" selection-start-line="39" selection-start-column="8" selection-end-line="43" selection-end-column="38" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="3007">
-          <caret line="97" column="68" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_main.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/app_bar_main.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Service/BluetoothLeService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="71" column="23" lean-forward="false" selection-start-line="71" selection-start-column="23" selection-end-line="71" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3269,27 +3137,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/GattAttributes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="25" column="76" lean-forward="false" selection-start-line="25" selection-start-column="76" selection-end-line="25" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_event.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="16" column="38" lean-forward="false" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://D:/android_Sdk/sources/android-26/org/json/JSONArray.java">
@@ -3300,28 +3158,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_ptretest_hint.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/UserMeasurementActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2201">
-          <caret line="81" column="46" lean-forward="false" selection-start-line="81" selection-start-column="46" selection-end-line="81" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MeasurementActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3627">
-          <caret line="143" column="64" lean-forward="false" selection-start-line="143" selection-start-column="64" selection-end-line="143" selection-end-column="64" />
-          <folding />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3332,34 +3174,369 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/狂斧.jpg" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="3007">
+          <caret line="97" column="68" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/UserMeasurementActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1488">
+          <caret line="58" column="26" lean-forward="true" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HistoryDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="35" column="13" lean-forward="false" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HealthArticleActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/DeviceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4030">
+          <caret line="172" column="21" lean-forward="false" selection-start-line="172" selection-start-column="21" selection-end-line="172" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#23876#23877#0" expanded="false" />
+            <element signature="e#23909#23910#0" expanded="false" />
+            <element signature="e#23956#23957#0" expanded="false" />
+            <element signature="e#23988#23989#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/EventActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HistoryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="165" column="69" lean-forward="true" selection-start-line="165" selection-start-column="69" selection-end-line="165" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MeasurementActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3968">
+          <caret line="154" column="27" lean-forward="false" selection-start-line="154" selection-start-column="27" selection-end-line="154" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#2575#2576#0" expanded="false" />
+            <element signature="e#2630#2631#0" expanded="false" />
+            <element signature="e#2774#2775#0" expanded="false" />
+            <element signature="e#2829#2830#0" expanded="false" />
+            <element signature="e#3021#3022#0" expanded="false" />
+            <element signature="e#3072#3073#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MyApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="13" column="27" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#395#396#0" expanded="false" />
+            <element signature="e#435#436#0" expanded="false" />
+            <element signature="e#600#601#0" expanded="false" />
+            <element signature="e#630#631#0" expanded="false" />
+            <element signature="e#666#667#0" expanded="false" />
+            <element signature="e#693#694#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8463">
-          <caret line="303" column="60" lean-forward="false" selection-start-line="303" selection-start-column="60" selection-end-line="303" selection-end-column="60" />
+        <state relative-caret-position="2728">
+          <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4350#4351#0" expanded="false" />
+            <element signature="e#4380#4381#0" expanded="false" />
+            <element signature="e#4426#4427#0" expanded="false" />
+            <element signature="e#4458#4459#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/HealthEducationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1333">
+          <caret line="49" column="36" lean-forward="false" selection-start-line="49" selection-start-column="36" selection-end-line="49" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_historyupdate.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_marker_view.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_register_history.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement_cat.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement_artilce_10.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_measurement_artilce_20.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_principle.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_article_factor_control.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_user_measurement.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="2077">
+          <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_measurement.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="20" column="53" lean-forward="false" selection-start-line="20" selection-start-column="53" selection-end-line="20" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/android_Sdk/sources/android-26/android/content/Context.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="3333" column="31" lean-forward="false" selection-start-line="3333" selection-start-column="31" selection-end-line="3333" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/PlayReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-884">
+          <caret line="56" column="44" lean-forward="false" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/GattAttributes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="744">
+          <caret line="25" column="76" lean-forward="false" selection-start-line="25" selection-start-column="76" selection-end-line="25" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/Model/ExerciseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1331">
+          <caret line="147" column="48" lean-forward="true" selection-start-line="147" selection-start-column="48" selection-end-line="147" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/StepService/SensorListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/ntust/mitlab/copdwalk/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12245">
-          <caret line="493" column="0" lean-forward="false" selection-start-line="493" selection-start-column="0" selection-end-line="493" selection-end-column="0" />
+        <state relative-caret-position="215">
+          <caret line="395" column="63" lean-forward="true" selection-start-line="395" selection-start-column="63" selection-end-line="395" selection-end-column="63" />
           <folding>
-            <marker date="1526493789941" expanded="false" signature="58236:58253" ph="&quot;主頁&quot;" />
-            <marker date="1526493789941" expanded="false" signature="58544:58561" ph="&quot;活動&quot;" />
+            <element signature="e#5504#7582#0" expanded="true" />
+            <element signature="e#7581#7582#0" expanded="true" />
+            <element signature="e#12022#12023#0" expanded="true" />
+            <element signature="e#12062#12063#0" expanded="true" />
+            <element signature="e#14602#14620#0" expanded="true" />
+            <element signature="e#14654#14680#0" expanded="true" />
+            <element signature="e#14724#14974#0" expanded="true" />
+            <element signature="e#14973#14974#0" expanded="true" />
+            <element signature="e#15042#15350#0" expanded="true" />
+            <element signature="e#15349#15350#0" expanded="true" />
+            <element signature="e#19138#19169#0" expanded="true" />
+            <element signature="e#19171#19203#0" expanded="true" />
+            <element signature="e#19631#22487#0" expanded="true" />
+            <element signature="e#20499#20859#0" expanded="true" />
+            <element signature="e#20858#20859#0" expanded="true" />
+            <element signature="e#21590#21951#0" expanded="true" />
+            <element signature="e#21950#21951#0" expanded="true" />
+            <element signature="e#22243#22260#0" expanded="true" />
+            <element signature="e#22486#22487#0" expanded="true" />
+            <element signature="e#24976#25154#0" expanded="true" />
+            <element signature="e#25153#25154#0" expanded="true" />
+            <element signature="e#28713#29114#0" expanded="true" />
+            <element signature="e#29113#29114#0" expanded="true" />
+            <element signature="e#30265#30694#0" expanded="true" />
+            <element signature="e#30693#30694#0" expanded="true" />
+            <element signature="e#33246#33910#0" expanded="true" />
+            <element signature="e#33909#33910#0" expanded="true" />
+            <element signature="e#34223#34343#0" expanded="true" />
+            <element signature="e#34342#34343#0" expanded="true" />
+            <element signature="e#38676#43285#0" expanded="true" />
+            <element signature="e#43284#43285#0" expanded="true" />
+            <element signature="e#47200#47433#0" expanded="true" />
+            <element signature="e#47432#47433#0" expanded="true" />
+            <element signature="e#47903#48384#0" expanded="true" />
+            <element signature="e#48383#48384#0" expanded="true" />
+            <element signature="e#48434#48711#0" expanded="true" />
+            <element signature="e#48710#48711#0" expanded="true" />
+            <element signature="e#49148#49474#0" expanded="true" />
+            <element signature="e#49473#49474#0" expanded="true" />
+            <element signature="e#49526#49803#0" expanded="true" />
+            <element signature="e#49802#49803#0" expanded="true" />
+            <element signature="e#50239#50541#0" expanded="true" />
+            <element signature="e#50540#50541#0" expanded="true" />
+            <element signature="e#50589#50846#0" expanded="true" />
+            <element signature="e#50845#50846#0" expanded="true" />
+            <element signature="e#51575#51828#0" expanded="true" />
+            <element signature="e#51827#51828#0" expanded="true" />
+            <element signature="e#51876#52133#0" expanded="true" />
+            <element signature="e#52132#52133#0" expanded="true" />
+            <element signature="e#52668#53429#0" expanded="true" />
+            <element signature="e#53428#53429#0" expanded="true" />
+            <element signature="e#56598#56864#0" expanded="true" />
+            <element signature="e#56863#56864#0" expanded="true" />
+            <marker date="1530519272644" expanded="false" signature="58937:58954" ph="&quot;主頁&quot;" />
+            <marker date="1530519272644" expanded="false" signature="59245:59262" ph="&quot;活動&quot;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/狂斧.jpg">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jsch-0.1.54/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="9" column="22" lean-forward="false" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+        <state relative-caret-position="310">
+          <caret line="10" column="25" lean-forward="true" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
           <folding />
         </state>
       </provider>
