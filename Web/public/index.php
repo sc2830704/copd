@@ -1,12 +1,4 @@
-<?php
-if($_SERVER["HTTPS"] != "on")
-{
-    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-    exit();
-}
-session_start();
-session_destroy();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,30 +18,29 @@ session_destroy();
 
 <script type="text/JavaScript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/JavaScript">
-$(document).ready(function(){
-    $("#login").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "../apiv1/admin/login",
-            dataType: "json",
-            data: {
-                account: $("#account").val(),
-                pwd: $("#password").val()           
-            },
-            success: function(data) {
-                if(data=='login success'){
-                  window.location = 'homepage.php';
-                }
-                else{
-                  $("#login_msg").html(data);
-                }
-            },
-            error: function(jqXHR) {
-                alert("發生錯誤: " + jqXHR.status);
-            }
-        })
-    })
-});
+function login() {
+  $.ajax({
+    type: "POST",
+    url: "../apiv1/admin/login",
+    dataType: "json",
+    data: {
+      account: $("#account").val(),
+      pwd: $("#password").val()           
+    },
+    success: function(data) {
+      if(data=='login success'){
+        window.location = 'homepage.php';
+      }
+      else{
+        alert(data);
+        //$("#login_msg").html(data);
+      }
+    },
+    error: function(jqXHR) {
+      alert("發生錯誤: " + jqXHR.status);
+    }
+  })
+}
 </script>
 
 <body class="bg-dark">
@@ -68,15 +59,11 @@ $(document).ready(function(){
           </div>
           <div class="form-group">
             <div class="form-check">
-              <text align="text-center" style="color:red" id="login_msg"></text>
+              <!--<text align="text-center" style="color:red" id="login_msg"></text>-->
             </div>
           </div>
-          <a class="btn btn-primary btn-block" id="login" style="color:white" >Login</a>
+          <button class="btn btn-primary btn-block" style="color:white" onclick="login()">Login</button>
         </form>
-        <div class="text-center" style="display: none;">
-          <a class="d-block small mt-3" href="register.php" >Register an Account</a>
-          <a class="d-block small" href="" >Forgot Password?</a>
-        </div>
       </div>
     </div>
   </div>
