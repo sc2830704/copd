@@ -21,6 +21,7 @@ import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity
     private MyApp myApp;
     ViewFlipper vf;
     private HttpTask myAsyncTask;
+    private MyAsyncTask EnvAsyncTask;
     private Toolbar toolbar;
     private List<BluetoothGattService> mGattServices;
     float sbp,dbp,spo2,hr;
@@ -290,6 +292,29 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+    private class MyAsyncTask extends AsyncTask<Integer, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected String doInBackground(Integer... params) {
+            return "無法連線到網路";
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            //tvUpdateTime.setText(無法連線到網路);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            tvUpdateTime.setText(result);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -356,7 +381,6 @@ public class MainActivity extends AppCompatActivity
             sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_UI, 0);
         }
 
-
     }
     private String clockParser(int secs){
         int sec = secs%60;
@@ -371,6 +395,7 @@ public class MainActivity extends AppCompatActivity
             time = String.format("%02d", hour);
         return  time + ":" + String.format("%02d", min) + ":" + String.format("%02d", sec);
     }
+
     private void getEnv() {
         //檢查envid是否同步到雲端
         String isEnvSync = MyShared.getData(MainActivity.this, "isEnvSync");
@@ -388,7 +413,10 @@ public class MainActivity extends AppCompatActivity
             myAsyncTask.setCallback(this);
             myAsyncTask.execute();
         }else{
-            tvUpdateTime.setText("無法連線到網路");
+            if (EnvAsyncTask == null) {
+                EnvAsyncTask = new MyAsyncTask();
+                EnvAsyncTask.execute();
+            }
         }
     }
     public void initialUI(){
@@ -517,7 +545,7 @@ public class MainActivity extends AppCompatActivity
             after.put("sbp",eh.sbpAfter);
             after.put("dbp",eh.dbpAfter);
             after.put("hr",eh.hrAfeter);
-            after.put("spo2",eh.hrAfeter);
+            after.put("spo2",eh.spo2After);
             before.put("sbp",eh.sbpBefore);
             before.put("dbp",eh.dbpBefore);
             before.put("hr",eh.hrBefore);
@@ -808,6 +836,7 @@ public class MainActivity extends AppCompatActivity
         else if (steps_week/7>=(stepGoal)){
             steps_state=true;
         }
+
         if(steps_state) {
             stepGoal += 500;
             steps_state=false;
