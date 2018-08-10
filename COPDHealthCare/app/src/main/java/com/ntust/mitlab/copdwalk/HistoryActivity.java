@@ -153,7 +153,7 @@ public class HistoryActivity extends AppCompatActivity {
         int numColumns = 7;
         //取得每周的步數資料
         for(int i=0; i<numColumns; i++){
-            int step = dbHelper.getDailySteps(Util.getDateStart(i-7),Util.getDateStart(i-6));
+            int step = dbHelper.getDailySteps(Util.getDateStart(i-7),Util.getDateStart(i-7));
             stepList.add(step);
             //設定x軸label
             if(i==6)

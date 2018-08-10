@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ExerciseHelper {
     public int workState;
     public String  workMessage, warnningMessage;
-    public float sbpBefore, dbpBefore, sbpAfter, dbpAfter, hrBefore, spo2Before, hrAfeter, spo2After;
+    public float sbpBefore, dbpBefore, sbpAfter, dbpAfter, hrBefore, spo2Before, hrAfter, spo2After;
     public ArrayList<Float> sbps_60, dbps_60, spo2s_60, hrs_60, sbps_5s, dbps_5s, spo2s_5s, hrs_5s;
     public float avgSpo2, avgSbp, avgDbp, avgHR;
     public ExerciseHelper(){
@@ -133,7 +133,7 @@ public class ExerciseHelper {
         if(MyApp.isSPO2Disable){
             sbpAfter = floatToSecnondDec(avgSbp);
             dbpAfter = floatToSecnondDec(avgDbp);
-            hrAfeter = floatToSecnondDec(avgHR);
+            hrAfter = floatToSecnondDec(avgHR);
             return;
         }
         sbpBefore = floatToSecnondDec(avgSbp);
@@ -145,12 +145,12 @@ public class ExerciseHelper {
         if(MyApp.isSPO2Disable){
             sbpAfter = floatToSecnondDec(avgSbp);
             dbpAfter = floatToSecnondDec(avgDbp);
-            hrAfeter = floatToSecnondDec(avgHR);
+            hrAfter = floatToSecnondDec(avgHR);
             return;
         }
         sbpAfter = floatToSecnondDec(avgSbp);
         dbpAfter = floatToSecnondDec(avgDbp);
-        hrAfeter = floatToSecnondDec(avgHR);
+        hrAfter = floatToSecnondDec(avgHR);
         spo2After = floatToSecnondDec(avgSpo2);
     }
     public void sample(){

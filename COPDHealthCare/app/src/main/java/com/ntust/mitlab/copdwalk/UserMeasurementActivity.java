@@ -20,7 +20,7 @@ public class UserMeasurementActivity extends AppCompatActivity {
 
     private String CAT_Score, mmRC_Score;
 
-    Button btn30, btn20, btn10, btn0, btnMeasurement;
+    Button btn30, btn20, btn10, btn0, btnMeasurement,btnMeasurementDetail;
     TextView tvCATScore, tvmmRCScore;
 
     Button.OnClickListener btnListener = new Button.OnClickListener(){
@@ -60,6 +60,11 @@ public class UserMeasurementActivity extends AppCompatActivity {
                 case R.id.btnMeasurement:
                     intent.setClass(UserMeasurementActivity.this,MeasurementActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.btnMeasurementDetail:
+                    intent.setClass(UserMeasurementActivity.this,MeasurementDetailActivity.class);
+                    startActivity(intent);
+                    break;
             }
         }
     };
@@ -77,11 +82,13 @@ public class UserMeasurementActivity extends AppCompatActivity {
         btn10 = findViewById(R.id.btn10);
         btn0 = findViewById(R.id.btn0);
         btnMeasurement = findViewById(R.id.btnMeasurement);
+        btnMeasurementDetail = findViewById(R.id.btnMeasurementDetail);
         btn30.setOnClickListener(btnListener);
         btn20.setOnClickListener(btnListener);
         btn10.setOnClickListener(btnListener);
         btn0.setOnClickListener(btnListener);
         btnMeasurement.setOnClickListener(btnListener);
+        btnMeasurementDetail.setOnClickListener(btnListener);
         setText();
     }
     private void setUpToolbar() {

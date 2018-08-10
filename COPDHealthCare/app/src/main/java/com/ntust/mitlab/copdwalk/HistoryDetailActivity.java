@@ -36,7 +36,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 public class HistoryDetailActivity extends AppCompatActivity {
    TextView tv;
     private SeekBar mSeekBarX, mSeekBarY;
-    private TextView tvX, tvY, tvStartTime, tvTime, tvSteps, tvH_I_Time, tvDBPBefore, tvSBPBefore, tvDBPAfter, tvSBPAfter,tvDistance;
+    private TextView tvX, tvY, tvStartTime, tvTime, tvSteps, tvH_I_Time, tvDBPBefore, tvSBPBefore, tvDBPAfter, tvSBPAfter,tvHRAfter,tvHRbefore,
+            tvSPO2After,tvSPO2before,tvDistance;
     private JSONObject actData;
     private LineChartView chart;
     private LineChartData chartData;
@@ -89,8 +90,12 @@ public class HistoryDetailActivity extends AppCompatActivity {
             int steps = data.getInt("steps");
             int sbpAfter = (int) after.getDouble("sbp");
             int dbpAfter = (int) after.getDouble("dbp");
+            int HRAfter = (int) after.getDouble("hr");
+            int SPO2After = (int) after.getDouble("spo2");
             int sbpBefore = (int) before.getDouble("sbp");
             int dbpBefore = (int) before.getDouble("dbp");
+            int HRBefore = (int) before.getDouble("hr");
+            int SPO2Before = (int) before.getDouble("spo2");
             tvStartTime.setText(getDate(start_time));
             tvTime.setText(getTime(start_time, end_time));
             tvH_I_Time.setText(String.valueOf(h_i_time));
@@ -100,6 +105,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
             tvSBPBefore.setText(String.valueOf(sbpBefore));
             tvDBPAfter.setText(String.valueOf(dbpAfter));
             tvSBPAfter.setText(String.valueOf(sbpAfter));
+            tvHRAfter.setText(String.valueOf(HRAfter));
+            tvSPO2After.setText(String.valueOf(SPO2After));
+            tvHRbefore.setText(String.valueOf(HRBefore));
+            tvSPO2before.setText(String.valueOf(SPO2Before));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -121,6 +130,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
         tvSBPBefore = findViewById(R.id.tvSBPBefore);
         tvDBPAfter = findViewById(R.id.tvDBPAfter);
         tvSBPAfter = findViewById(R.id.tvSBPAfter);
+        tvHRAfter=findViewById(R.id.tvHRAfter);
+        tvHRbefore=findViewById(R.id.tvHRBefore);
+        tvSPO2After=findViewById(R.id.tvSPO2After);
+        tvSPO2before=findViewById(R.id.tvSPO2Before);
         //tvDistance = findViewById(R.id.tvDistance);
         chart = findViewById(R.id.chart);
         chart.setOnValueTouchListener(new ValueTouchListener());

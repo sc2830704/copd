@@ -138,7 +138,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/none" />
+                    android:text="@string/none"
+                    android:textSize="@dimen/content_main_text"/>
 
                 <TextView
                     android:layout_width="0dp"

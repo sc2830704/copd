@@ -27,12 +27,11 @@ public class DBHelper extends SQLiteOpenHelper {
     public final static String TABLE_PDO = "pdo";
     public final static String TABLE_ACTIVITY = "activity";
     public final static String TABLE_DAILY = "daily";
+    public final static String TABLE_MEASUREMENT = "measurement";
     private final  String TAG = "DBHelper";
     private static DBHelper instance;
     private static final AtomicInteger openCounter = new AtomicInteger();
-    private DBHelper(Context context) {
-        super(context, DB_NAME, null, 1);
-    }
+    private DBHelper(Context context) {super(context, DB_NAME, null, 1);}
     public static synchronized DBHelper getInstance(final Context c) {
         if (instance == null) {
             instance = new DBHelper(c.getApplicationContext());
@@ -64,6 +63,19 @@ public class DBHelper extends SQLiteOpenHelper {
                 " distance INTEGER," +
                 " step INTEGER," +
                 "sync_flag INTEGER)");
+
+        sqLiteDatabase.execSQL("CREATE  TABLE "+TABLE_MEASUREMENT+
+                " (mmrc INTEGER," +
+                "cat1 INTEGER," +
+                "cat2 INTEGER," +
+                "cat3 INTEGER," +
+                "cat4 INTEGER," +
+                "cat5 INTEGER," +
+                "cat6 INTEGER," +
+                "cat7 INTEGER," +
+                "cat8 INTEGER,"+
+                "update_time INTEGER)" );
+
         Log.d("TAG","OnCreateEND");
 
     }
@@ -261,6 +273,61 @@ public class DBHelper extends SQLiteOpenHelper {
         c.close();
         return jsonArray.toString();
     }
+    public boolean saveMeasurement(int mmrc, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6, int cat7, int cat8, long update_time){
+        boolean flag = false;
+        getWritableDatabase().beginTransaction();
+        ContentValues values = new ContentValues();
+        values.put("mmrc",mmrc);
+        values.put("cat1",cat1);
+        values.put("cat2",cat2);
+        values.put("cat3",cat3);
+        values.put("cat4",cat4);
+        values.put("cat5",cat5);
+        values.put("cat6",cat6);
+        values.put("cat7",cat7);
+        values.put("cat8",cat8);
+        values.put("update_time",update_time);
+        try {
+            getWritableDatabase().insert(TABLE_MEASUREMENT,null,values);
+            getWritableDatabase().setTransactionSuccessful();
+            flag = true;
+        }finally {
+            getWritableDatabase().endTransaction();
+        }
+        return flag;
+    }
+    public String getAllMeasurement(){
+        Cursor c = getReadableDatabase().query(
+                TABLE_MEASUREMENT,
+                new String[]{"mmrc","cat1","cat2","cat3","cat4","cat5","cat6","cat7","cat8","update_time"},
+                null,
+                null,
+                null,
+                null,
+                "update_time DESC");
+        JSONArray jsonArray = new JSONArray();
+        while(c.moveToNext()){
+            JSONObject jobj = new JSONObject();
+            try {
+                jobj.put("mmrc", c.getInt(0));
+                jobj.put("cat1",c.getInt(1));
+                jobj.put("cat2",c.getInt(2));
+                jobj.put("cat3",c.getInt(3));
+                jobj.put("cat4",c.getInt(4));
+                jobj.put("cat5",c.getInt(5));
+                jobj.put("cat6",c.getInt(6));
+                jobj.put("cat7",c.getInt(7));
+                jobj.put("cat8",c.getInt(8));
+                jobj.put("update_time",c.getLong(9));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonArray.put(jobj);
+        }
+        c.close();
+        return jsonArray.toString();
+    }
+
     public String getActivity(long start,long end){
         Cursor c = getReadableDatabase().query(
                 TABLE_ACTIVITY,
@@ -383,6 +450,7 @@ public class DBHelper extends SQLiteOpenHelper {
         getWritableDatabase().execSQL("delete from "+ TABLE_ACTIVITY);
         getWritableDatabase().execSQL("delete from "+ TABLE_PDO);
         getWritableDatabase().execSQL("delete from "+ TABLE_DAILY);
+        getWritableDatabase().execSQL("delete from "+ TABLE_MEASUREMENT);
     }
     public void clearTable(String table){
 

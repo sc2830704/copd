@@ -69,6 +69,8 @@
             android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+
+
         <service
             android:name=".StepService.SensorListener"
             android:enabled="true">
@@ -101,6 +103,12 @@
         <activity
             android:name=".HistoryDetailActivity"
             android:label="@string/title_activity_history_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MeasurementDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MeasurementScoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SettingActivity"

@@ -206,6 +206,94 @@
                 </TableRow>
                 <TableRow>
                     <View android:layout_height="10dp"/>
+
+                </TableRow>
+                <TableRow>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="26sp"
+                            android:id="@+id/tvHRBefore"
+                            android:textColor="@color/md_Black"
+                            android:text="50"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="bpm"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="26sp"
+                            android:textColor="@color/md_Black"
+                            android:id="@+id/tvSPO2Before"
+                            android:text="110"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"/>
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="心跳"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="血氧濃度"/>
+                </TableRow>
+                <TableRow>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:textColor="#33B5E5"
+                                    android:text="●" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="心跳" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </TableRow>
 
                 <View
@@ -287,12 +375,100 @@
                         <View android:layout_height="10dp"/>
                     </TableRow>
 
+                    <TableRow>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="26sp"
+                                android:id="@+id/tvHRAfter"
+                                android:textColor="@color/md_Black"
+                                android:text="50"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="bpm"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="26sp"
+                                android:textColor="@color/md_Black"
+                                android:id="@+id/tvSPO2After"
+                                android:text="110"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="%"/>
+                        </LinearLayout>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="心跳"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="血氧濃度"/>
+                    </TableRow>
+                    <TableRow>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:text="●"
+                                    android:textColor="#AA66CC" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="血氧濃度" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </TableRow>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/md_Grey_400"/>
 
                 </TableLayout>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -300,11 +476,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <lecho.lib.hellocharts.view.LineChartView
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-            </lecho.lib.hellocharts.view.LineChartView>
+                android:layout_height="match_parent"></lecho.lib.hellocharts.view.LineChartView>
 
         </LinearLayout>
 

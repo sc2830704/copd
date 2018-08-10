@@ -18,6 +18,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.icu.util.Measure;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity
     private ImageView imageState;
     public static final int REQUEST_ENABLE_BT = 1;
     public final int STATE_NONE=0, STATE_PRETEST=1, STATE_WORKING=2, STATE_END=3, STATE_BAD_PRETEST=4,STATE_GOOD_PRETEST=5,
-            STATE_BAD_ADVICE=6,STATE_AFTERTEST=7, STATE_BAD_AFTERTEST=8, STATE_GOOD_AFTERTEST=9;
+            STATE_BAD_ADVICE=6,STATE_AFTERTEST=7, STATE_BAD_AFTERTEST=8, STATE_GOOD_AFTERTEST=9,STATE_Env_noSync=10,STATE_Env_noNet=11;
     private final int MILL_SECONDS_MINUTES = 60*1000;
     private int stepGoal, steps_today, steps_week;
     private boolean steps_state;
@@ -107,7 +108,6 @@ public class MainActivity extends AppCompatActivity
     private MyApp myApp;
     ViewFlipper vf;
     private HttpTask myAsyncTask;
-    private MyAsyncTask EnvAsyncTask;
     private Toolbar toolbar;
     private List<BluetoothGattService> mGattServices;
     float sbp,dbp,spo2,hr;
@@ -169,6 +169,13 @@ public class MainActivity extends AppCompatActivity
                     }
 
                     break;
+                case 10:
+                    updateUI(STATE_Env_noSync);
+                    break;
+                case 11:
+                    updateUI(STATE_Env_noNet);
+                    break;
+
 
             }
         }
@@ -293,28 +300,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private class MyAsyncTask extends AsyncTask<Integer, Integer, String> {
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected String doInBackground(Integer... params) {
-            return "無法連線到網路";
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            //tvUpdateTime.setText(無法連線到網路);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            tvUpdateTime.setText(result);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -397,10 +382,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void getEnv() {
+        Message msg=new Message();
         //檢查envid是否同步到雲端
         String isEnvSync = MyShared.getData(MainActivity.this, "isEnvSync");
         if(isEnvSync!=null && isEnvSync.equals("false")){
-            tvUpdateTime.setText("裝置尚未同步成功，請重新啟動APP");
+            //tvUpdateTime.setText("裝置尚未同步成功，請重新啟動APP");
+            msg.what=10;
+            taskHandler.sendMessage(msg);
             return;
         }
 
@@ -413,10 +401,9 @@ public class MainActivity extends AppCompatActivity
             myAsyncTask.setCallback(this);
             myAsyncTask.execute();
         }else{
-            if (EnvAsyncTask == null) {
-                EnvAsyncTask = new MyAsyncTask();
-                EnvAsyncTask.execute();
-            }
+            msg.what=11;
+            taskHandler.sendMessage(msg);
+            //tvUpdateTime.setText("無法連線到網路");
         }
     }
     public void initialUI(){
@@ -544,7 +531,7 @@ public class MainActivity extends AppCompatActivity
         try {
             after.put("sbp",eh.sbpAfter);
             after.put("dbp",eh.dbpAfter);
-            after.put("hr",eh.hrAfeter);
+            after.put("hr",eh.hrAfter);
             after.put("spo2",eh.spo2After);
             before.put("sbp",eh.sbpBefore);
             before.put("dbp",eh.dbpBefore);
@@ -1249,6 +1236,17 @@ public class MainActivity extends AppCompatActivity
                     }})
                     .show();
                 setDialogParam(ad);
+                break;
+            case STATE_Env_noSync:
+                tvUpdateTime.setText("裝置尚未同步成功，請重新啟動APP");
+                break;
+
+            case STATE_Env_noNet:
+                tvUpdateTime.setText("無法連線到網路");
+                tvPM25.setText("---");
+                tvTmp.setText("---");
+                tvHumd.setText("---");
+                tvUV.setText("---");
                 break;
         }
     }

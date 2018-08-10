@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             for(int i=0; i<jsonArray.length(); i++) {
                 jobj = jsonArray.getJSONObject(i);
 
-                Log.d("setupActivity","jobj"+jobj.toString());
+                Log.d("setupDaily","jobj"+jobj.toString());
 
                 step = jobj.getInt("step");
                 h_i_time = jobj.getInt("h_i_time");
@@ -291,12 +291,34 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             e.printStackTrace();
         }
     }
+    //set MeasurementHistory to local database
     public void setupMeasurement(String result) {
+        int cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8;
+        int mmrc;
+        Long update_time;
         try {
             int CATScore;
             JSONArray jsonArray = new JSONArray(result);
             JSONObject jobj;
             for(int i=0; i<jsonArray.length(); i++) {
+                jobj = jsonArray.getJSONObject(i);
+
+                Log.d("setupMeasurement","jobj"+jobj.toString());
+
+                cat1 = jobj.getInt("cat1");
+                cat2 = jobj.getInt("cat2");
+                cat3 = jobj.getInt("cat3");
+                cat4 = jobj.getInt("cat4");
+                cat5 = jobj.getInt("cat5");
+                cat6 = jobj.getInt("cat6");
+                cat7 = jobj.getInt("cat7");
+                cat8 = jobj.getInt("cat8");
+                mmrc = jobj.getInt("mmrc");
+                update_time = sdf.parse(jobj.get("datetime").toString()).getTime();
+
+                DBHelper dbHelper = DBHelper.getInstance(this);
+                dbHelper.saveMeasurement(mmrc, cat1, cat2, cat3, cat4, cat5, cat6, cat7, cat8, update_time);
+                //for the last measuremnetdetail display on UI
                 if(i==(jsonArray.length()-1)) {
                     jobj = jsonArray.getJSONObject(i);
                     Log.d("setupMeasurement", "" + jobj.toString());
@@ -309,6 +331,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                 }
             }
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }
