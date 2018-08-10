@@ -54,19 +54,19 @@ else{
 <script type="text/JavaScript">
   
   $(document).ready(function(){
-    initial_date();
+    //initial_date();
 
-    var dailyDataTable = $('#dailyTable').DataTable({
-      "order": [[ 4, "desc" ]],
+    var evaluateDataTable = $('#myTable').DataTable({
+      "order": [[ 10, "desc" ]],
       rowReorder: {
         selector: 'td:nth-child(2)'
       },
       responsive: true
     });
-    getDailyData();
-
+    getevaluateData();
+/*
     $("#time_select").change(function(){
-      getDailyData();
+      getevaluateData();
     })
 
     $("#env_date").change(function(){
@@ -96,42 +96,49 @@ else{
         document.location.href="Download_Daily_zip.php?start_time=" + $("#download_start_time").val() + "&end_time=" + $("#download_end_time").val() + "&type=Excel";
       }
     })
+    */
   });
 
-  function getDailyData() {
+  function getevaluateData() {
     $.ajax({
       type : 'GET',
-      url  : '../apiv1/daily/' + $("#time_select").val(),
+      url  : '../apiv1/evaluate/getall',// + $("#time_select").val(),
       dataType: 'json',
       cache: false,
       success :  function(result){
         $("#error_msg").hide();
-        $("#dailyTable").show();
-        LoadDailyDataToTable(result);
+        $("#myTable").show();
+        LoadevaluateDataToTable(result);
       },
       error: function(jqXHR) {
-        $("#dailyTable").hide();
+        $("#myTable").hide();
         $("#error_msg").show();
         $("#error_msg").html("查無資料");
       }
     });
   }
 
-  function LoadDailyDataToTable(dailyData) {
-    var dailyDataTable = $('#dailyTable').DataTable();
-    dailyDataTable.clear().draw(false);
-    for (var i in dailyData){
-      dailyDataTable.row.add([
-        dailyData[i].uid,
-        dailyData[i].step,
-        dailyData[i].distance,
-        dailyData[i].h_i_time,
-        dailyData[i].date
+  function LoadevaluateDataToTable(evaluateData) {
+    var evaluateDataTable = $('#myTable').DataTable();
+    evaluateDataTable.clear().draw(false);
+    for (var i in evaluateData){
+      evaluateDataTable.row.add([
+        evaluateData[i].uid,
+        evaluateData[i].mmrc,
+        evaluateData[i].cat1,
+        evaluateData[i].cat2,
+        evaluateData[i].cat3,
+        evaluateData[i].cat4,
+        evaluateData[i].cat5,
+        evaluateData[i].cat6,
+        evaluateData[i].cat7,
+        evaluateData[i].cat8,
+        evaluateData[i].datetime
       ]).draw(false);
     }
-    dailyDataTable.columns.adjust().draw();
+    evaluateDataTable.columns.adjust().draw();
   }
-
+/*
   function initial_date(){
     var today = new Date();
     var today_date;
@@ -160,6 +167,8 @@ else{
       }
     }
   }
+  */
+
 </script>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -171,7 +180,7 @@ else{
     <div class="container-fluid">
       <div align="right">
         <label id="error_msg" style="color: red; display: none;"></label>&nbsp;&nbsp;&nbsp;
-        <!-- 時間篩選 -->
+        <!--
         資料顯示：<select id="time_select">
         <option value="getbytime/week">近一週</option>
         <option value="getall">全部</option>
@@ -199,21 +208,27 @@ else{
               <button class="btn btn-primary" id="Daily_Excel_Download">Excel 下載</button>
             </div>
           </div>
-        </div>
+          -->
       </div>
     </div><br>
     <!-- /.container-fluid-->
     <!-- Download Page -->
     <!-- Daily DataTable-->
     <div id="datatable_env_visible" style="width: 98%; margin: auto;">
-      <table id="dailyTable" class="display" cellspacing="0" width="100%">
+      <table id="myTable" class="display" cellspacing="0" width="100%">
         <thead>
           <tr>
-            <th>帳號</th>
-            <th>步數</th>
-            <th>距離(公尺)</th>
-            <th>中高強度運動時間(分)</th>
-            <th>日期</th>
+            <th>uid</th>
+            <th>mmrc</th>
+            <th>cat1</th>
+            <th>cat2</th>
+            <th>cat3</th>
+            <th>cat4</th>
+            <th>cat5</th>
+            <th>cat6</th>
+            <th>cat7</th>
+            <th>cat8</th>
+            <th>datetime</th>
           </tr>
         </thead>
       </table>

@@ -20,23 +20,24 @@ class Evaluate{
  			return $getAll_dataArray;
 		}
 	}
-	/*function getById($id){
+	
+	function getById($id){
 		//connet db
 		require 'connect.php';
 		mysqli_select_db($con,"evaluate");
 		
 		//query data by method
-		$getById_sql = "SELECT * FROM evaluate WHERE id = '$id'";
+		$getById_sql = "SELECT * FROM evaluate WHERE uid = '$id'";
 		$getById_result = mysqli_query($con,$getById_sql);
 
 		if(mysqli_num_rows($getById_result) == 0) {
 			return 'NULL';
 		}
 		else {
-			$getById_dataArray = mysqli_fetch_array($getById_result,MYSQLI_ASSOC);
+			$getById_dataArray = mysqli_fetch_all($getById_result,MYSQLI_ASSOC);
 			return $getById_dataArray;
 		}
-	}*/
+	}
 
 	function add($input){
 		//connet db

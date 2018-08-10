@@ -24,6 +24,11 @@ class EvaluateHandler extends SimpleRest{
 					echo $this->set_status_code($evaluate_all->getAll());
 					break;
 				}
+				else if($this->action == 'getbyid'){
+					$evaluate_id = new Evaluate();
+					echo $this->set_status_code($evaluate_id->getById($this->id));
+					break;
+				}
 			case 'post':
 				if($this->action == 'add'){
 					$evaluate_add = new Evaluate();

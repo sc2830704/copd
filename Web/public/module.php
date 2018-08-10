@@ -55,6 +55,17 @@
           </li>
         </ul>
       </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Evaluate">
+        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEvaluatePages" data-parent="#exampleAccordion">
+          <i class="fa fa-fw fa-tasks"></i>
+          <span class="nav-link-text" id="test">衛教量表</span>
+        </a>
+        <ul class="sidenav-second-level collapse" id="collapseEvaluatePages">
+          <li>
+            <a href="EvaluatePage.php">Evaluate</a>
+          </li>
+        </ul>
+      </li>
     </ul>
     <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">
