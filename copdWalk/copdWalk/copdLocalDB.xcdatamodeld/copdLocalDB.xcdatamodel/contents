@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="activity_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="activity_sync_flag" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="bp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="h_i_time" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="step" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Daily" representedClassName="Daily" syncable="YES">
+        <attribute name="daily_sync_flag" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="h_i_time" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="step" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Device" representedClassName="Device" syncable="YES">
+        <attribute name="env" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spo2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="watch" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Evaluate" representedClassName="Evaluate" syncable="YES">
+        <attribute name="cat1" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat2" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat3" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat4" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat5" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat6" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat7" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cat8" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="mmrc" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Pdo" representedClassName="Pdo" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="step" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="UserData" representedClassName="UserData" syncable="YES">
+        <attribute name="account_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="bmi" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="drug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drug_other" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="history_other" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Activity" positionX="18" positionY="63" width="128" height="178"/>
+        <element name="Daily" positionX="0" positionY="45" width="128" height="118"/>
+        <element name="Device" positionX="-383.6953125" positionY="57.328125" width="128" height="88"/>
+        <element name="Evaluate" positionX="36" positionY="81" width="128" height="178"/>
+        <element name="Pdo" positionX="-9" positionY="36" width="128" height="73"/>
+        <element name="UserData" positionX="-9" positionY="36" width="128" height="223"/>
+    </elements>
+</model>

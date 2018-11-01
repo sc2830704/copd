@@ -50,7 +50,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Activity_Cell", for: indexPath) as! TableviewCellViewController
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.accessoryType = .none
         
         if let myDatetime = cell.activity_datetime {

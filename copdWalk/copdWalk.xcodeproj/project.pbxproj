@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8183C9D21671AE40086E5B6 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8183C9C21671AE40086E5B6 /* HomeKit.framework */; };
 		F82EF8D721060F950035BB96 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82EF8D621060F950035BB96 /* TabBarViewController.swift */; };
 		F82EF8D921060FDB0035BB96 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82EF8D821060FDB0035BB96 /* LoginViewController.swift */; };
 		F82EF8DB210610060035BB96 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82EF8DA210610060035BB96 /* RegisterViewController.swift */; };
@@ -25,10 +26,7 @@
 		F838AE5E2147BA7D00747879 /* Evaluate_6.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AE5D2147BA7D00747879 /* Evaluate_6.swift */; };
 		F838AE602147BA8500747879 /* Evaluate_7.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AE5F2147BA8500747879 /* Evaluate_7.swift */; };
 		F838AE662148EDAB00747879 /* TableviewCellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F838AE652148EDAB00747879 /* TableviewCellViewController.swift */; };
-		F87AC04B214ABE7800C9D171 /* BEMAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AC044214ABE7800C9D171 /* BEMAnimationManager.m */; };
-		F87AC04C214ABE7800C9D171 /* BEMPathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AC045214ABE7800C9D171 /* BEMPathManager.m */; };
-		F87AC04D214ABE7800C9D171 /* BEMCheckBoxGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AC046214ABE7800C9D171 /* BEMCheckBoxGroup.m */; };
-		F87AC04E214ABE7800C9D171 /* BEMCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AC048214ABE7800C9D171 /* BEMCheckBox.m */; };
+		F83A78D92186ADE500DAE9E1 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83A78D82186ADE500DAE9E1 /* Checkbox.swift */; };
 		F8BE276020E370B2004A6AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE275F20E370B2004A6AC8 /* AppDelegate.swift */; };
 		F8BE276220E370B2004A6AC8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE276120E370B2004A6AC8 /* ViewController.swift */; };
 		F8BE276520E370B2004A6AC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BE276320E370B2004A6AC8 /* Main.storyboard */; };
@@ -36,6 +34,22 @@
 		F8BE276A20E370B3004A6AC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BE276820E370B3004A6AC8 /* LaunchScreen.storyboard */; };
 		F8BE277520E370B3004A6AC8 /* copdWalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE277420E370B3004A6AC8 /* copdWalkTests.swift */; };
 		F8BE278020E370B3004A6AC8 /* copdWalkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BE277F20E370B3004A6AC8 /* copdWalkUITests.swift */; };
+		F8CCBEC62181990700FE65D4 /* copdLocalDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBEC42181990700FE65D4 /* copdLocalDB.xcdatamodeld */; };
+		F8CCBF3021819C5A00FE65D4 /* Evaluate+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2421819C5A00FE65D4 /* Evaluate+CoreDataClass.swift */; };
+		F8CCBF3121819C5A00FE65D4 /* Evaluate+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2521819C5A00FE65D4 /* Evaluate+CoreDataProperties.swift */; };
+		F8CCBF3421819C5A00FE65D4 /* Pdo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2821819C5A00FE65D4 /* Pdo+CoreDataClass.swift */; };
+		F8CCBF3521819C5A00FE65D4 /* Pdo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2921819C5A00FE65D4 /* Pdo+CoreDataProperties.swift */; };
+		F8CCBF3621819C5A00FE65D4 /* Daily+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2A21819C5A00FE65D4 /* Daily+CoreDataClass.swift */; };
+		F8CCBF3721819C5A00FE65D4 /* Daily+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2B21819C5A00FE65D4 /* Daily+CoreDataProperties.swift */; };
+		F8CCBF3A21819C5A00FE65D4 /* Device+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2E21819C5A00FE65D4 /* Device+CoreDataClass.swift */; };
+		F8CCBF3B21819C5A00FE65D4 /* Device+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF2F21819C5A00FE65D4 /* Device+CoreDataProperties.swift */; };
+		F8CCBF4021819F1C00FE65D4 /* UserData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF3E21819F1C00FE65D4 /* UserData+CoreDataClass.swift */; };
+		F8CCBF4121819F1C00FE65D4 /* UserData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF3F21819F1C00FE65D4 /* UserData+CoreDataProperties.swift */; };
+		F8CCBF4B2181AAED00FE65D4 /* Activity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF492181AAED00FE65D4 /* Activity+CoreDataClass.swift */; };
+		F8CCBF4C2181AAED00FE65D4 /* Activity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF4A2181AAED00FE65D4 /* Activity+CoreDataProperties.swift */; };
+		F8CCBF8F21856CCF00FE65D4 /* SSRadioButtonsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF8D21856CCE00FE65D4 /* SSRadioButtonsController.swift */; };
+		F8CCBF9021856CCF00FE65D4 /* SSRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF8E21856CCE00FE65D4 /* SSRadioButton.swift */; };
+		F8CCBF9221856E7F00FE65D4 /* Evaluate_Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CCBF9121856E7F00FE65D4 /* Evaluate_Form.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F8183C9A21671AE40086E5B6 /* copdWalk.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = copdWalk.entitlements; sourceTree = "<group>"; };
+		F8183C9C21671AE40086E5B6 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		F82EF8D621060F950035BB96 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		F82EF8D821060FDB0035BB96 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F82EF8DA210610060035BB96 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -74,15 +90,7 @@
 		F838AE5D2147BA7D00747879 /* Evaluate_6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluate_6.swift; sourceTree = "<group>"; };
 		F838AE5F2147BA8500747879 /* Evaluate_7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluate_7.swift; sourceTree = "<group>"; };
 		F838AE652148EDAB00747879 /* TableviewCellViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableviewCellViewController.swift; sourceTree = "<group>"; };
-		F87AC043214ABE7800C9D171 /* BEMCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBox.h; sourceTree = "<group>"; };
-		F87AC044214ABE7800C9D171 /* BEMAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMAnimationManager.m; sourceTree = "<group>"; };
-		F87AC045214ABE7800C9D171 /* BEMPathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPathManager.m; sourceTree = "<group>"; };
-		F87AC046214ABE7800C9D171 /* BEMCheckBoxGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBoxGroup.m; sourceTree = "<group>"; };
-		F87AC047214ABE7800C9D171 /* BEMAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMAnimationManager.h; sourceTree = "<group>"; };
-		F87AC048214ABE7800C9D171 /* BEMCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCheckBox.m; sourceTree = "<group>"; };
-		F87AC049214ABE7800C9D171 /* BEMPathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPathManager.h; sourceTree = "<group>"; };
-		F87AC04A214ABE7800C9D171 /* BEMCheckBoxGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCheckBoxGroup.h; sourceTree = "<group>"; };
-		F87AC04F214ABEC100C9D171 /* CheckBoxHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CheckBoxHeader.h; sourceTree = "<group>"; };
+		F83A78D82186ADE500DAE9E1 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		F8BE275C20E370B2004A6AC8 /* copdWalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = copdWalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BE275F20E370B2004A6AC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8BE276120E370B2004A6AC8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +104,22 @@
 		F8BE277B20E370B3004A6AC8 /* copdWalkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = copdWalkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BE277F20E370B3004A6AC8 /* copdWalkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = copdWalkUITests.swift; sourceTree = "<group>"; };
 		F8BE278120E370B3004A6AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8CCBEC52181990700FE65D4 /* copdLocalDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = copdLocalDB.xcdatamodel; sourceTree = "<group>"; };
+		F8CCBF2421819C5A00FE65D4 /* Evaluate+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Evaluate+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF2521819C5A00FE65D4 /* Evaluate+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Evaluate+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF2821819C5A00FE65D4 /* Pdo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pdo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF2921819C5A00FE65D4 /* Pdo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pdo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF2A21819C5A00FE65D4 /* Daily+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Daily+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF2B21819C5A00FE65D4 /* Daily+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Daily+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF2E21819C5A00FE65D4 /* Device+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF2F21819C5A00FE65D4 /* Device+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Device+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF3E21819F1C00FE65D4 /* UserData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF3F21819F1C00FE65D4 /* UserData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF492181AAED00FE65D4 /* Activity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F8CCBF4A2181AAED00FE65D4 /* Activity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Activity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F8CCBF8D21856CCE00FE65D4 /* SSRadioButtonsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButtonsController.swift; sourceTree = "<group>"; };
+		F8CCBF8E21856CCE00FE65D4 /* SSRadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSRadioButton.swift; sourceTree = "<group>"; };
+		F8CCBF9121856E7F00FE65D4 /* Evaluate_Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Evaluate_Form.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8183C9D21671AE40086E5B6 /* HomeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8183C9B21671AE40086E5B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8183C9C21671AE40086E5B6 /* HomeKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F838AE502147AAC000747879 /* More */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +177,7 @@
 				F838AE5B2147BA7400747879 /* Evaluate_5.swift */,
 				F838AE5D2147BA7D00747879 /* Evaluate_6.swift */,
 				F838AE5F2147BA8500747879 /* Evaluate_7.swift */,
+				F8CCBF9121856E7F00FE65D4 /* Evaluate_Form.swift */,
 			);
 			path = Evaluate;
 			sourceTree = "<group>";
@@ -174,6 +208,14 @@
 			path = History;
 			sourceTree = "<group>";
 		};
+		F83A78D72186ADE500DAE9E1 /* CheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				F83A78D82186ADE500DAE9E1 /* Checkbox.swift */,
+			);
+			path = CheckBox;
+			sourceTree = SOURCE_ROOT;
+		};
 		F87AC041214AB32B00C9D171 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,28 +224,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		F87AC042214ABE7800C9D171 /* BEM_Classes */ = {
-			isa = PBXGroup;
-			children = (
-				F87AC043214ABE7800C9D171 /* BEMCheckBox.h */,
-				F87AC044214ABE7800C9D171 /* BEMAnimationManager.m */,
-				F87AC045214ABE7800C9D171 /* BEMPathManager.m */,
-				F87AC046214ABE7800C9D171 /* BEMCheckBoxGroup.m */,
-				F87AC047214ABE7800C9D171 /* BEMAnimationManager.h */,
-				F87AC048214ABE7800C9D171 /* BEMCheckBox.m */,
-				F87AC049214ABE7800C9D171 /* BEMPathManager.h */,
-				F87AC04A214ABE7800C9D171 /* BEMCheckBoxGroup.h */,
-			);
-			path = BEM_Classes;
-			sourceTree = SOURCE_ROOT;
-		};
 		F8BE275320E370B2004A6AC8 = {
 			isa = PBXGroup;
 			children = (
+				F8CCBF2321819C4200FE65D4 /* copdLocalDB */,
 				F8BE275E20E370B2004A6AC8 /* copdWalk */,
 				F8BE277320E370B3004A6AC8 /* copdWalkTests */,
 				F8BE277E20E370B3004A6AC8 /* copdWalkUITests */,
 				F8BE275D20E370B2004A6AC8 /* Products */,
+				F8183C9B21671AE40086E5B6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,12 +249,14 @@
 		F8BE275E20E370B2004A6AC8 /* copdWalk */ = {
 			isa = PBXGroup;
 			children = (
-				F87AC04F214ABEC100C9D171 /* CheckBoxHeader.h */,
-				F87AC042214ABE7800C9D171 /* BEM_Classes */,
-				F8BE275F20E370B2004A6AC8 /* AppDelegate.swift */,
+				F83A78D72186ADE500DAE9E1 /* CheckBox */,
+				F8CCBF8C21856CCE00FE65D4 /* SSRadioButtonController */,
+				F8CCBEC42181990700FE65D4 /* copdLocalDB.xcdatamodeld */,
+				F8183C9A21671AE40086E5B6 /* copdWalk.entitlements */,
 				F8BE276320E370B2004A6AC8 /* Main.storyboard */,
-				F838AE522147AB3100747879 /* Login_Register */,
+				F8BE275F20E370B2004A6AC8 /* AppDelegate.swift */,
 				F82EF8D621060F950035BB96 /* TabBarViewController.swift */,
+				F838AE522147AB3100747879 /* Login_Register */,
 				F87AC041214AB32B00C9D171 /* Home */,
 				F838AE612148ECA600747879 /* Activity */,
 				F838AE622148ECB400747879 /* History */,
@@ -256,6 +287,34 @@
 			);
 			path = copdWalkUITests;
 			sourceTree = "<group>";
+		};
+		F8CCBF2321819C4200FE65D4 /* copdLocalDB */ = {
+			isa = PBXGroup;
+			children = (
+				F8CCBF492181AAED00FE65D4 /* Activity+CoreDataClass.swift */,
+				F8CCBF4A2181AAED00FE65D4 /* Activity+CoreDataProperties.swift */,
+				F8CCBF3E21819F1C00FE65D4 /* UserData+CoreDataClass.swift */,
+				F8CCBF3F21819F1C00FE65D4 /* UserData+CoreDataProperties.swift */,
+				F8CCBF2421819C5A00FE65D4 /* Evaluate+CoreDataClass.swift */,
+				F8CCBF2521819C5A00FE65D4 /* Evaluate+CoreDataProperties.swift */,
+				F8CCBF2821819C5A00FE65D4 /* Pdo+CoreDataClass.swift */,
+				F8CCBF2921819C5A00FE65D4 /* Pdo+CoreDataProperties.swift */,
+				F8CCBF2A21819C5A00FE65D4 /* Daily+CoreDataClass.swift */,
+				F8CCBF2B21819C5A00FE65D4 /* Daily+CoreDataProperties.swift */,
+				F8CCBF2E21819C5A00FE65D4 /* Device+CoreDataClass.swift */,
+				F8CCBF2F21819C5A00FE65D4 /* Device+CoreDataProperties.swift */,
+			);
+			path = copdLocalDB;
+			sourceTree = "<group>";
+		};
+		F8CCBF8C21856CCE00FE65D4 /* SSRadioButtonController */ = {
+			isa = PBXGroup;
+			children = (
+				F8CCBF8D21856CCE00FE65D4 /* SSRadioButtonsController.swift */,
+				F8CCBF8E21856CCE00FE65D4 /* SSRadioButton.swift */,
+			);
+			path = SSRadioButtonController;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -325,6 +384,12 @@
 				TargetAttributes = {
 					F8BE275B20E370B2004A6AC8 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.HomeKit = {
+								enabled = 1;
+							};
+						};
 					};
 					F8BE276F20E370B3004A6AC8 = {
 						CreatedOnToolsVersion = 9.4;
@@ -388,29 +453,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8CCBF9221856E7F00FE65D4 /* Evaluate_Form.swift in Sources */,
 				F82EF8D921060FDB0035BB96 /* LoginViewController.swift in Sources */,
-				F87AC04C214ABE7800C9D171 /* BEMPathManager.m in Sources */,
 				F82EF8DB210610060035BB96 /* RegisterViewController.swift in Sources */,
-				F87AC04E214ABE7800C9D171 /* BEMCheckBox.m in Sources */,
+				F8CCBF4021819F1C00FE65D4 /* UserData+CoreDataClass.swift in Sources */,
+				F8CCBF4B2181AAED00FE65D4 /* Activity+CoreDataClass.swift in Sources */,
+				F8CCBF8F21856CCF00FE65D4 /* SSRadioButtonsController.swift in Sources */,
+				F8CCBF3B21819C5A00FE65D4 /* Device+CoreDataProperties.swift in Sources */,
 				F838AE662148EDAB00747879 /* TableviewCellViewController.swift in Sources */,
 				F82EF8D721060F950035BB96 /* TabBarViewController.swift in Sources */,
+				F8CCBF3521819C5A00FE65D4 /* Pdo+CoreDataProperties.swift in Sources */,
 				F838AE602147BA8500747879 /* Evaluate_7.swift in Sources */,
+				F8CCBF4C2181AAED00FE65D4 /* Activity+CoreDataProperties.swift in Sources */,
 				F82EF8E1210610500035BB96 /* ActivityViewController.swift in Sources */,
 				F82EF8EB210619690035BB96 /* PersonalInfoViewController.swift in Sources */,
+				F8CCBF3621819C5A00FE65D4 /* Daily+CoreDataClass.swift in Sources */,
 				F838AE5A2147BA6C00747879 /* Evaluate_4.swift in Sources */,
 				F838AE582147BA6500747879 /* Evaluate_3.swift in Sources */,
 				F8BE276220E370B2004A6AC8 /* ViewController.swift in Sources */,
 				F82EF8E52106109F0035BB96 /* MoreViewController.swift in Sources */,
 				F8BE276020E370B2004A6AC8 /* AppDelegate.swift in Sources */,
 				F82EF8DF2106103D0035BB96 /* HistoryViewController.swift in Sources */,
-				F87AC04D214ABE7800C9D171 /* BEMCheckBoxGroup.m in Sources */,
+				F8CCBF3721819C5A00FE65D4 /* Daily+CoreDataProperties.swift in Sources */,
+				F8CCBF3021819C5A00FE65D4 /* Evaluate+CoreDataClass.swift in Sources */,
+				F8CCBF4121819F1C00FE65D4 /* UserData+CoreDataProperties.swift in Sources */,
+				F8CCBF9021856CCF00FE65D4 /* SSRadioButton.swift in Sources */,
+				F8CCBEC62181990700FE65D4 /* copdLocalDB.xcdatamodeld in Sources */,
 				F82EF8E32106106D0035BB96 /* EvaluateViewController.swift in Sources */,
 				F82EF8E9210619420035BB96 /* BleDeviceViewController.swift in Sources */,
+				F83A78D92186ADE500DAE9E1 /* Checkbox.swift in Sources */,
 				F82EF8DD210610130035BB96 /* HomeViewController.swift in Sources */,
 				F838AE542147BA4200747879 /* Evaluate_1.swift in Sources */,
-				F87AC04B214ABE7800C9D171 /* BEMAnimationManager.m in Sources */,
+				F8CCBF3421819C5A00FE65D4 /* Pdo+CoreDataClass.swift in Sources */,
 				F838AE5C2147BA7400747879 /* Evaluate_5.swift in Sources */,
 				F838AE562147BA5B00747879 /* Evaluate_2.swift in Sources */,
+				F8CCBF3A21819C5A00FE65D4 /* Device+CoreDataClass.swift in Sources */,
+				F8CCBF3121819C5A00FE65D4 /* Evaluate+CoreDataProperties.swift in Sources */,
 				F838AE5E2147BA7D00747879 /* Evaluate_6.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,12 +595,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -571,11 +650,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -584,16 +664,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = copdWalk/copdWalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RP4H9HU9UN;
 				INFOPLIST_FILE = copdWalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yangfourone.copdWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -602,16 +687,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = copdWalk/copdWalk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RP4H9HU9UN;
 				INFOPLIST_FILE = copdWalk/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = yangfourone.copdWalk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -738,6 +827,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F8CCBEC42181990700FE65D4 /* copdLocalDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F8CCBEC52181990700FE65D4 /* copdLocalDB.xcdatamodel */,
+			);
+			currentVersion = F8CCBEC52181990700FE65D4 /* copdLocalDB.xcdatamodel */;
+			path = copdLocalDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F8BE275420E370B2004A6AC8 /* Project object */;
 }

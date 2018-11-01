@@ -10,17 +10,17 @@ import UIKit
 
 class Evaluate_2: UIViewController {
     
+    @IBOutlet weak var Evaluate2_1: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        Evaluate2_1.image = UIImage(named: "Evaluate2-1.png")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func Evaluate2_button(_ sender: Any) {
     }
     
 }

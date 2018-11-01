@@ -10,12 +10,18 @@ import UIKit
 
 class Evaluate_1: UIViewController {
     
-    @IBOutlet weak var Evaluate_1: UIImageView!
+    @IBOutlet weak var Evaluate1_1: UIImageView!
+    @IBOutlet weak var Evaluate1_2: UIImageView!
+    @IBOutlet weak var Evaluate1_3: UIImageView!
+    @IBOutlet weak var Evaluate1_4: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Evaluate_1.image = UIImage(named: "Evaluate_1.png")
+        Evaluate1_1.image = UIImage(named: "Evaluate1-1.png")
+        Evaluate1_2.image = UIImage(named: "Evaluate1-2.png")
+        Evaluate1_3.image = UIImage(named: "Evaluate1-3.png")
+        Evaluate1_4.image = UIImage(named: "Evaluate1-4.png")
     }
     
     override func didReceiveMemoryWarning() {
