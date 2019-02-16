@@ -10,6 +10,10 @@ import UIKit
 
 class RegisterViewController: UIViewController, SSRadioButtonControllerDelegate  {
     
+    // button
+    @IBOutlet weak var back: UIButton!
+    @IBOutlet weak var submit: UIButton!
+    
     // UserData
     @IBOutlet weak var account: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -122,6 +126,14 @@ class RegisterViewController: UIViewController, SSRadioButtonControllerDelegate 
         /** close keyboard when click anywhere **/
         self.hideKeyboardWhenTappedAround()
         
+        /** button style setting **/
+        back.layer.cornerRadius = 10
+        back.layer.borderColor = UIColor.black.cgColor
+        back.layer.borderWidth = 2
+        submit.layer.cornerRadius = 10
+        submit.layer.borderColor = UIColor.orange.cgColor
+        submit.layer.borderWidth = 2
+        
         /** drug style setting **/
         for drug_button in drug {
             drug_button.borderStyle = .circle
@@ -192,7 +204,6 @@ class RegisterViewController: UIViewController, SSRadioButtonControllerDelegate 
     }
     
     @IBAction func submit(_ sender: Any) {
-        
         for drug_select in drug {
             if drug_select.isChecked {
                 user_drug.append(drug_select.restorationIdentifier!)

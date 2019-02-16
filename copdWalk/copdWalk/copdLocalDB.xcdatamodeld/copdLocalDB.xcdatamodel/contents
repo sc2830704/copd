@@ -34,6 +34,9 @@
         <attribute name="cat8" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mmrc" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="Login" representedClassName="Login" syncable="YES">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Pdo" representedClassName="Pdo" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="step" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -59,5 +62,6 @@
         <element name="Evaluate" positionX="36" positionY="81" width="128" height="178"/>
         <element name="Pdo" positionX="-9" positionY="36" width="128" height="73"/>
         <element name="UserData" positionX="-9" positionY="36" width="128" height="223"/>
+        <element name="Login" positionX="-180" positionY="126" width="128" height="58"/>
     </elements>
 </model>
