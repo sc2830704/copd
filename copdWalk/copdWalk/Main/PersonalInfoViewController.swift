@@ -10,6 +10,7 @@ import UIKit
 
 class PersonalInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+//    let url = URL(string: "http://140.118.122.241/copd/apiv1/user/getbyid/" + user_account!)
     let url = URL(string: "http://140.118.122.241/copd/apiv1/user/getbyid/qwerty")
     var cellTitle = ["帳號","姓名","年齡","性別","身高","體重","BMI","用藥","病史","其他用藥","其他病史"]
     var user_cell:[String]!

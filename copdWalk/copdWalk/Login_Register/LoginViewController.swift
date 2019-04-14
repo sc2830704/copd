@@ -24,6 +24,9 @@ class LoginViewController: UIViewController {
     let app = UIApplication.shared.delegate as! AppDelegate
     var viewContext: NSManagedObjectContext!
     
+    /** Post Data**/
+    let url = URL(string: "https://140.118.122.241/copd/apiv1/admin/login")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -64,10 +67,45 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(_ sender: Any) {
+        
+        /** POST Login **/
+        
+//        if account.text == "" || password.text == "" {
+//            let alertController = UIAlertController(title: "ERROR", message: "帳號或密碼不能為空", preferredStyle: .actionSheet)
+//            let okAction = UIAlertAction(title: "OK", style: .default) {
+//                (action) in
+//                self.dismiss (animated: true, completion: nil)
+//            }
+//            alertController.addAction(okAction)
+//            present(alertController, animated: true, completion: nil)
+//        } else {
+//            var request = URLRequest(url: url!)
+//            request.httpBody = "id=\(account.text!)&pwd=\(password.text!)".data(using: .utf8)
+//            request.httpMethod = "POST"
+//
+//            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+//                guard error == nil && data != nil else {
+//                    print("error=\(error)")
+//                    return
+//                }
+//
+//                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+//                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+//                    print("response = \(response)")
+//                }
+//
+//                let responseString = String(data: data!, encoding: .utf8)
+//                print("responseString = \(responseString)")
+//            }
+//            task.resume()
+//        }
+        
+        /** Testing Login **/
+        
         if account.text == "qwerty" && password.text == "" {
             user_account = "qwerty"
             //insertLoginData()
-            
+
             UserDefaults.standard.set(true, forKey: "isLogin")
             let MainViewController = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             self.navigationController?.pushViewController(MainViewController, animated: true)
@@ -75,18 +113,18 @@ class LoginViewController: UIViewController {
             let vc = storyboard?.instantiateViewController(withIdentifier: "tabbar")
             show(vc!, sender: self)
             */
-            
+
         } else {
             //設定為 alert action
-            let alertController = UIAlertController(title: "ERROR", message: "帳號或密碼有錯誤", preferredStyle: .actionSheet)
+            let alertController = UIAlertController(title: "ERROR", message: "帳號或密碼有錯誤", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default) {
                 (action) in
                 self.dismiss (animated: true, completion: nil)
             }
-            //增加"OK"按鍵
+            //增加按鍵
             alertController.addAction(okAction)
             //顯示提醒
-            show(alertController, sender: self)
+            present(alertController, animated: true, completion: nil)
         }
     }
     func queryLoginData() -> String {

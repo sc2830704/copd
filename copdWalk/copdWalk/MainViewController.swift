@@ -25,6 +25,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(user_account)
         self.navigationItem.hidesBackButton = true
         // Do any additional setup after loading the view.
         Personal_Info.layer.cornerRadius = 10
@@ -104,7 +105,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func Medicine_Box(_ sender: Any) {
-        
+        let MedicineBoxViewController = self.storyboard?.instantiateViewController(withIdentifier: "medicine") as! MedicineBoxViewController
+        self.navigationController?.pushViewController(MedicineBoxViewController, animated: true)
     }
     
     @IBAction func Health_Education(_ sender: Any) {

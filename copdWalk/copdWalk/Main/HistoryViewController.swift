@@ -9,11 +9,14 @@
 import UIKit
 
 class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var activity_datetime = ["2018/08/24 19:32","2018/08/30 21:49","2018/09/07 14:22","2018/09/24 19:32","2018/09/30 21:49","2018/10/07 14:22"]
-    var exercise_time = ["00:20:16","00:25:07","00:24:45","00:20:16","00:25:07","00:24:45"]
-    var h_i_time = ["17","21","17","17","21","17"]
-    var step = ["2097","2662","2496","2097","2662","2496"]
-    var distance = ["733","931","873","733","931","873"]
+    
+    var activity_datetime = [""]
+    var exercise_time = ["00:20:16","00:25:07","00:24:45","00:20:16","00:25:07","00:24:45","00:25:07","00:25:07","00:25:07","00:25:07",""]
+    var h_i_time = [""]
+    var step = [""]
+    var distance = [""]
+    
+    let url = URL(string: "http://140.118.122.241/copd/apiv1/activity/getbyuser/qwerty")
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +25,20 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         imageView.image = UIImage(named: "History_1.png")
+        
+        if let data = try? Data(contentsOf: url!) {
+            let new_data = String(decoding: data, as: UTF8.self)
+            let data_obj = new_data.data(using: .utf8)
+
+            if let jsonObj = try? JSONSerialization.jsonObject(with: data_obj!, options: .allowFragments) {
+                for history in jsonObj as! [[String: AnyObject]] {
+                    activity_datetime.insert(history["start_time"] as! String, at: 0)
+                    h_i_time.insert(history["h_i_time"] as! String, at: 0)
+                    step.insert(history["step"] as! String, at: 0)
+                    distance.insert(history["distance"] as! String, at: 0)
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,16 +53,6 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return activity_datetime.count
     }
-    
-    /*func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-     var Footer = ["Personal Information","BLE & Wi-Fi Device Setting and Connecting"]
-     return Footer[section]
-     }
- 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let Header = "COPD (Chronic Obstructive Pulmonary Disease) 是一種呼吸道長期發炎導致無法呼吸之呼吸道阻塞，使得氣體無法通暢地進出呼吸道的疾病。"
-        return Header
-    }*/
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Activity_Cell", for: indexPath) as! TableviewCellViewController
