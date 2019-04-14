@@ -63,5 +63,6 @@ Web/DataTables
 .htaccess
 
 # iOS
+.DS_Store
 copdWalk/icon
 copdWalk/picture
