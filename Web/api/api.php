@@ -6,6 +6,8 @@ require_once('ActivityHandler.php');
 require_once('DailyHandler.php');
 require_once('AdminHandler.php');
 require_once('EvaluateHandler.php');
+require_once('Fev1Handler.php');
+
 $method = $_SERVER['REQUEST_METHOD'];
 $params = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $controller = $params[0];
@@ -46,6 +48,10 @@ $queryStr = $_SERVER['QUERY_STRING'];
 		$evaluateHandler = new EvaluateHandler($method,$params,$input);
 		$evaluateHandler->response();
 		break;
+	case 'fev1':
+        $fev1Handler = new Fev1Handler($method,$params,$input);
+        $fev1Handler->response();
+        break;
 	default:
 		header("http/ 404");
 		echo 'URL Error!';

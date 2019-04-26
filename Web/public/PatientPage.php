@@ -115,10 +115,10 @@ else{
         patientData[i].lname,
         patientData[i].age,
         patientData[i].sex==1?'男':(patientData[i].sex==0?'女':null),
+        patientData[i].height,
+        patientData[i].weight,
         patientData[i].bmi,
-        patientData[i].env_id,
-        patientData[i].ble_id,
-        patientData[i].watch_id
+        patientData[i].env_id
       ]).draw(false);
     }
     patientDataTable.columns.adjust().draw();
@@ -142,6 +142,7 @@ else{
   }
 
   function post_data($action){
+    var save_bmi = $("#weight").val() / (($("#height").val()/100) * ($("#height").val()/100));
     get_medicine();
     get_case();
     $.ajax({
@@ -155,7 +156,9 @@ else{
         lname: $("#lname").val(),
         age: $("#age").val(),
         sex: $("#sex").val(),
-        bmi: $("#bmi").val(),
+        height: $("#height").val(),
+        weight: $("#weight").val(),
+        bmi: save_bmi.toFixed(2),
         history: $("#history").val(),
         drug: $("#drug").val(),
         env_id: $("#env_id").val(),
@@ -248,6 +251,8 @@ else{
         document.getElementById('lname').value = data.lname;
         document.getElementById('age').value = data.age;
         document.getElementById('sex').value = data.sex;
+        document.getElementById('height').value = data.height;
+        document.getElementById('weight').value = data.weight;
         document.getElementById('bmi').value = data.bmi;
         document.getElementById('env_id').value = data.env_id;
         document.getElementById('ble_id').value = data.ble_id;
@@ -293,6 +298,8 @@ else{
     document.getElementById('lname').value = '';
     document.getElementById('age').value = '';
     document.getElementById('sex').value = '';
+    document.getElementById('height').value = '';
+    document.getElementById('weight').value = '';
     document.getElementById('bmi').value = '';
     document.getElementById('env_id').value = '';
     document.getElementById('ble_id').value = '';
@@ -360,8 +367,14 @@ else{
               <label for="pwd">密碼：</label>
               <input type="password" id="pwd"> <br>
 
+              <label for="height">身高：</label>
+              <input type="text" id="height"> <br>
+
+              <label for="weight">體重：</label>
+              <input type="text" id="weight"> <br>
+
               <label for="bmi">BMI：</label>
-              <input type="text" id="bmi"> <br>
+              <input type="text" id="bmi" disabled> <br>
 
               <label for="env_id">環境ID：</label>
               <input type="text" id="env_id"> <br>
@@ -383,24 +396,30 @@ else{
             <div class="card-header">
               <i class="fa fa-list-ol"></i>&nbsp;&nbsp;藥物勾選清單
             </div>
-            <div class="card-body" align="left" style="margin: auto">
-              <h6>吸入型藥物：</h6>
-              <input name="medicine" type="checkbox" value="Berotec"> 備勞喘噴霧劑：(Berotec, Fenoterol)<br>
-              <input name="medicine" type="checkbox" value="BerodualN"> 備喘全噴霧劑：(Berodual N, Fenoterol + Ipratropium)<br>
-              <input name="medicine" type="checkbox" value="Combivent"> 冠喘衛噴霧劑：(Combivent, Salbutamol + Ipratropium)<br>
-              <input name="medicine" type="checkbox" value="Spiriva"> 適喘樂吸入劑：(Spiriva, Tiotropium)<br>
-              <input name="medicine" type="checkbox" value="Atrovent"> 定喘樂吸入劑：(Atrovent Nebuliser Soln, Ipratropium)<br>
-              <input name="medicine" type="checkbox" value="Seretide"> 使肺泰乾粉吸入劑：(Seretide, Fluticasone propionate + Salmeterol)<br>
-              <br>
-              <h6>口服型類固醇：</h6>
-              <input name="medicine" type="checkbox" value="Prednisone"> 強的松/去氫可的松 (Prednisone)<br>
-              <input name="medicine" type="checkbox" value="Donison"> 康速龍 (Donison, Prednisone)<br>
-              <input name="medicine" type="checkbox" value="Methylprednisolone"> 甲基培尼皮質醇 (Methylprednisolone)<br>
-              <input name="medicine" type="checkbox" value="Hydrocortisone"> 氫化可體松 (Hydrocortisone)<br>
-              <input name="medicine" type="checkbox" value="Dexamethasone"> 地塞米松 (Dexamethasone)<br>
-              <br>
-              <h6>其它藥物：</h6>
-              <textarea type="text" id="drug_other" rows="3" cols="25"></textarea>
+            <div class="card-body" align="left" style="margin: auto 0; padding-left: 30px;">
+                <h6>短效  支氣管擴張劑：</h6>
+                <input name="medicine" type="checkbox" value="Berotec"> 備勞喘 (Berotec)<br>
+                <input name="medicine" type="checkbox" value="Ventolin"> 范得林 (Ventolin)<br>
+                <input name="medicine" type="checkbox" value="Atrovent"> 定喘樂 (Atrovent)<br>
+                <input name="medicine" type="checkbox" value="Berodual"> 備喘全 (Berodual)<br>
+
+                <br><h6>長效  支氣管擴張劑：</h6>
+                <input name="medicine" type="checkbox" value="IncruseEllipta"> 英克賜易利達 (Incruse Ellipta)<br>
+                <input name="medicine" type="checkbox" value="OnbrezBreezhaler"> 樂昂舒 (Onbrez Breezhaler)<br>
+                <input name="medicine" type="checkbox" value="Spiriva"> 適喘樂 (Spiriva)<br>
+                <input name="medicine" type="checkbox" value="StriverdiRespimat"> 適維樂舒沛噴 (Striverdi Respimat)<br>
+                <input name="medicine" type="checkbox" value="SpioltoRespimat"> 適倍樂舒沛 (Spiolto Respimat)<br>
+                <input name="medicine" type="checkbox" value="AnoroEllipta"> 安肺樂易利達 (Anoro Ellipta)<br>
+                <input name="medicine" type="checkbox" value="UltibroBreezhaler"> 昂帝博 (Ultibro Breezhaler)<br>
+
+                <br><h6>類固醇  噴劑：</h6>
+                <input name="medicine" type="checkbox" value="Alvesco"> 治喘樂 (Alvesco)<br>
+                <input name="medicine" type="checkbox" value="FlixotideAccuhaler"> 輔舒酮準納 (Flixotide Accuhaler)<br>
+                <input name="medicine" type="checkbox" value="FlixotideEvohaler"> 輔舒酮優氟 (Flixotide Evohaler)<br>
+                <input name="medicine" type="checkbox" value="Duasma"> 適喘樂 (Duasma)<br>
+
+                <br><h6>其它藥物：</h6>
+                <textarea type="text" id="drug_other" rows="3" cols="25"></textarea>
             </div>
             <div class="card-footer"></div>
           </div>
@@ -410,7 +429,7 @@ else{
             <div class="card-header">
               <i class="fa fa-heartbeat"></i>&nbsp;&nbsp;疾病史
             </div>
-            <div class="card-body" align="left" style="margin: auto">
+            <div class="card-body" align="left" style="margin: auto 0; padding-left: 30px;">
               <input name="case" type="checkbox" value="HeartDisease"> 心臟病<br>
               <input name="case" type="checkbox" value="Hypertension"> 高血壓<br>
               <input name="case" type="checkbox" value="Diabetes"> 糖尿病<br>
@@ -444,10 +463,10 @@ else{
               <th>名字</th>
               <th>年齡</th>
               <th>性別</th>
+              <th>身高(cm)</th>
+              <th>體重(kg)</th>
               <th>BMI</th>
               <th>環境ID</th>
-              <th>藍芽ID</th>
-              <th>手錶ID</th>
             </tr>
           </thead>
         </table>
